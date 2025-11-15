@@ -1,45 +1,76 @@
-﻿using Colossal.Logging;
-using Colossal.IO.AssetDatabase;
-using Game;
-using Game.Modding;
-using Game.SceneFlow;
-using Game.Settings;
+// Mod.cs
 
-namespace PostalHelper;
-
-public class Mod : IMod
+namespace PostOfficeTweaks
 {
-    // mod's instance and asset
-    public static Mod instance { get; private set; }
-    public static ExecutableAsset modAsset { get; private set; }
-    // logging
-    public static ILog log = LogManager.GetLogger($"{nameof(PostalHelper)}").SetShowsErrorsInUI(false);
-	// settings
-	public static Setting m_Setting;
+    using Colossal.IO.AssetDatabase;
+    using Colossal.Logging;
+    using Game;
+    using Game.Modding;
+    using Game.SceneFlow;
 
-	public void OnLoad(UpdateSystem updateSystem)
+    public sealed class Mod : IMod
     {
-        log.Info(nameof(OnLoad));
-
-        if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
+        // Mod instance and asset
+        public static Mod? instance
         {
-            log.Info($"{asset.name} v{asset.version} mod asset at {asset.path}");
-            modAsset = asset;
+            get; private set;
         }
 
-		m_Setting = new Setting(this);
-		m_Setting.RegisterInOptionsUI();
-		GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
-		GameManager.instance.localizationManager.AddSource("ja-JP", new LocaleJA(m_Setting));
+        public static ExecutableAsset? modAsset
+        {
+            get; private set;
+        }
 
-		AssetDatabase.global.LoadSettings(nameof(PostalHelper), m_Setting, new Setting(this));
+        // Logging
+        public static readonly ILog log =
+            LogManager.GetLogger(nameof(PostOfficeTweaks)).SetShowsErrorsInUI(false);
 
-		// Run the system before simulation phase starts
-		updateSystem.UpdateBefore<PostalHelperSystem>(SystemUpdatePhase.GameSimulation);
-    }
+        // Settings instance
+        public static Setting? m_Setting;
 
-    public void OnDispose()
-    {
-        log.Info(nameof(OnDispose));
+        public void OnLoad(UpdateSystem updateSystem)
+        {
+            instance = this;
+            log.Info($"{nameof(OnLoad)} for {nameof(PostOfficeTweaks)}");
+
+            GameManager? gameManager = GameManager.instance;
+            if (gameManager == null)
+            {
+                log.Error("GameManager.instance is null in Mod.OnLoad.");
+                return;
+            }
+
+            if (gameManager.modManager.TryGetExecutableAsset(this, out ExecutableAsset asset))
+            {
+                log.Info($"{asset.name} v{asset.version} mod asset at {asset.path}");
+                modAsset = asset;
+            }
+
+            Setting setting = new Setting(this);
+            m_Setting = setting;
+
+            setting.RegisterInOptionsUI();
+
+            var localizationManager = gameManager.localizationManager;
+            if (localizationManager == null)
+            {
+                log.Warn("LocalizationManager is null; skipping locale registration.");
+            }
+            else
+            {
+                localizationManager.AddSource("en-US", new LocaleEN(setting));
+                localizationManager.AddSource("ja-JP", new LocaleJA(setting));
+            }
+
+            AssetDatabase.global.LoadSettings(nameof(PostOfficeTweaks), setting, new Setting(this));
+
+            // Run the system before simulation phase starts
+            updateSystem.UpdateBefore<PostOfficeSystem>(SystemUpdatePhase.GameSimulation);
+        }
+
+        public void OnDispose()
+        {
+            log.Info(nameof(OnDispose));
+        }
     }
 }

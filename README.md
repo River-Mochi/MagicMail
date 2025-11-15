@@ -1,4 +1,4 @@
-# PostalHelper
+# PostOfficeTweaks
 
 Mod helps the post facilities to work more smoothly.
 - **Post Office** gets Mail to Deliver when in critical need.
