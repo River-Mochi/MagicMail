@@ -1,0 +1,56 @@
+Folder PATH listing for volume Windows-SSD
+Volume serial number is D640-3A2A
+C:.
+|   .editorconfig
+|   .gitattributes
+|   .gitignore
+|   GoPostal.csproj
+|   GoPostal.sln
+|   LICENSE
+|   Mod.cs
+|   README.md
+|   repo-tree.txt
+|   
++---bin
+|   \---Debug
++---Localization
+|       LocaleEN.cs
+|       LocaleJA.cs
+|       
++---obj
+|   |   GoPostal.csproj.nuget.dgspec.json
+|   |   GoPostal.csproj.nuget.g.props
+|   |   GoPostal.csproj.nuget.g.targets
+|   |   project.assets.json
+|   |   project.nuget.cache
+|   |   
+|   \---Debug
+|       \---net48
+|               .NETFramework,Version=v4.8.AssemblyAttributes.cs
+|               GoPostal.AssemblyInfo.cs
+|               GoPostal.AssemblyInfoInputs.cache
+|               GoPostal.assets.cache
+|               GoPostal.csproj.AssemblyReference.cache
+|               GoPostal.csproj.CoreCompileInputs.cache
+|               GoPostal.csproj.FileListAbsolute.txt
+|               GoPostal.GeneratedMSBuildEditorConfig.editorconfig
+|               GoPostal.sourcelink.json
+|               
++---Properties
+|   |   PublishConfiguration.xml
+|   |   Thumbnail.png
+|   |   
+|   \---PublishProfiles
+|           PublishNewMod.pubxml
+|           PublishNewMod.pubxml.user
+|           PublishNewVersion.pubxml
+|           PublishNewVersion.pubxml.user
+|           UpdatePublishedConfiguration.pubxml
+|           UpdatePublishedConfiguration.pubxml.user
+|           
++---Settings
+|       Settings.cs
+|       
+\---Systems
+        GoPostalSystem.cs
+        

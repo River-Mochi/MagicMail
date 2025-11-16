@@ -1,10 +1,10 @@
 ﻿<Publish>
 	<!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
-	<ModId Value="78802" />
+	<ModId Value="" />
 	<!--Name of the mod to display to players-->
-	<DisplayName Value="Postal Office Tweaks" />
+	<DisplayName Value="Go Postal" />
 	<!--Short description of the mod-->
-	<ShortDescription Value="Post Office Controller from capacity to speed" />
+	<ShortDescription Value="Post Office Fixes and Control" />
 	<!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
 	<!--LongDescription Value="Fixes always-empty industrial signature buildings." /-->
 	<LongDescription>
@@ -31,6 +31,14 @@ Each time the mod adds some mail, there will be an entry in the log. When there 
 - This is a workaround solution until CO will fix the mail transfer processes.
 - The mod does **not** modify savefiles.
 - The mod does **not** modify any game systems.
+
+
+
+### Credits
+- River-Mochi - current author/maintainer
+- Thanks to Infixo author of Postal Helper and inspiration
+
+
 	</LongDescription>
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/Thumbnail.png" />
@@ -51,5 +59,5 @@ Each time the mod adds some mail, there will be an entry in the log. When there 
 	<ChangeLog>Fixes mail overflow that blocks post vans.</ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 	<ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
-	<ExternalLink Type="github" Url="https://github.com/River-Mochi/PostOfficeTweaks" />
+	<ExternalLink Type="github" Url="https://github.com/River-Mochi/GoPostal" />
 </Publish>
