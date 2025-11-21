@@ -8,12 +8,11 @@
 		<PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
 
 		<!--The folder where Game.dll is located. Set it only if the game is not installed in the default location, otherwise keep it empty-->
-		<CustomManagedPath></CustomManagedPath>
 		<RootNamespace>MagicMail</RootNamespace>
 		<Nullable>enable</Nullable>
 
   <!-- Single source of truth -->
-	  <Version>1.0.3</Version>
+	  <Version>1.0.4</Version>
 	<AssemblyVersion>$(Version).0</AssemblyVersion>
 	<FileVersion>$(Version).0</FileVersion>  <!-- for file properties -->
 
