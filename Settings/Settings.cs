@@ -12,8 +12,7 @@ namespace MagicMail
     using UnityEngine;
 
     /// <summary>
-    /// Settings definition and UI bindings for MagicMail [MM].
-    /// </summary>
+    /// Settings definition and UI bindings for MagicMail [MM].</summary>
     [FileLocation("ModsSettings/MagicMail/MagicMail")]
     [SettingsUITabOrder(
         kActionsTab,
@@ -69,8 +68,7 @@ namespace MagicMail
             "https://discord.gg/HTav7ARPs2";
 
         /// <summary>
-        /// Internal flag used to avoid resetting options on every load.
-        /// </summary>
+        /// Internal flag used to avoid resetting options on every load.</summary>
         [SettingsUIHidden]
         public bool NotFirstTime
         {
@@ -79,23 +77,21 @@ namespace MagicMail
         }
 
         /// <summary>
-        /// Constructs the settings object and initializes defaults on first creation.
-        /// </summary>
+        /// Constructs the settings object and initializes defaults on first creation.</summary>
         /// <param name="mod">Mod instance passed by the game.</param>
         public Setting(IMod mod)
             : base(mod)
         {
-            // Only apply defaults the first time this settings asset is created.
+            // First run: start from pure game defaults (vanilla).
             if (!NotFirstTime)
             {
-                SetDefaults();
+                SetDefaults();    // SetDefaults => vanilla now.
                 NotFirstTime = true;
             }
         }
 
         /// <summary>
-        /// Applies settings at runtime and ensures the managed system is enabled.
-        /// </summary>
+        /// Applies settings at runtime and ensures the managed system is enabled.</summary>
         public override void Apply()
         {
             base.Apply();
@@ -141,7 +137,7 @@ namespace MagicMail
                     return;
                 }
 
-                SetDefaults();
+                SetRecommended();
                 Apply();
             }
         }
@@ -186,8 +182,7 @@ namespace MagicMail
         }
 
         /// <summary>
-        /// Global overflow fix toggle (post offices + sorting facilities).
-        /// </summary>
+        /// Global overflow fix toggle (post offices + sorting facilities).</summary>
         [SettingsUISection(kActionsTab, PostOfficeGroup)]
         public bool FixMailOverflow
         {
@@ -228,8 +223,7 @@ namespace MagicMail
         // --------------------------------------------------------------------
 
         /// <summary>
-        /// Master toggle for changing postal capacities (vans, trucks, payload).
-        /// </summary>
+        /// Master toggle for changing postal capacities (vans, trucks, payload).</summary>
         [SettingsUISection(kActionsTab, PostVanGroup)]
         public bool ChangeCapacity
         {
@@ -240,8 +234,7 @@ namespace MagicMail
         /// <summary>
         /// Post van mail load multiplier (percent).
         /// Applied to PostVanData.m_MailCapacity (payload per van).
-        /// 100% = vanilla; higher values let each van carry more mail.
-        /// </summary>
+        /// 100% = vanilla; higher values let each van carry more mail.</summary>
         [SettingsUISection(kActionsTab, PostVanGroup)]
         [SettingsUISlider(
             min = 100,
@@ -258,8 +251,7 @@ namespace MagicMail
 
         /// <summary>
         /// Post van fleet size multiplier (percent).
-        /// Applied to PostFacilityData.m_PostVanCapacity (vans per facility).
-        /// </summary>
+        /// Applied to PostFacilityData.m_PostVanCapacity (vans per facility).</summary>
         [SettingsUISection(kActionsTab, PostVanGroup)]
         [SettingsUISlider(
             min = 50,
@@ -276,8 +268,7 @@ namespace MagicMail
 
         /// <summary>
         /// Post truck fleet size multiplier (percent).
-        /// Applied to PostFacilityData.m_PostTruckCapacity (trucks per facility).
-        /// </summary>
+        /// Applied to PostFacilityData.m_PostTruckCapacity (trucks per facility).</summary>
         [SettingsUISection(kActionsTab, PostVanGroup)]
         [SettingsUISlider(
             min = 50,
@@ -297,8 +288,7 @@ namespace MagicMail
         // --------------------------------------------------------------------
 
         /// <summary>
-        /// Sorting speed multiplier for sorting facilities (percent).
-        /// </summary>
+        /// Sorting speed multiplier for sorting facilities (percent).</summary>
         [SettingsUISection(kActionsTab, PostSortingFacilityGroup)]
         [SettingsUISlider(
             min = 50,
@@ -314,8 +304,7 @@ namespace MagicMail
 
         /// <summary>
         /// Storage capacity multiplier for sorting facilities (percent).
-        /// Scales PostFacilityData.m_MailCapacity only for facilities that sort mail.
-        /// </summary>
+        /// Scales PostFacilityData.m_MailCapacity only for facilities that sort mail.</summary>
         [SettingsUISection(kActionsTab, PostSortingFacilityGroup)]
         [SettingsUISlider(
             min = 50,
@@ -431,9 +420,41 @@ namespace MagicMail
         // --------------------------------------------------------------------
 
         /// <summary>
-        /// Sets recommended default values for mod behavior.
-        /// </summary>
+        /// Sets vanilla-like defaults (pure game defaults) for first run.</summary>
         public override void SetDefaults()
+        {
+            SetToVanilla();
+        }
+
+        /// <summary>
+        /// Vanilla / game-default behaviour: no magic, 100% capacities.</summary>
+        public void SetToVanilla()
+        {
+            // Vanilla-like behavior: no auto gets, no overflow cleanup, vanilla capacities.
+            PO_GetLocalMail = false;
+            PO_GettingThresholdPercentage = 2;
+            PO_GettingPercentage = 15;
+
+            FixMailOverflow = false;
+            PO_OverflowPercentage = 80;
+            PSF_OverflowPercentage = 80;
+
+            PSF_GetUnsortedMail = false;
+            PSF_GettingThresholdPercentage = 2;
+            PSF_GettingPercentage = 15;
+
+            PSF_SortingSpeedPercentage = 100;
+            PSF_StorageCapacityPercentage = 100;
+
+            ChangeCapacity = false;
+            PostVanMailLoadPercentage = 100;
+            PostVanFleetSizePercentage = 100;
+            TruckCapacityPercentage = 100;
+        }
+
+        /// <summary>
+        /// Recommended MagicMail tuning preset.</summary>
+        private void SetRecommended()
         {
             // Post offices: auto-get local mail when low (magic top-up).
             PO_GetLocalMail = true;
@@ -460,40 +481,12 @@ namespace MagicMail
             TruckCapacityPercentage = 100;
         }
 
-        /// <summary>
-        /// Restore settings similar to game defaults (vanilla).
-        /// </summary>
-        public void SetToVanilla()
-        {
-            // Vanilla-like behavior: no auto gets, no overflow cleanup, vanilla capacities.
-            PO_GetLocalMail = false;
-            PO_GettingThresholdPercentage = 2;
-            PO_GettingPercentage = 15;
-
-            FixMailOverflow = false;
-            PO_OverflowPercentage = 80;
-            PSF_OverflowPercentage = 80;
-
-            PSF_GetUnsortedMail = false;
-            PSF_GettingThresholdPercentage = 2;
-            PSF_GettingPercentage = 15;
-
-            PSF_SortingSpeedPercentage = 100;
-            PSF_StorageCapacityPercentage = 100;
-
-            ChangeCapacity = false;
-            PostVanMailLoadPercentage = 100;
-            PostVanFleetSizePercentage = 100;
-            TruckCapacityPercentage = 100;
-        }
-
         // --------------------------------------------------------------------
         // HELPERS
         // --------------------------------------------------------------------
 
         /// <summary>
-        /// Opens a URL via Unity’s Application.OpenURL, ignoring failures.
-        /// </summary>
+        /// Opens a URL via Unity’s Application.OpenURL, ignoring failures.</summary>
         private static void TryOpenUrl(string url)
         {
             try

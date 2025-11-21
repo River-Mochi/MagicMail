@@ -38,126 +38,132 @@ namespace MagicMail
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Bureau de poste" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "Fourgonnettes & camions" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "Fourgons & camions" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Centre de tri" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup),               "Réinitialiser" },
 
                 // Groups (Status tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.StatusSummaryGroup), "Vue d’ensemble de la ville" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.StatusActivityGroup), "Dernière mise à jour" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.StatusSummaryGroup), "Vue d'ensemble de la ville" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.StatusActivityGroup), "Dernière activité" },
 
                 // Groups (About tab)
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup),  "Infos" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Liens" },
 
                 // ---- Post Office ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Corriger le faible courrier local" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Corriger le manque de courrier local" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
-                    "Quand cette option est activée, du courrier local supplémentaire apparaît \"magiquement\" si le stock est trop bas.\n " +
-                    "Aucune fourgonnette supplémentaire n’est envoyée – le courrier apparaît directement dans le bâtiment." },
+                    "Quand c'est activé et que le stock devient trop bas, du courrier supplémentaire apparaît.\n " +
+                    "Aucun fourgon supplémentaire n’est généré – c’est comme de la magie, mais réelle." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Seuil de courrier local" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
-                    "Si le courrier local passe en dessous de ce pourcentage choisi, le bureau de poste récupère automatiquement plus de courrier local.\n" +
-                    "Il s’agit d’un pourcentage de la capacité de stockage maximale." },
+                    "Si le courrier local passe en dessous de ce pourcentage choisi,\n " +
+                    "le bureau de poste fait venir plus de courrier local.\n" +
+                    "C’est un pourcentage de la capacité maximale de stockage." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Montant de courrier local à ajouter" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Quantité de courrier local ajouté" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingPercentage)),
-                    "Pourcentage ajouté lors du remplissage magique du courrier local.\n" +
-                    "20 % = +2 000 si la capacité vanilla = 10 000." },
+                    "Pourcentage ajouté lors du remplissage du courrier local (recharge magique).\n" +
+                    "Si le maximum vanilla = 10 000 et que tu mets 20 %, alors 2 000 sont ajoutés." },
 
                 // Global overflow toggle (PO + PSF)
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)),
-                    "Corriger le débordement de courrier" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Corriger le débordement de courrier" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
-                    "Quand cette option est activée, les bureaux de poste et/ou les centres de tri effectuent un petit nettoyage \"magique\" lorsque\n " +
-                    "les seuils de débordement sont atteints : le courrier excédentaire est considéré comme distribué puis supprimé.\n " +
-                    "Cela évite que les bâtiments restent bloqués en état \"plein\" pour toujours.\n " +
-                    "Désactive cette option pour conserver le comportement vanilla." },
+                    "Quand il y a trop de courrier, les bâtiments effectuent un petit nettoyage **magique**.\n " +
+                    "Le surplus est considéré comme distribué et supprimé.\n " +
+                    "Cela évite que les bâtiments restent bloqués en mode « plein » pour toujours.\n " +
+                    "Désactive cette option pour garder le comportement vanilla pur." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Seuil de débordement du bureau de poste" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Seuil de débordement (bureau de poste)" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_OverflowPercentage)),
-                    "Quand le courrier total atteint ce pourcentage de la capacité de stockage, la gestion de débordement se déclenche." },
+                    "Quand le total du courrier dans un bureau de poste atteint ce pourcentage,\n" +
+                    "le mod supprime assez de courrier pour revenir à ce niveau." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Seuil de débordement du centre de tri" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Seuil de débordement (centre de tri)" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_OverflowPercentage)),
-                    "Quand le courrier total dans les centres de tri atteint ce pourcentage de la capacité totale,\n " +
-                    "le traitement de débordement \"magique\" se déclenche." },
+                   "Quand le total du courrier dans un centre de tri atteint ce pourcentage,\n" +
+                   "le mod supprime assez de courrier pour revenir à ce niveau." },
 
                 // ---- Post Vans & Trucks ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ChangeCapacity)), "Modifier les capacités" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
-                    "Active cette option pour modifier les capacités des fourgons et des camions. Lorsque cette option est désactivée, tous les curseurs ci-dessous sont cachés\n " +
-                    "et les valeurs vanilla du jeu sont utilisées, même si les curseurs affichent d’autres nombres." },
+                    "Active ceci pour modifier les capacités des fourgons et camions. Si c’est désactivé,\n" +
+                    "tous les curseurs ci-dessous sont masqués et\n" +
+                    "les valeurs vanilla du jeu sont appliquées même si les curseurs affichent autre chose." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Charge de courrier des fourgons" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Charge des fourgons" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
-                    "Contrôle la quantité de courrier que chaque fourgon postal peut transporter. 100 % = charge vanilla." },
+                    "Contrôle la quantité de courrier que chaque fourgon peut transporter.\n" +
+                    "<100 % = charge vanilla.>" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Taille de la flotte de fourgons" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Taille de flotte de fourgons" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
-                    "Contrôle combien de fourgons chaque bâtiment postal peut posséder et utiliser.\n" +
-                    "<100 % = taille de flotte vanilla.>" },
+                    "Contrôle combien de fourgons chaque bâtiment postal peut posséder et envoyer.\n" +
+                    "<100 % = flotte vanilla.>" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Taille de la flotte de camions postaux" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Taille de flotte de camions" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
-                    "Contrôle combien de camions postaux chaque centre de tri (et tout bâtiment avec des camions de poste)\n " +
-                    "peut posséder et utiliser.\n " +
-                    "<100 % = taille de flotte vanilla.>" },
+                    "Contrôle combien de camions chaque centre de tri (et tout bâtiment avec des camions postaux)\n " +
+                    "peut posséder et envoyer.\n " +
+                    "<100 % = flotte vanilla.>" },
 
                 // ---- Sorting Facility ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)), "Vitesse de tri" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
-                    "Multiplicateur de vitesse de tri pour les **centres de tri** postaux. S’applique au taux de tri de base du bâtiment.\n " +
+                    "Multiplicateur pour les centres de **tri**. S’applique à la vitesse de tri de base du bâtiment.\n " +
                     "<100 % = vanilla>" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Capacité de stockage du tri" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Capacité de stockage de tri" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
-                    "Contrôle la **capacité de stockage** dans un centre de tri.\n " +
+                    "Contrôle la **capacité de stockage du courrier**.\n " +
                     "<100 % = vanilla>" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Corriger le faible courrier non trié" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Corriger le manque de courrier non trié" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
-                    "Quand cette option est activée, du courrier non trié supplémentaire apparaît \"magiquement\" dans les centres de tri si le stock devient trop faible.\n " +
-                    "Cela maintient l’activité de tri sans attendre de nouvelles livraisons.\n" +
-                    "Correction temporaire pour le bug actuel où les centres de tri reçoivent trop peu de courrier lorsqu’un port de fret est présent." },
+                    "Quand c’est activé, du courrier non trié apparaît magiquement si le stock est trop bas.\n " +
+                    "Cela garde les centres de tri actifs sans attendre les livraisons.\n" +
+                    "Correctif temporaire pour un bug où les centres de tri reçoivent trop peu de courrier\n " +
+                    "lorsqu’un port de fret est présent." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Seuil de courrier non trié" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
-                    "Si le courrier non trié passe en dessous de ce pourcentage de la capacité, le bâtiment fait apparaître magiquement la quantité configurée de courrier non trié." },
+                    "Si le courrier non trié descend sous ce pourcentage de la capacité,\n " +
+                    "une quantité supplémentaire de courrier non trié est ajoutée magiquement.\n" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Montant de courrier non trié à ajouter" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Quantité de courrier non trié" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
-                    "Courrier supplémentaire ajouté lors du remplissage magique du courrier non trié.\n" +
-                    "Pourcentage de la capacité de stockage maximale." },
+                    "Courrier additionnel ajouté lors du remplissage de courrier non trié (recharge magique).\n" +
+                    "Valeur exprimée en pourcentage de la capacité maximale de stockage." },
 
-                // ---- Reset ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Réinitialiser aux valeurs du jeu" },
+                // ---- RESET BUTTONS ----
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Valeurs par défaut du jeu" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)),
-                    "Restaure tous les réglages postaux au comportement original du jeu (vanilla)." },
+                    "Restaure toutes les options au comportement par défaut original du jeu (vanilla)." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Réinitialiser aux valeurs recommandées" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Recommandé" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "Démarrage rapide : applique les réglages postaux recommandés." },
+                    "**Démarrage rapide** – applique tous les réglages postaux recommandés.\n" +
+                    "Mode facile : un clic et c’est fait !" },
 
                 // ---- Status tab ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), "" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
-                    "Résumé des bureaux de poste, fourgons, centres de tri et camions postaux traités lors de la dernière mise à jour du jeu (~toutes les 45 minutes de jeu)." },
+                    "Résumé des bureaux de poste, fourgons, centres de tri et camions postaux traités\n " +
+                    "lors de la dernière mise à jour du jeu (~toutes les 45 minutes en jeu)." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "Courrier de la ville" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusCityMailSummary)),
-                    "Affiche le flux de courrier récent à l’échelle de la ville.\n\n" +
-                     "Courrier généré = quantité de courrier produite par les citoyens.\n" +
-                     "Courrier traité   = quantité de courrier réellement traitée par le réseau.\n\n" +
-                     "- Si le courrier traité reste constamment supérieur au courrier généré, ton réseau postal a assez de capacité " +
-                     "et tu peux réduire le budget ou les véhicules si tu le souhaites.\n" +
-                     "- Si le courrier généré reste au-dessus du courrier traité pendant longtemps, la ville génère plus de courrier que\n " +
-                     "le réseau ne peut en traiter – ajoute des bâtiments, des véhicules ou ajuste les réglages." },
+                    "Montre le flux récent de courrier dans la ville.\n\n" +
+                     "**Accumulé** = quantité de courrier générée par les citoyens.\n" +
+                     "**Traité**   = quantité de courrier effectivement prise en charge par le réseau.\n\n" +
+                     "- Si « Traité » est souvent supérieur à « Accumulé », le réseau postal a assez de capacité.\n " +
+                     "- Si « Accumulé » reste au-dessus de « Traité » pendant longtemps, la ville génère plus de courrier\n " +
+                     "que ce que le réseau peut gérer : ajoute des bâtiments, des véhicules ou ajuste les réglages." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "Activité" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)),
-                    "Compte les remplissages de courrier et les nettoyages de débordement effectués lors de la dernière mise à jour." },
+                    "Nombre de compléments de courrier et de nettoyages de débordement effectués lors de la dernière mise à jour." },
 
                 // ---- About tab: info ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModNameDisplay)), "Mod" },
@@ -171,11 +177,11 @@ namespace MagicMail
                 // ---- About tab: links ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Paradox" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)),
-                    "Ouvre la page **Paradox** pour **Magic Mail** et d’autres mods." },
+                    "Ouvre la page **Paradox** pour **Magic Mail** et les autres mods." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)),
-                    "Ouvre le salon de discussion **Discord** pour les retours dans un navigateur." },
+                    "Ouvre le salon **Discord** de retour d’expérience dans un navigateur." },
             };
         }
 

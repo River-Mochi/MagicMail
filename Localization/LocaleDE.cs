@@ -39,12 +39,12 @@ namespace MagicMail
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Postamt" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "Postwagen & LKW" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Sortierzentrum" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Sortieranlage" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup),               "Zurücksetzen" },
 
                 // Groups (Status tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.StatusSummaryGroup), "Stadtüberblick" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.StatusActivityGroup), "Letztes Update" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.StatusSummaryGroup), "Stadt-Überblick" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.StatusActivityGroup), "Letzte Aktualisierung" },
 
                 // Groups (About tab)
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup),  "Info" },
@@ -53,116 +53,122 @@ namespace MagicMail
                 // ---- Post Office ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Niedrige lokale Post beheben" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
-                    "Wenn aktiviert, erscheint bei zu niedrigem Bestand \"magisch\" zusätzliche lokale Post im Postamt.\n " +
-                    "Es werden keine zusätzlichen Fahrzeuge erzeugt – die Post liegt direkt im Gebäude zur Verfügung." },
+                    "Wenn aktiviert und der Lagerstand zu niedrig wird, erscheint zusätzliche Post.\n " +
+                    "Es werden keine zusätzlichen Lieferwagen gespawnt – fast wie Magie, aber echt." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Schwellenwert für lokale Post" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Schwellwert für lokale Post" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
-                    "Wenn lokale Post unter diesen von dir gewählten Prozentsatz fällt, holt das Postamt automatisch mehr lokale Post.\n" +
-                    "Es ist der Prozentsatz der maximalen Lagerkapazität." },
+                    "Wenn lokale Post unter diesen von dir gewählten Prozentsatz fällt,\n " +
+                    "zieht das Postamt automatisch mehr lokale Post nach.\n" +
+                    "Bezogen auf den maximalen Speicher." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Menge der lokalen Postabrufe" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Menge der nachgezogenen lokalen Post" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingPercentage)),
-                    "Prozentsatz, der beim magischen Auffüllen lokaler Post hinzugefügt wird.\n" +
-                    "20 % = +2.000, wenn das Vanilla-Limit = 10.000 ist." },
+                    "Prozentsatz, der beim Nachziehen von lokaler Post hinzugefügt wird (magisches Auffüllen).\n" +
+                    "Wenn das Vanilla-Maximum = 10.000 ist und hier 20 % eingestellt sind, werden 2.000 hinzugefügt." },
 
                 // Global overflow toggle (PO + PSF)
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)),
-                    "Postüberlauf beheben" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Postüberlauf beheben" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
-                    "Wenn aktiviert, führen Postämter und/oder Sortierzentren eine kleine \"magische\" Bereinigung durch,\n " +
-                    "sobald die eingestellten Überlaufgrenzen erreicht werden: überschüssige Post wird als zugestellt behandelt und entfernt.\n " +
-                    "Dies verhindert, dass Gebäude dauerhaft als \"voll\" stecken bleiben.\n " +
-                    "Deaktiviere dies, um das reine Vanilla-Verhalten beizubehalten." },
+                    "Wenn es zu viel Post gibt, führen die Anlagen eine kleine **magische** Aufräumaktion durch.\n " +
+                    "Überschüssige Post wird als zugestellt behandelt und entfernt.\n " +
+                    "So bleiben Anlagen nicht dauerhaft als „voll“ hängen.\n " +
+                    "Deaktiviere dies, um das reine Vanilla-Verhalten zu behalten." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Überlaufgrenze Postamt" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Überlauf-Schwellwert (Postamt)" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_OverflowPercentage)),
-                    "Wenn die Gesamtpost diesen Prozentsatz der Lagerkapazität erreicht, wird die Überlaufbehandlung ausgelöst." },
+                    "Wenn die Gesamtmenge an Post in einem Postamt diesen Prozentsatz erreicht,\n" +
+                    "löscht das Mod genügend gespeicherte Post, um wieder auf dieses Niveau zu kommen." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Überlaufgrenze Sortierzentrum" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Überlauf-Schwellwert (Sortierung)" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_OverflowPercentage)),
-                    "Wenn die Gesamtpost in Sortierzentren diesen Prozentsatz der Gesamtspeicherkapazität erreicht,\n " +
-                    "wird die \"magische\" Überlaufbehandlung ausgelöst." },
+                   "Wenn die Gesamtmenge an Post in einer Sortieranlage diesen Prozentsatz erreicht,\n" +
+                   "löscht das Mod genügend gespeicherte Post, um wieder auf dieses Niveau zu kommen." },
 
                 // ---- Post Vans & Trucks ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ChangeCapacity)), "Kapazitäten ändern" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
-                    "Aktiviere dies, um die Kapazität von Postwagen und LKW zu ändern. Wenn deaktiviert, sind alle Regler unten ausgeblendet\n " +
-                    "und Vanilla-Werte werden verwendet, auch wenn die Regler andere Werte anzeigen." },
+                    "Aktiviere dies, um Kapazitäten von Wagen und LKW anzupassen. Wenn deaktiviert,\n" +
+                    "werden alle Slider unten ausgeblendet und\n" +
+                    "Vanilla-Werte verwendet – selbst wenn die Slider andere Werte anzeigen." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Ladung der Postwagen" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Postwagen-Ladung" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
-                    "Steuert, wie viel Post ein einzelner Postwagen transportieren kann. 100 % = Vanilla-Ladung." },
+                    "Steuert, wie viel Post jeder Postwagen transportieren kann.\n" +
+                    "<100 % = Vanilla-Nutzlast.>" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Größe der Postwagenflotte" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Anzahl der Postwagen" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
-                    "Steuert, wie viele Postwagen jedes Postgebäude besitzen und einsetzen kann.\n" +
+                    "Steuert, wie viele Postwagen jedes Postgebäude besitzen und aussenden kann.\n" +
                     "<100 % = Vanilla-Flottengröße.>" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Größe der Post-LKW-Flotte" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Anzahl der Post-LKW" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
-                    "Steuert, wie viele Post-LKW jedes Sortierzentrum (und andere Gebäude mit Post-LKW)\n " +
-                    "besitzen und einsetzen kann.\n " +
+                    "Steuert, wie viele Post-LKW jede Sortieranlage (und andere Gebäude mit Post-LKW)\n " +
+                    "besitzen und aussenden kann.\n " +
                     "<100 % = Vanilla-Flottengröße.>" },
 
                 // ---- Sorting Facility ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)), "Sortiergeschwindigkeit" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
-                    "Multiplikator für die Sortiergeschwindigkeit in postalischen **Sortierzentren**. Wirkt auf die Basis-Sortierleistung der Anlage.\n " +
+                    "Multiplikator für **Sortier**anlagen. Wirkt auf die Basis-Sortiergeschwindigkeit der Anlage.\n " +
                     "<100 % = Vanilla>" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Sortierlagerkapazität" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Sortierspeicher-Kapazität" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
-                    "Steuert die **Postlagerung** im Sortierzentrum.\n " +
+                    "Steuert die **Post-Speicherkapazität**.\n " +
                     "<100 % = Vanilla>" },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Niedrige unsortierte Post beheben" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
-                    "Wenn aktiviert, erscheint \"magisch\" zusätzliche unsortierte Post im Sortierzentrum, wenn der Vorrat zu niedrig wird.\n " +
-                    "So bleibt das Sortieren aktiv, ohne auf weitere Lieferungen warten zu müssen.\n" +
-                    "Vorübergehender Fix für den aktuellen Fehler, bei dem Sortierzentren zu wenig Post erhalten, wenn ein Frachthafen vorhanden ist." },
+                    "Wenn aktiviert, erscheint etwas unsortierte Post „magisch“, wenn der Vorrat zu niedrig ist.\n " +
+                    "So bleiben Sortiergebäude aktiv, ohne auf Lieferungen warten zu müssen.\n" +
+                    "Dies ist ein temporärer Fix für einen Bug, bei dem Sortieranlagen zu wenig Post bekommen,\n " +
+                    "wenn ein Frachthafen vorhanden ist." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Schwellenwert für unsortierte Post" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Schwellwert unsortierte Post" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
-                    "Wenn unsortierte Post unter diesen Prozentsatz der Kapazität fällt, zieht die Anlage magisch die eingestellte Abrufmenge an unsortierter Post nach." },
+                    "Wenn unsortierte Post unter diesen Prozentsatz der Kapazität fällt,\n " +
+                    "wird magisch zusätzliche unsortierte Post nachgezogen.\n" },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Menge der unsortierten Postabrufe" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Menge der unsortierten Post" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
-                    "Zusätzliche Post, die beim magischen Auffüllen von unsortierter Post hinzugefügt wird.\n" +
-                    "Prozentsatz der maximalen Speicherkapazität." },
+                    "Zusätzliche Post, die beim Nachziehen von unsortierter Post hinzugefügt wird (magisches Auffüllen).\n" +
+                    "Wert ist ein Prozentsatz der maximalen Speicherkapazität." },
 
-                // ---- Reset ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Auf Spiel-Standard zurücksetzen" },
+                // ---- RESET BUTTONS ----
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Spiel-Standardwerte" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)),
-                    "Setzt alle Posteinstellungen auf das ursprüngliche Verhalten des Spiels (Vanilla) zurück." },
+                    "Setzt alle Einstellungen auf das ursprüngliche Standardverhalten des Spiels (Vanilla) zurück." },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Auf Empfehlung zurücksetzen" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Empfohlen" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "Schnellstart: Empfohlene Posteinstellungen anwenden." },
+                    "**Schnellstart** – wendet alle empfohlenen Post-Einstellungen an.\n" +
+                    "Easy-Mode: 1 Klick und fertig!" },
 
                 // ---- Status tab ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), "" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
-                    "Zusammenfassung der Postämter, Postwagen, Sortierzentren und Post-LKW, die im letzten Spiel-Update (~alle 45 Spielminuten) verarbeitet wurden." },
+                    "Zusammenfassung der Postämter, Postwagen, Sortieranlagen und Post-LKW,\n " +
+                    "die im letzten Spiel-Update verarbeitet wurden (~alle 45 In-Game-Minuten)." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "Stadtpost" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusCityMailSummary)),
-                    "Zeigt den jüngsten Postfluss in der ganzen Stadt.\n\n" +
-                     "Erzeugt = wie viel Post die Bürger produziert haben.\n" +
-                     "Verarbeitet   = wie viel Post das Netz tatsächlich bearbeitet hat.\n\n" +
-                     "- Wenn Verarbeitet dauerhaft höher ist als Erzeugt, hat das Postnetz genug Kapazität " +
-                     "und man kann Budget oder Fahrzeuganzahl bei Bedarf senken.\n" +
-                     "- Wenn Erzeugt über längere Zeit über Verarbeitet bleibt, erzeugt die Stadt mehr Post als\n " +
-                     "das Netz bewältigen kann – mehr Anlagen, Fahrzeuge oder feinere Einstellungen sind nötig." },
+                    "Zeigt den aktuellen Postfluss in der Stadt.\n\n" +
+                     "**Gesammelt** = wie viel Post die Bürger erzeugt haben.\n" +
+                     "**Verarbeitet**   = wie viel Post das Netzwerk tatsächlich bearbeitet hat.\n\n" +
+                     "- Wenn „Verarbeitet“ häufig höher ist als „Gesammelt“, hat dein Postnetz genug Kapazität.\n " +
+                     "- Wenn „Gesammelt“ über lange Zeit höher bleibt, produziert die Stadt mehr Post,\n " +
+                     "als verarbeitet werden kann; baue weitere Anlagen, mehr Wagen oder passe die Einstellungen an." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "Aktivität" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)),
-                    "Zählt die Postauffüllungen und Überlaufbereinigungen, die im letzten Update durchgeführt wurden." },
+                    "Anzahl der Post-Nachzüge und Überlaufbereinigungen im letzten Update." },
 
                 // ---- About tab: info ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModNameDisplay)), "Mod" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModNameDisplay)),
-                    "Anzeigename dieser Mod." },
+                    "Anzeigename dieses Mods." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModVersionDisplay)), "Version" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)),
@@ -171,7 +177,7 @@ namespace MagicMail
                 // ---- About tab: links ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Paradox" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)),
-                    "Öffnet die **Paradox**-Webseite für **Magic Mail** und andere Mods." },
+                    "Öffnet die **Paradox**-Seite für **Magic Mail** und andere Mods." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)),

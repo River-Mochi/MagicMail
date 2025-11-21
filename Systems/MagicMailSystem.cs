@@ -20,16 +20,15 @@ namespace MagicMail
     /// <summary>
     /// Simulation system that adjusts post office / sorting facility capacities,
     /// post van mail payloads, and optional overflow cleanup.
-    /// Also reads city-wide mail stats from MailAccumulationSystem.
-    /// </summary>
+    /// Also reads city-wide mail stats from MailAccumulationSystem.</summary>
     public partial class MagicMailSystem : GameSystemBase
     {
         private EntityQuery m_PostFacilitiesQuery;
         private EntityQuery m_PostVanPrefabsQuery;
 
-        // Baselines so we can scale relative to vanilla and support clean resets.
-        private Dictionary<Entity, FacilityBaseline> m_FacilityBaselines = null!;
-        private Dictionary<Entity, int> m_PostVanMailBaselines = null!;
+        // Baselines so scaling is relative to vanilla and can be reset cleanly.
+        private readonly Dictionary<Entity, FacilityBaseline> m_FacilityBaselines = new();
+        private readonly Dictionary<Entity, int> m_PostVanMailBaselines = new();
 
         private struct FacilityBaseline
         {
@@ -58,8 +57,7 @@ namespace MagicMail
         internal static int s_LastOverflowClamps;
 
         /// <summary>
-        /// Returns a short summary of the last facility scan.
-        /// </summary>
+        /// Returns a short summary of the last facility scan.</summary>
         public static string GetStatusSummary()
         {
             if (s_LastFacilityCount == 0)
@@ -75,8 +73,7 @@ namespace MagicMail
         }
 
         /// <summary>
-        /// Returns a short summary of the last update activity.
-        /// </summary>
+        /// Returns a short summary of the last update activity.</summary>
         public static string GetStatusActivity()
         {
             if (s_LastFacilityCount == 0)
@@ -92,8 +89,7 @@ namespace MagicMail
 
         /// <summary>
         /// Returns a summary of city-wide mail accumulation/processing
-        /// from the vanilla MailAccumulationSystem.
-        /// </summary>
+        /// from the vanilla MailAccumulationSystem.</summary>
         public static string GetStatusCityMail()
         {
             if (s_LastCityAccumulatedMail == 0 && s_LastCityProcessedMail == 0)
@@ -103,13 +99,12 @@ namespace MagicMail
 
             // Slightly widened spacing after "Monthly".
             return
-                $"Monthly   {s_LastCityAccumulatedMail,8:N0} accumulated | " +
+                $"Monthly       {s_LastCityAccumulatedMail:N0} accumulated | " +
                 $"{s_LastCityProcessedMail:N0} processed";
         }
 
         /// <summary>
-        /// Controls how often the system updates for each phase.
-        /// </summary>
+        /// Controls how often the system updates for each phase.</summary>
         public override int GetUpdateInterval(SystemUpdatePhase phase)
         {
 #if DEBUG
@@ -122,8 +117,7 @@ namespace MagicMail
         }
 
         /// <summary>
-        /// Controls when the system runs relative to other systems.
-        /// </summary>
+        /// Controls when the system runs relative to other systems.</summary>
         public override int GetUpdateOffset(SystemUpdatePhase phase)
         {
             // Keeps this system in a safe slot before the vanilla system.
@@ -131,14 +125,10 @@ namespace MagicMail
         }
 
         /// <summary>
-        /// Creates the system and builds the entity queries.
-        /// </summary>
+        /// Creates the system and builds the entity queries.</summary>
         protected override void OnCreate()
         {
             base.OnCreate();
-
-            m_FacilityBaselines = new Dictionary<Entity, FacilityBaseline>();
-            m_PostVanMailBaselines = new Dictionary<Entity, int>();
 
             // Query for all operational post facilities with a resource buffer.
             m_PostFacilitiesQuery = GetEntityQuery(new EntityQueryDesc
@@ -157,7 +147,7 @@ namespace MagicMail
                 },
             });
 
-            // Query for post van prefabs (we only need PostVanData).
+            // Query for post van prefabs (only need PostVanData).
             m_PostVanPrefabsQuery = GetEntityQuery(new EntityQueryDesc
             {
                 All = new[]
@@ -168,15 +158,14 @@ namespace MagicMail
 
             RequireForUpdate(m_PostFacilitiesQuery);
 
-            // Try to grab the vanilla MailAccumulationSystem so we can surface its stats.
+            // Try to grab the vanilla MailAccumulationSystem so stats can be surfaced.
             TryResolveMailAccumulationSystem();
 
             Mod.s_Log.Info("MagicMailSystem created.");
         }
 
         /// <summary>
-        /// Per-update simulation logic for all post facilities.
-        /// </summary>
+        /// Per-update simulation logic for all post facilities.</summary>
         protected override void OnUpdate()
         {
             Setting? settings = Mod.Settings;
@@ -185,7 +174,7 @@ namespace MagicMail
                 return;
             }
 
-            EntityManager entityManager = EntityManager;
+            var entityManager = EntityManager;
 
             // Toggle: when false, facility capacities/sorting are forced to vanilla.
             bool changeCapacity = settings.ChangeCapacity;
@@ -203,20 +192,20 @@ namespace MagicMail
             ApplyPostVanStats(entityManager, vanMailPercent);
 
             using NativeArray<Entity> postEntities = m_PostFacilitiesQuery.ToEntityArray(Allocator.Temp);
-            int facilityCount = postEntities.Length;
-            int postOfficeCount = 0;
-            int sortingFacilityCount = 0;
-            int postOfficeGets = 0;
-            int sortingGets = 0;
-            int overflowClamps = 0;
-            int totalPostVanCapacity = 0;
-            int totalPostTruckCapacity = 0;
+            var facilityCount = postEntities.Length;
+            var postOfficeCount = 0;
+            var sortingFacilityCount = 0;
+            var postOfficeGets = 0;
+            var sortingGets = 0;
+            var overflowClamps = 0;
+            var totalPostVanCapacity = 0;
+            var totalPostTruckCapacity = 0;
 
 #if DEBUG
             Mod.s_Log.Info($"MagicMailSystem.OnUpdate: {facilityCount} post facilities");
 #endif
 
-            foreach (Entity postEntity in postEntities)
+            foreach (var postEntity in postEntities)
             {
                 if (!entityManager.TryGetComponent(postEntity, out PrefabRef prefabRef))
                 {
@@ -245,12 +234,12 @@ namespace MagicMail
                     m_FacilityBaselines[prefab] = baseline;
                 }
 
-                bool facilityChanged = false;
+                var facilityChanged = false;
 
-                int targetVanCapacity = baseline.PostVanCapacity;
-                int targetTruckCapacity = baseline.PostTruckCapacity;
-                int targetSortingRate = baseline.SortingRate;
-                int targetMailCapacity = baseline.MailCapacity;
+                var targetVanCapacity = baseline.PostVanCapacity;
+                var targetTruckCapacity = baseline.PostTruckCapacity;
+                var targetSortingRate = baseline.SortingRate;
+                var targetMailCapacity = baseline.MailCapacity;
 
                 if (changeCapacity)
                 {
@@ -308,8 +297,8 @@ namespace MagicMail
                     entityManager.SetComponentData(prefab, postFacilityData);
                 }
 
-                int mailCapacity = postFacilityData.m_MailCapacity;
-                int sortingRate = postFacilityData.m_SortingRate;
+                var mailCapacity = postFacilityData.m_MailCapacity;
+                var sortingRate = postFacilityData.m_SortingRate;
 
                 if (!entityManager.HasBuffer<Resources>(postEntity))
                 {
@@ -352,12 +341,7 @@ namespace MagicMail
                         ref overflowClamps);
                 }
 
-                // NOTE: Future hook for "MoreDeliveries" could go here, once we tie into
-                // the underlying request logic (PostFacilityAISystem thresholds/etc).
-                // For now, the toggle is plumbed and logged but does not change delivery
-                // request behaviour on its own.
-
-                // For status summary we want total capacity after scaling.
+                // For status summary, track total capacity after scaling.
                 totalPostVanCapacity += postFacilityData.m_PostVanCapacity;
                 totalPostTruckCapacity += postFacilityData.m_PostTruckCapacity;
             }
@@ -386,15 +370,14 @@ namespace MagicMail
         }
 
         /// <summary>
-        /// Applies van mail capacity multipliers to all post van prefabs.
-        /// </summary>
+        /// Applies van mail capacity multipliers to all post van prefabs.</summary>
         private void ApplyPostVanStats(EntityManager entityManager, int vanMailPercent)
         {
             using NativeArray<Entity> vanEntities = m_PostVanPrefabsQuery.ToEntityArray(Allocator.Temp);
 
-            foreach (Entity vanPrefab in vanEntities)
+            foreach (var vanPrefab in vanEntities)
             {
-                bool changedVanData = false;
+                var changedVanData = false;
 
                 if (!entityManager.TryGetComponent(vanPrefab, out PostVanData vanData))
                 {
@@ -408,7 +391,7 @@ namespace MagicMail
                     m_PostVanMailBaselines[vanPrefab] = baseCapacity;
                 }
 
-                int targetCapacity = (int)math.round(baseCapacity * vanMailPercent / 100f);
+                var targetCapacity = (int)math.round(baseCapacity * vanMailPercent / 100f);
                 targetCapacity = math.max(1, targetCapacity);
 
                 if (vanData.m_MailCapacity != targetCapacity)
@@ -425,8 +408,7 @@ namespace MagicMail
         }
 
         /// <summary>
-        /// Handles mail behavior for a pure post office (no sorting).
-        /// </summary>
+        /// Handles mail behavior for a pure post office (no sorting).</summary>
         private static void HandlePostOffice(
             Entity postEntity,
             int mailCapacity,
@@ -436,21 +418,21 @@ namespace MagicMail
             ref int getCounter,
             ref int overflowCounter)
         {
-            bool didGet = false;
-            bool didOverflow = false;
+            var didGet = false;
+            var didOverflow = false;
 
-            int localMailCount = GetResourceAmount(resources, Resource.LocalMail);
-            int outgoingMailCount = GetResourceAmount(resources, Resource.OutgoingMail);
-            int unsortedMailCount = GetResourceAmount(resources, Resource.UnsortedMail);
-            int allMailCount = localMailCount + outgoingMailCount + unsortedMailCount;
+            var localMailCount = GetResourceAmount(resources, Resource.LocalMail);
+            var outgoingMailCount = GetResourceAmount(resources, Resource.OutgoingMail);
+            var unsortedMailCount = GetResourceAmount(resources, Resource.UnsortedMail);
+            var allMailCount = localMailCount + outgoingMailCount + unsortedMailCount;
 
             // 1) Pull local mail if under threshold (magic top-up).
             if (settings.PO_GetLocalMail &&
                 mailCapacity > 0 &&
                 localMailCount * 100 / mailCapacity <= settings.PO_GettingThresholdPercentage)
             {
-                int addAmount = mailCapacity * settings.PO_GettingPercentage / 100;
-                int oldLocal = localMailCount;
+                var addAmount = mailCapacity * settings.PO_GettingPercentage / 100;
+                var oldLocal = localMailCount;
 
                 AddResourceAmount(resources, Resource.LocalMail, addAmount);
 
@@ -474,8 +456,8 @@ namespace MagicMail
                 return;
             }
 
-            double overflowRatio = settings.PO_OverflowPercentage / 100.0;
-            double fillRatio = (double)allMailCount / mailCapacity;
+            var overflowRatio = settings.PO_OverflowPercentage / 100.0;
+            var fillRatio = (double)allMailCount / mailCapacity;
 
             if (fillRatio < overflowRatio)
             {
@@ -488,7 +470,7 @@ namespace MagicMail
             }
 
             // Clamp each mail type so total storage is near overflowRatio * capacity.
-            int targetTotal = (int)math.round(overflowRatio * mailCapacity);
+            var targetTotal = (int)math.round(overflowRatio * mailCapacity);
             if (targetTotal < 0)
             {
                 targetTotal = 0;
@@ -497,16 +479,16 @@ namespace MagicMail
             // Proportional distribution based on current shares.
             if (allMailCount > 0)
             {
-                int targetLocal = (int)math.round((double)localMailCount / allMailCount * targetTotal);
-                int targetOutgoing = (int)math.round((double)outgoingMailCount / allMailCount * targetTotal);
-                int targetUnsorted = targetTotal - targetLocal - targetOutgoing;
+                var targetLocal = (int)math.round((double)localMailCount / allMailCount * targetTotal);
+                var targetOutgoing = (int)math.round((double)outgoingMailCount / allMailCount * targetTotal);
+                var targetUnsorted = targetTotal - targetLocal - targetOutgoing;
 
                 AddResourceAmount(resources, Resource.LocalMail, targetLocal - localMailCount);
                 AddResourceAmount(resources, Resource.OutgoingMail, targetOutgoing - outgoingMailCount);
                 AddResourceAmount(resources, Resource.UnsortedMail, targetUnsorted - unsortedMailCount);
             }
 
-            int oldAll = allMailCount;
+            var oldAll = allMailCount;
             localMailCount = GetResourceAmount(resources, Resource.LocalMail);
             outgoingMailCount = GetResourceAmount(resources, Resource.OutgoingMail);
             unsortedMailCount = GetResourceAmount(resources, Resource.UnsortedMail);
@@ -527,8 +509,7 @@ namespace MagicMail
         }
 
         /// <summary>
-        /// Handles mail behavior for a sorting facility.
-        /// </summary>
+        /// Handles mail behavior for a sorting facility.</summary>
         private static void HandleSortingFacility(
             Entity postEntity,
             int mailCapacity,
@@ -538,21 +519,21 @@ namespace MagicMail
             ref int getCounter,
             ref int overflowCounter)
         {
-            bool didGet = false;
-            bool didOverflow = false;
+            var didGet = false;
+            var didOverflow = false;
 
-            int localMailCount = GetResourceAmount(resources, Resource.LocalMail);
-            int outgoingMailCount = GetResourceAmount(resources, Resource.OutgoingMail);
-            int unsortedMailCount = GetResourceAmount(resources, Resource.UnsortedMail);
-            int allMailCount = localMailCount + outgoingMailCount + unsortedMailCount;
+            var localMailCount = GetResourceAmount(resources, Resource.LocalMail);
+            var outgoingMailCount = GetResourceAmount(resources, Resource.OutgoingMail);
+            var unsortedMailCount = GetResourceAmount(resources, Resource.UnsortedMail);
+            var allMailCount = localMailCount + outgoingMailCount + unsortedMailCount;
 
             // 1) Pull unsorted mail if under threshold (magic top-up).
             if (settings.PSF_GetUnsortedMail &&
                 mailCapacity > 0 &&
                 unsortedMailCount * 100 / mailCapacity <= settings.PSF_GettingThresholdPercentage)
             {
-                int addAmount = mailCapacity * settings.PSF_GettingPercentage / 100;
-                int oldUnsorted = unsortedMailCount;
+                var addAmount = mailCapacity * settings.PSF_GettingPercentage / 100;
+                var oldUnsorted = unsortedMailCount;
 
                 AddResourceAmount(resources, Resource.UnsortedMail, addAmount);
 
@@ -576,8 +557,8 @@ namespace MagicMail
                 return;
             }
 
-            double overflowRatio = settings.PSF_OverflowPercentage / 100.0;
-            double fillRatio = (double)allMailCount / mailCapacity;
+            var overflowRatio = settings.PSF_OverflowPercentage / 100.0;
+            var fillRatio = (double)allMailCount / mailCapacity;
 
             if (fillRatio < overflowRatio)
             {
@@ -589,7 +570,7 @@ namespace MagicMail
                 return;
             }
 
-            int targetTotal = (int)math.round(overflowRatio * mailCapacity);
+            var targetTotal = (int)math.round(overflowRatio * mailCapacity);
             if (targetTotal < 0)
             {
                 targetTotal = 0;
@@ -597,16 +578,16 @@ namespace MagicMail
 
             if (allMailCount > 0)
             {
-                int targetLocal = (int)math.round((double)localMailCount / allMailCount * targetTotal);
-                int targetOutgoing = (int)math.round((double)outgoingMailCount / allMailCount * targetTotal);
-                int targetUnsorted = targetTotal - targetLocal - targetOutgoing;
+                var targetLocal = (int)math.round((double)localMailCount / allMailCount * targetTotal);
+                var targetOutgoing = (int)math.round((double)outgoingMailCount / allMailCount * targetTotal);
+                var targetUnsorted = targetTotal - targetLocal - targetOutgoing;
 
                 AddResourceAmount(resources, Resource.LocalMail, targetLocal - localMailCount);
                 AddResourceAmount(resources, Resource.OutgoingMail, targetOutgoing - outgoingMailCount);
                 AddResourceAmount(resources, Resource.UnsortedMail, targetUnsorted - unsortedMailCount);
             }
 
-            int oldAll = allMailCount;
+            var oldAll = allMailCount;
             localMailCount = GetResourceAmount(resources, Resource.LocalMail);
             outgoingMailCount = GetResourceAmount(resources, Resource.OutgoingMail);
             unsortedMailCount = GetResourceAmount(resources, Resource.UnsortedMail);
@@ -632,9 +613,9 @@ namespace MagicMail
 
         private static int GetResourceAmount(DynamicBuffer<Resources> resources, Resource resource)
         {
-            for (int i = 0; i < resources.Length; i++)
+            for (var i = 0; i < resources.Length; i++)
             {
-                Resources value = resources[i];
+                var value = resources[i];
                 if (value.m_Resource == resource)
                 {
                     return value.m_Amount;
@@ -646,12 +627,12 @@ namespace MagicMail
 
         private static int AddResourceAmount(DynamicBuffer<Resources> resources, Resource resource, int amount)
         {
-            for (int i = 0; i < resources.Length; i++)
+            for (var i = 0; i < resources.Length; i++)
             {
-                Resources value = resources[i];
+                var value = resources[i];
                 if (value.m_Resource == resource)
                 {
-                    long newAmount = (long)value.m_Amount + amount;
+                    var newAmount = (long)value.m_Amount + amount;
                     if (newAmount < int.MinValue)
                     {
                         newAmount = int.MinValue;

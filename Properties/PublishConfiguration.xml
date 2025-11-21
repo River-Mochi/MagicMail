@@ -38,12 +38,13 @@ preset.
 
 ### Credits
 
-- River-Mochi: author and maintainer.
-- Inspired by Infixo's "Postal Helper".
+- River-Mochi - author and maintainer
+- Inspired by Infixo's original Postal Helper
+- BugsyG - testing
 
   </LongDescription>
   <!--Thumbnail-->
-  <Thumbnail Value="Properties/Thumbnail.png" />
+  <Thumbnail Value="Properties/Images/10Thumbnail.png" />
   <!--Screenshot, can be set multiple times-->
   <Screenshot Value="" />
   <!--Tag, can be set multiple times-->

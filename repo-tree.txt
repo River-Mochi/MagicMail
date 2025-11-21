@@ -1,0 +1,87 @@
+Folder PATH listing for volume Windows-SSD
+Volume serial number is D640-3A2A
+C:.
+|   .editorconfig
+|   .gitattributes
+|   .gitignore
+|   LICENSE
+|   MagicMail.csproj
+|   MagicMail.sln
+|   Mod.cs
+|   README.md
+|   repo-tree.txt
+|   
++---bin
+|   +---Debug
+|   |   \---net48
+|   \---Release
+|       \---net48
+|               MagicMail.dll
+|               MagicMail.pdb
+|               MagicMail_linux_x86_64.so
+|               MagicMail_mac_x86_64.bundle
+|               MagicMail_win_x86_64.dll
+|               MagicMail_win_x86_64.pdb
+|               
++---Library
+|       ilpp.pid
+|       
++---Localization
+|       LocaleDE.cs
+|       LocaleEN.cs
+|       LocaleES.cs
+|       LocaleFR.cs
+|       LocaleZH_CN.cs
+|       
++---obj
+|   |   MagicMail.csproj.nuget.dgspec.json
+|   |   MagicMail.csproj.nuget.g.props
+|   |   MagicMail.csproj.nuget.g.targets
+|   |   project.assets.json
+|   |   project.nuget.cache
+|   |   
+|   +---Debug
+|   |   \---net48
+|   |           .NETFramework,Version=v4.8.AssemblyAttributes.cs
+|   |           MagicMail.AssemblyInfo.cs
+|   |           MagicMail.AssemblyInfoInputs.cache
+|   |           MagicMail.assets.cache
+|   |           MagicMail.csproj.AssemblyReference.cache
+|   |           MagicMail.csproj.FileListAbsolute.txt
+|   |           MagicMail.GeneratedMSBuildEditorConfig.editorconfig
+|   |           
+|   \---Release
+|       \---net48
+|               .NETFramework,Version=v4.8.AssemblyAttributes.cs
+|               MagicMail.AssemblyInfo.cs
+|               MagicMail.AssemblyInfoInputs.cache
+|               MagicMail.assets.cache
+|               MagicMail.csproj.AssemblyReference.cache
+|               MagicMail.csproj.CoreCompileInputs.cache
+|               MagicMail.csproj.FileListAbsolute.txt
+|               MagicMail.dll
+|               MagicMail.GeneratedMSBuildEditorConfig.editorconfig
+|               MagicMail.pdb
+|               MagicMail.sourcelink.json
+|               
++---Properties
+|   |   PublishConfiguration.xml
+|   |   
+|   +---Images
+|   |       dogHat.pdn
+|   |       dogHat.png
+|   |       
+|   \---PublishProfiles
+|           PublishNewMod.pubxml
+|           PublishNewMod.pubxml.user
+|           PublishNewVersion.pubxml
+|           PublishNewVersion.pubxml.user
+|           UpdatePublishedConfiguration.pubxml
+|           UpdatePublishedConfiguration.pubxml.user
+|           
++---Settings
+|       Settings.cs
+|       
+\---Systems
+        MagicMailSystem.cs
+        

@@ -79,7 +79,7 @@ namespace MagicMail
             // Register locales.
             AddLocaleSource("en-US", new LocaleEN(setting));
 
-            // Ready for future locales (uncomment once you add the files):
+            // Ready for future locales
             AddLocaleSource("de-DE", new LocaleDE(setting));
             AddLocaleSource("fr-FR", new LocaleFR(setting));
             AddLocaleSource("es-ES", new LocaleES(setting));
@@ -93,7 +93,7 @@ namespace MagicMail
             // Load persisted settings or create defaults on first run.
             AssetDatabase.global.LoadSettings(ModId, setting, new Setting(this));
 
-            // Register in Options UI once we have locales.
+            // Register in Options UI
             setting.RegisterInOptionsUI();
 
             // Schedule the system before the vanilla postal system in the GameSimulation phase.
