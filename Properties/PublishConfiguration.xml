@@ -7,27 +7,31 @@
   <ShortDescription Value="Post office fixes, mail tweaks, and capacity controls." />
   <!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
   <LongDescription>
-## Magic Mail [MM]
+## Magic Mail
 
 - Control post offices, post-vans, sorting facilities, and post-trucks.
-- All sliders and toggles are optional
-- Reset to game defaults (vanilla) or to a quick-start preset.
-- Provides some 'magic' fixes for the mail system.
+- Also provides some auto 'magic' fixes for the mail system.
 
 
 ### How to Use
 
-- **Quick Start Button** - 1-Click, just set it and forget it (applies recommended defaults).
-- Adjust post-van **mail load**, post-van **fleet size**, and post-truck **fleet size.**
-- **Boost speed** and storage capacity for sorting facilities.
-- Simple city-wide **mail statistics** and recent activity in the options menu.
+- **Quick Start Button** - 1-Click, set it and forget it (applies recommended defaults).
+    - not sure what to do? Just use this button, done, now you can play with a better working mail system.
 
+### Power Users
 
-- **Fix low amount** of Local mail at post offices by magically topping up Local Mail when storage
-  drops below a certain amount (you can choose).
-- **Fix low unsorted mail** at sorting facilities to keep the sorting active.
-- **Fix mail overflow** by trimming overfilled mail buffers so they don't remain blocked forever.
-- This is a workaround solution until CO fixes the mail transfer process.
+- Adjust post-van mail load, fleet size, and post-truck fleet size.
+- Boost speed and storage capacity for sorting facilities.
+- Simple city-wide mail statistics and recent activity in the Status tab.
+- All sliders and toggles are optional and can be reset to game defaults (vanilla).
+
+### Fixes for mail issues
+
+1. **auto Fix** low amount of local mail by magically topping up mail when storage drops below a certain amount (you can choose).
+2. **auto Fix** mail overflow by trimming overfilled mail buffers at post offices and sorting facilities so they do not remain blocked forever.
+3. **auto Fix** low amount of unsorted mail at sorting facilities to keep the sorting active. 
+    If you have cargo shipyard, it could be shipping out most of the unsorted mail leaving very little see reference below.
+4. Fixes are workaround solution until CO fixes the mail transfer process.
 
 ### 5 Languages
 
@@ -47,8 +51,12 @@
 ### Credits
 
 - River-Mochi - author and maintainer
-- Inspired by Infixo's original Postal Helper
 - BugsyG - testing
+- Inspired by Infixo's original Postal Helper
+
+
+Reference: some of the mail problems which have not been fixed yet are acknowledged here:
+https://www.paradoxinteractive.com/games/cities-skylines-ii/news/bridges-bikes-bugfixes
 
 tags: unreliable mail service, broken mail bug fixes, post van, post truck, delivery
 
@@ -68,14 +76,14 @@ tags: unreliable mail service, broken mail bug fixes, post van, post truck, deli
   <!--Link to the forum post where the mod can be discussed-->
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/magic-mail.1877962/" />
   <!--Version of the mod-->
-  <ModVersion Value="1.0.4" />
+  <ModVersion Value="1.0.5" />
   <!--Recommended version of the base game to use the mod-->
   <GameVersion Value="1.4.*" />
   <!--Dependency for the mod, can be set multiple times-->
   <Dependency Id="" />
   <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
   <ChangeLog>
-- add images
+- images ordering, publish notes
   </ChangeLog>
   <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
