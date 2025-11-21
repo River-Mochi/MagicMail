@@ -1,6 +1,6 @@
-﻿# Magic PostMaster [MPM]
+﻿# Magic Mail [MM]
 
-Magic PostMaster helps Cities: Skylines II’s postal system work more smoothly and gives more
+Magic Mail helps Cities: Skylines II’s postal system work more smoothly and gives more
 control over how post offices and sorting facilities behave.
 
 It can:

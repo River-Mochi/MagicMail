@@ -1,13 +1,13 @@
 // Localization/LocaleZH_CN.cs
 // Simplified Chinese locale zh-HANS
 
-namespace MagicPostMaster
+namespace MagicMail
 {
     using System.Collections.Generic;
     using Colossal;
 
     /// <summary>
-    /// Simplified Chinese localization source for Magic PostMaster [MPM].</summary>
+    /// Simplified Chinese localization source for Magic Mail [MM].</summary>
     public sealed class LocaleZH_CN : IDictionarySource
     {
         private readonly Setting m_Setting;
@@ -29,7 +29,7 @@ namespace MagicPostMaster
             return new Dictionary<string, string>
             {
                 // Mod title
-                { m_Setting.GetSettingsLocaleID(), "Magic PostMaster [MPM]" },
+                { m_Setting.GetSettingsLocaleID(), "Magic Mail [MM]" },
 
                 // Tabs
                 { m_Setting.GetOptionTabLocaleID(Setting.kActionsTab), "操作" },
@@ -171,7 +171,7 @@ namespace MagicPostMaster
                 // ---- About tab: links ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Paradox" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)),
-                    "打开 **Paradox** 网站上的 **Magic PostMaster** 及其他模组页面。" },
+                    "打开 **Paradox** 网站上的 **Magic Mail** 及其他模组页面。" },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)),

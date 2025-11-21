@@ -2,12 +2,12 @@
   <!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
   <ModId Value="" />
   <!--Name of the mod to display to players-->
-  <DisplayName Value="Magic PostMaster" />
+  <DisplayName Value="Magic Mail" />
   <!--Short description of the mod-->
   <ShortDescription Value="Post office fixes, tweaks, and capacity controls." />
   <!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
   <LongDescription>
-## Magic PostMaster [MPM]
+## Magic Mail [MM]
 
 - MPM gives more control over post offices, sorting facilities, and post-vans.
 - It also provides a couple "Magic" fixes for issues with the mail system until CO fixes it.
@@ -55,12 +55,12 @@ preset.
   <Dependency Id="" />
   <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
   <ChangeLog>
-- Renamed to Magic PostMaster.
+- Renamed to Magic Mail.
 - Added configurable Local/Unsorted mail top-ups and overflow fixes.
 - Added capacity sliders for vans, trucks, and sorting facilities.
 - Added city-wide mail stats and activity summary.
   </ChangeLog>
   <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
-  <ExternalLink Type="github" Url="https://github.com/River-Mochi/PostMaster" />
+  <ExternalLink Type="github" Url="https://github.com/River-Mochi/MagicMail" />
 </Publish>

@@ -1,9 +1,9 @@
-// Systems/MagicPostMasterSystem.cs
+// Systems/MagicMailSystem.cs
 // Main ECS system that tweaks postal facility capacities, van payloads,
 // and handles optional mail overflow cleanup.
 // Also exposes city-wide mail stats via MailAccumulationSystem.
 
-namespace MagicPostMaster
+namespace MagicMail
 {
     using System.Collections.Generic;
     using Colossal.Entities;
@@ -171,7 +171,7 @@ namespace MagicPostMaster
             // Try to grab the vanilla MailAccumulationSystem so we can surface its stats.
             TryResolveMailAccumulationSystem();
 
-            Mod.s_Log.Info("MagicPostMasterSystem created.");
+            Mod.s_Log.Info("MagicMailSystem created.");
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace MagicPostMaster
             int totalPostTruckCapacity = 0;
 
 #if DEBUG
-            Mod.s_Log.Info($"MagicPostMasterSystem.OnUpdate: {facilityCount} post facilities");
+            Mod.s_Log.Info($"MagicMailSystem.OnUpdate: {facilityCount} post facilities");
 #endif
 
             foreach (Entity postEntity in postEntities)

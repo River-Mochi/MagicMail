@@ -1,13 +1,13 @@
 // Localization/LocaleES.cs
 // Spanish locale es-ES
 
-namespace MagicPostMaster
+namespace MagicMail
 {
     using System.Collections.Generic;
     using Colossal;
 
     /// <summary>
-    /// Spanish localization source for Magic PostMaster [MPM].</summary>
+    /// Spanish localization source for Magic Mail [MM].</summary>
     public sealed class LocaleES : IDictionarySource
     {
         private readonly Setting m_Setting;
@@ -29,7 +29,7 @@ namespace MagicPostMaster
             return new Dictionary<string, string>
             {
                 // Mod title
-                { m_Setting.GetSettingsLocaleID(), "Magic PostMaster [MPM]" },
+                { m_Setting.GetSettingsLocaleID(), "Magic Mail [MM]" },
 
                 // Tabs
                 { m_Setting.GetOptionTabLocaleID(Setting.kActionsTab), "Acciones" },
@@ -170,7 +170,7 @@ namespace MagicPostMaster
                 // ---- About tab: links ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Paradox" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)),
-                    "Abre la página de **Paradox** para **Magic PostMaster** y otros mods." },
+                    "Abre la página de **Paradox** para **Magic Mail** y otros mods." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)),

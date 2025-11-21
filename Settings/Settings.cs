@@ -1,21 +1,20 @@
 // Settings/Setting.cs
-// Options UI and configuration for MagicPostMaster [MPM].
+// Options UI and configuration for MagicMail [MM].
 
-namespace MagicPostMaster
+namespace MagicMail
 {
     using System;
     using Colossal.IO.AssetDatabase;
     using Game.Modding;
     using Game.Settings;
     using Game.UI;
-    using MagicPostMaster;
     using Unity.Entities;
     using UnityEngine;
 
     /// <summary>
-    /// Settings definition and UI bindings for MagicPostMaster [MPM].
+    /// Settings definition and UI bindings for MagicMail [MM].
     /// </summary>
-    [FileLocation("ModsSettings/PostMaster/PostMaster")]
+    [FileLocation("ModsSettings/MagicMail/MagicMail")]
     [SettingsUITabOrder(
         kActionsTab,
         kStatusTab,

@@ -1,7 +1,7 @@
 // Mod.cs
-// Entry point for MagicPostMaster [MPM].
+// Entry point for MagicMail [MM].
 
-namespace MagicPostMaster
+namespace MagicMail
 {
     using System.Reflection;             // Assembly version
     using Colossal;                      // IDictionarySource
@@ -13,16 +13,16 @@ namespace MagicPostMaster
     using Game.SceneFlow;                // GameManager
 
     /// <summary>
-    /// Mod entry point for MagicPostMaster [MPM].
+    /// Mod entry point for MagicMail [MM].
     /// Registers settings, locales, and the ECS system.
     /// </summary>
     public sealed class Mod : IMod
     {
         // ---- PUBLIC CONSTANTS / METADATA ----
 
-        public const string ModId = "MagicPostMaster";
-        public const string ModName = "Magic PostMaster";
-        public const string ModTag = "[MPM]";
+        public const string ModId = "MagicMail";
+        public const string ModName = "Magic Mail";
+        public const string ModTag = "[MM]";
 
         /// <summary>
         /// Read Version from .csproj (3-part).
