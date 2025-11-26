@@ -233,3 +233,6 @@ On the next load without the mod:
 - Facilities return to the game’s default capacities.  
 - Any “magic” mail that was added or removed only existed in the simulation at the
   time and does not corrupt the save.
+
+## Links
+- [Paradox Mods](https://mods.paradoxplaza.com/authors/kimosabe1/cities_skylines_2?games=cities_skylines_2&orderBy=desc&sortBy=best&time=alltime)
