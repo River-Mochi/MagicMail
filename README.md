@@ -40,7 +40,7 @@ supplied with Local Mail to deliver.
 This is a configurable version of the original “Postal Helper” behaviour: instead of a
 fixed amount, both the threshold and amount are under user control.
 
-> ⚠️ This is a “magic” helper: Local Mail is spawned directly in the post office
+> This is a “magic” helper: Local Mail is spawned directly in the post office
 > without simulating a transfer.
 
 ---
