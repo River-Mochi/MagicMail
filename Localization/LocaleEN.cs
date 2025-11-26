@@ -54,7 +54,7 @@ namespace MagicMail
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Fix Low Local mail" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
                     "When enabled and if the storage gets too low, extra mail appears.\n " +
-                    "Does not spawn extra vans — it's like magic, but real." },
+                    "Does not spawn extra vans; it's like magic...but real :)" },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Local mail threshold" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
@@ -70,7 +70,7 @@ namespace MagicMail
                 // Global overflow toggle (PO + PSF)
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Fix mail overflow" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
-                    "When there is too much mail, the facilities perform a small **magic** cleanup.\n " +
+                    "When there is too much mail, the facilities perform a small magic cleanup.\n " +
                     "Excess stored mail is treated as delivered and removed.\n " +
                     "This fix prevents facilities from getting stuck full forever.\n " +
                     "Disable this to keep pure vanilla behavior." },
