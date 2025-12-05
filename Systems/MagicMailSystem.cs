@@ -1,7 +1,6 @@
 // Systems/MagicMailSystem.cs
-// Main ECS system that tweaks postal facility capacities, van payloads,
-// and handles optional mail overflow cleanup.
-// Also exposes city-wide mail stats via MailAccumulationSystem.
+// Scans postal facilities for magic top-ups + overflow cleanup,
+// and exposes city-wide mail stats via MailAccumulationSystem.
 
 namespace MagicMail
 {
@@ -18,25 +17,14 @@ namespace MagicMail
     using Unity.Mathematics;
 
     /// <summary>
-    /// Simulation system that adjusts post office / sorting facility capacities,
-    /// post van mail payloads, and optional overflow cleanup.
-    /// Also reads city-wide mail stats from MailAccumulationSystem.</summary>
+    /// Simulation system that runs the "magic" mail behaviour:
+    /// - Local/unsorted mail top-ups
+    /// - Optional overflow cleanup
+    /// - Status counters & city-wide mail stats
+    /// </summary>
     public partial class MagicMailSystem : GameSystemBase
     {
         private EntityQuery m_PostFacilitiesQuery;
-        private EntityQuery m_PostVanPrefabsQuery;
-
-        // Baselines so scaling is relative to vanilla and can be reset cleanly.
-        private readonly Dictionary<Entity, FacilityBaseline> m_FacilityBaselines = new();
-        private readonly Dictionary<Entity, int> m_PostVanMailBaselines = new();
-
-        private struct FacilityBaseline
-        {
-            public int PostVanCapacity;
-            public int PostTruckCapacity;
-            public int MailCapacity;
-            public int SortingRate;
-        }
 
         // ---- CITY-WIDE MAIL STATS (from MailAccumulationSystem) ----
 
@@ -97,7 +85,7 @@ namespace MagicMail
                 return "City mail stats not available yet. Open a city and let the simulation run.";
             }
 
-            // Status message
+            // UI collapses extra spaces; this is just a simple "A | B" display.
             return
                 $"  {s_LastCityAccumulatedMail:N0} accumulated  |  " +
                 $"{s_LastCityProcessedMail:N0} processed";
@@ -105,14 +93,15 @@ namespace MagicMail
 
         /// <summary>
         /// Controls how often the system updates for each phase.</summary>
-        private const int UpdatesPerDay = 256;   // Increase this to update more frequently.
+        private const int UpdatesPerDay = 64;   // ≈ once per 22.5 in-game minutes.
+
         public override int GetUpdateInterval(SystemUpdatePhase phase)
         {
 #if DEBUG
             // Matching the vanilla PostFacilityAISystem interval for easier debugging.
             return 256;
 #else
-            return 262144 / UpdatesPerDay;   // 256 updates per day ≈ once per 5.625 in-game minutes.
+            return 262144 / UpdatesPerDay;
 #endif
         }
 
@@ -147,15 +136,6 @@ namespace MagicMail
                 },
             });
 
-            // Query for post van prefabs (only need PostVanData).
-            m_PostVanPrefabsQuery = GetEntityQuery(new EntityQueryDesc
-            {
-                All = new[]
-                {
-                    ComponentType.ReadWrite<PostVanData>(),
-                },
-            });
-
             RequireForUpdate(m_PostFacilitiesQuery);
 
             // Try to grab the vanilla MailAccumulationSystem so stats can be surfaced.
@@ -176,20 +156,7 @@ namespace MagicMail
 
             var entityManager = EntityManager;
 
-            // Toggle: when false, facility capacities/sorting are forced to vanilla.
-            bool changeCapacity = settings.ChangeCapacity;
-
-            // Clamp user inputs defensively.
-            var vanMailPercent = math.clamp(settings.PostVanMailLoadPercentage, 100, 500);
-            var vanFleetPercent = math.clamp(settings.PostVanFleetSizePercentage, 50, 300);
-            var truckFleetPercent = math.clamp(settings.TruckCapacityPercentage, 50, 300);
-            var sortingSpeedPercent = math.clamp(settings.PSF_SortingSpeedPercentage, 50, 500);
-            var sortingStoragePercent = math.clamp(settings.PSF_StorageCapacityPercentage, 50, 300);
             bool fixOverflow = settings.FixMailOverflow;
-
-            // Apply per-van mail capacity scaling to all post van prefabs
-            // (independent of facility capacity toggle).
-            ApplyPostVanStats(entityManager, vanMailPercent);
 
             using NativeArray<Entity> postEntities = m_PostFacilitiesQuery.ToEntityArray(Allocator.Temp);
             var facilityCount = postEntities.Length;
@@ -219,82 +186,6 @@ namespace MagicMail
                 {
                     Mod.s_Log.Warn($"Failed to retrieve PostFacilityData for prefab {prefab}.");
                     continue;
-                }
-
-                // Capture vanilla baselines for this prefab once.
-                if (!m_FacilityBaselines.TryGetValue(prefab, out FacilityBaseline baseline))
-                {
-                    baseline = new FacilityBaseline
-                    {
-                        PostVanCapacity = postFacilityData.m_PostVanCapacity,
-                        PostTruckCapacity = postFacilityData.m_PostTruckCapacity,
-                        MailCapacity = postFacilityData.m_MailCapacity,
-                        SortingRate = postFacilityData.m_SortingRate,
-                    };
-                    m_FacilityBaselines[prefab] = baseline;
-                }
-
-                var facilityChanged = false;
-
-                var targetVanCapacity = baseline.PostVanCapacity;
-                var targetTruckCapacity = baseline.PostTruckCapacity;
-                var targetSortingRate = baseline.SortingRate;
-                var targetMailCapacity = baseline.MailCapacity;
-
-                if (changeCapacity)
-                {
-                    if (baseline.PostVanCapacity > 0)
-                    {
-                        targetVanCapacity = (int)math.round(baseline.PostVanCapacity * vanFleetPercent / 100f);
-                        targetVanCapacity = math.max(0, targetVanCapacity);
-                    }
-
-                    if (baseline.PostTruckCapacity > 0)
-                    {
-                        targetTruckCapacity = (int)math.round(baseline.PostTruckCapacity * truckFleetPercent / 100f);
-                        targetTruckCapacity = math.max(0, targetTruckCapacity);
-                    }
-
-                    if (baseline.SortingRate > 0)
-                    {
-                        targetSortingRate = (int)math.round(baseline.SortingRate * sortingSpeedPercent / 100f);
-                        targetSortingRate = math.max(1, targetSortingRate);
-
-                        if (baseline.MailCapacity > 0)
-                        {
-                            targetMailCapacity = (int)math.round(baseline.MailCapacity * sortingStoragePercent / 100f);
-                            targetMailCapacity = math.max(1, targetMailCapacity);
-                        }
-                    }
-                }
-
-                if (postFacilityData.m_PostVanCapacity != targetVanCapacity)
-                {
-                    postFacilityData.m_PostVanCapacity = targetVanCapacity;
-                    facilityChanged = true;
-                }
-
-                if (postFacilityData.m_PostTruckCapacity != targetTruckCapacity)
-                {
-                    postFacilityData.m_PostTruckCapacity = targetTruckCapacity;
-                    facilityChanged = true;
-                }
-
-                if (postFacilityData.m_SortingRate != targetSortingRate)
-                {
-                    postFacilityData.m_SortingRate = targetSortingRate;
-                    facilityChanged = true;
-                }
-
-                if (postFacilityData.m_MailCapacity != targetMailCapacity)
-                {
-                    postFacilityData.m_MailCapacity = targetMailCapacity;
-                    facilityChanged = true;
-                }
-
-                if (facilityChanged)
-                {
-                    entityManager.SetComponentData(prefab, postFacilityData);
                 }
 
                 var mailCapacity = postFacilityData.m_MailCapacity;
@@ -366,44 +257,6 @@ namespace MagicMail
             {
                 s_LastCityAccumulatedMail = m_MailAccumulationSystem.LastAccumulatedMail;
                 s_LastCityProcessedMail = m_MailAccumulationSystem.LastProcessedMail;
-            }
-        }
-
-        /// <summary>
-        /// Applies van mail capacity multipliers to all post van prefabs.</summary>
-        private void ApplyPostVanStats(EntityManager entityManager, int vanMailPercent)
-        {
-            using NativeArray<Entity> vanEntities = m_PostVanPrefabsQuery.ToEntityArray(Allocator.Temp);
-
-            foreach (var vanPrefab in vanEntities)
-            {
-                var changedVanData = false;
-
-                if (!entityManager.TryGetComponent(vanPrefab, out PostVanData vanData))
-                {
-                    continue;
-                }
-
-                // Baseline for van mail capacity.
-                if (!m_PostVanMailBaselines.TryGetValue(vanPrefab, out int baseCapacity))
-                {
-                    baseCapacity = vanData.m_MailCapacity;
-                    m_PostVanMailBaselines[vanPrefab] = baseCapacity;
-                }
-
-                var targetCapacity = (int)math.round(baseCapacity * vanMailPercent / 100f);
-                targetCapacity = math.max(1, targetCapacity);
-
-                if (vanData.m_MailCapacity != targetCapacity)
-                {
-                    vanData.m_MailCapacity = targetCapacity;
-                    changedVanData = true;
-                }
-
-                if (changedVanData)
-                {
-                    entityManager.SetComponentData(vanPrefab, vanData);
-                }
             }
         }
 

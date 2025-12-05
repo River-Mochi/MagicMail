@@ -86,16 +86,31 @@ namespace MagicMail
         }
 
         /// <summary>
-        /// Applies settings at runtime and ensures the managed system is enabled.</summary>
+        /// Applies settings at runtime and ensures the managed systems are enabled.</summary>
         public override void Apply()
         {
             base.Apply();
 
             World? world = World.DefaultGameObjectInjectionWorld;
-            MagicMailSystem? system = world?.GetExistingSystemManaged<MagicMailSystem>();
-            if (system != null)
+            if (world == null || !world.IsCreated)
             {
-                system.Enabled = true;
+                return;
+            }
+
+            // Slow periodic scan (magic top-ups + overflow).
+            MagicMailSystem? magicSystem =
+                world.GetExistingSystemManaged<MagicMailSystem>();
+            if (magicSystem != null)
+            {
+                magicSystem.Enabled = true;
+            }
+
+            // One-shot capacity updater – gives "instant" slider changes.
+            MailCapacitySystem? capacitySystem =
+                world.GetExistingSystemManaged<MailCapacitySystem>();
+            if (capacitySystem != null)
+            {
+                capacitySystem.Enabled = true;
             }
         }
 

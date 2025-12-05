@@ -14,7 +14,7 @@ namespace MagicMail
 
     /// <summary>
     /// Mod entry point for MagicMail [MM].
-    /// Registers settings, locales, and the ECS system.
+    /// Registers settings, locales, and the ECS systems.
     /// </summary>
     public sealed class Mod : IMod
     {
@@ -90,9 +90,8 @@ namespace MagicMail
             AddLocaleSource("pt-BR", new LocalePT_BR(setting));
             AddLocaleSource("zh-HANS", new LocaleZH_CN(setting));   // Simplified Chinese
             AddLocaleSource("zh-HANT", new LocaleZH_HANT(setting)); // Traditional Chinese
-            AddLocaleSource("th-TH", new LocaleTH(setting));    // requires Thai mod
-            AddLocaleSource("vi-VN", new LocaleVI(setting));    // requires Vietnamese mod
-
+            AddLocaleSource("th-TH", new LocaleTH(setting));        // requires Thai mod
+            AddLocaleSource("vi-VN", new LocaleVI(setting));        // requires Vietnamese mod
 
             // Load persisted settings or create defaults on first run.
             AssetDatabase.global.LoadSettings(ModId, setting, new Setting(this));
@@ -100,8 +99,11 @@ namespace MagicMail
             // Register in Options UI
             setting.RegisterInOptionsUI();
 
-            // Schedule the system before the vanilla postal system in the GameSimulation phase.
+            // GameSimulation systems:
+            // - MailCapacitySystem: one-shot capacity update when sliders change
+            // - MagicMailSystem: slow, periodic magic top-ups + overflow cleanup
             updateSystem.UpdateBefore<MagicMailSystem>(SystemUpdatePhase.GameSimulation);
+            updateSystem.UpdateBefore<MailCapacitySystem>(SystemUpdatePhase.GameSimulation);
         }
 
         /// <summary>
