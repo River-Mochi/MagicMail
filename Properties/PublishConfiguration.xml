@@ -74,7 +74,7 @@ tags: unreliable mail service, broken mail bug fixes, post van, post truck, deli
   <!--Link to the forum post where the mod can be discussed-->
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/magic-mail.1877962/" />
   <!--Version of the mod-->
-  <ModVersion Value="1.1.2" />
+  <ModVersion Value="1.1.3" />
   <!--Recommended version of the base game to use the mod-->
   <GameVersion Value="1.5.*" />
   <!--Dependency for the mod, can be set multiple times-->
@@ -82,8 +82,7 @@ tags: unreliable mail service, broken mail bug fixes, post van, post truck, deli
   <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
   <ChangeLog>
 - updated for 1.5.* game patch
-- faster application of capacity changes
-- adjusted recommended values slightly
+- Internal refactor: split systems to improve capacity sliders, and keep mail scans light/infrequent for performance (~ every 45 game minutes).
   </ChangeLog>
   <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />

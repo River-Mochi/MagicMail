@@ -93,7 +93,7 @@ namespace MagicMail
 
         /// <summary>
         /// Controls how often the system updates for each phase.</summary>
-        private const int UpdatesPerDay = 64;   // ≈ once per 22.5 in-game minutes.
+        private const int UpdatesPerDay = 32;   // ≈ once per 45 in-game minutes.
 
         public override int GetUpdateInterval(SystemUpdatePhase phase)
         {

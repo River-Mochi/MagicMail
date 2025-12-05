@@ -33,7 +33,11 @@ namespace MagicMail
 
                 // Tabs
                 { m_Setting.GetOptionTabLocaleID(Setting.kActionsTab), "Actions" },
-                { m_Setting.GetOptionTabLocaleID(Setting.kStatusTab),  "Status" },
+                { m_Setting.GetOptionTabLocaleID(Setting.k
+                
+                
+                
+                Tab),  "Status" },
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab),   "About" },
 
                 // Groups (Actions tab)
@@ -126,19 +130,19 @@ namespace MagicMail
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Fix low unsorted mail" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
                     "When enabled, some unsorted mail magically appears if storage supplies get too low.\n " +
-                    "This keeps sorting buildings active without waiting for deliveries.\n" +
-                    "This is a temp fix for a current bug where Sorting facilities don't get enough mail if a Cargo harbor is present." },
+                    "This keeps sorting buildings active.\n" +
+                    "It is a temp fix for a current bug where Sorting facilities don't get enough mail if a Cargo harbor is present." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Unsorted mail threshold" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
                     "If unsorted mail goes below this low percentage of total storage capacity\n" +
-                    "then some extra unsorted mail is magically fetched. \n" },
+                    "then some extra unsorted mail is fetched. \n" },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Unsorted mail fetch amount" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
                     "The additional mail to add when fetching unsorted mail (magic top-up).\n" +
                     "Amount is a percentage of max storage capacity.\n" +
-                    "If vanilla max = 250,000 and this is set to 10%, then 25,000 is added. "
+                    "If vanilla <max = 250,000> and this is set to <10%>, then <25,000> is added. "
                 },
 
                 // ---- RESET BUTTONS ----
@@ -154,7 +158,7 @@ namespace MagicMail
                 // ---- Status tab ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), "" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
-                    "Summary of post offices, post vans, sorting facilities, and post trucks processed in the last game update (~every 45 min in-game)." },
+                    "Summary of post offices, post vans, sorting facilities, and post trucks processed in the last game update." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "Monthly Mail" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusCityMailSummary)),
@@ -162,8 +166,9 @@ namespace MagicMail
                      "**Accumulated** = how much mail citizens generated.\n" +
                      "**Processed**   = how much mail the network actually handled.\n\n" +
                      "- If Processed is often higher than Accumulated, then your postal network has enough capacity.\n " +
-                     "- If Accumulated stays above Processed for long periods, then the city is generating more mail\n " +
-                     "than it can handle; add more facilities, vans or tweak your settings." },
+                     "- If Accumulated stays above Processed for long periods,\n" +
+                     "then the city is generating more mail than it can handle.\n" +
+                     "Add more facilities, vans, or tweak your settings." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "Activity" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)),
