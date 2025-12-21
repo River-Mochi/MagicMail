@@ -1,4 +1,4 @@
-﻿# Magic Mail [MM]
+# Magic Mail [MM]
 
 Magic Mail helps Cities: Skylines II’s postal system work more smoothly and gives more
 control over how post offices and sorting facilities behave.
@@ -235,4 +235,17 @@ On the next load without the mod:
   time and does not corrupt the save.
 
 ## Links
-- [Paradox Mods](https://mods.paradoxplaza.com/authors/kimosabe1/cities_skylines_2?games=cities_skylines_2&orderBy=desc&sortBy=best&time=alltime)
+- [Paradox Mods]("https://mods.paradoxplaza.com/authors/River-mochi/cities_skylines_2?games=cities_skylines_2&orderBy=desc&sortBy=best&time=alltime";)
+
+
+## Scan Frequency Reference
+
+| UpdatesPerDay | In-Game Time Between Scans | Real-Life Rough Estimate| Notes |
+|---------------|----------------------------|----------------------------------------|-------|
+| **32**  | ~45 min                        | ~6–12 seconds                           | Very light load (MM current default) |
+| **64**  | ~22.5 min                      | ~3–6 seconds                           | Still very light, more responsive |
+| **128** | ~11.25 min                     | ~1.5–3 seconds                         | Medium frequency, similar to vanilla feel |
+| **256** | ~5.6 min                       | ~1–2 second                          | Vanilla PostFacilityAISystem speed |
+| **512** | ~2.8 min                       | ~0.5–1 seconds                       | Very high frequency; heavier load |
+
+> **Note:** Real-life times vary by hardware and city size; rough ballpark estimates meant only for tuning. these are my times not other people's PC.

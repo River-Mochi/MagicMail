@@ -60,7 +60,7 @@ namespace MagicMail
         // ---- LINKS ----
 
         private const string kUrlParadox =
-            "https://mods.paradoxplaza.com/authors/kimosabe1/cities_skylines_2?games=cities_skylines_2&orderBy=desc&sortBy=best&time=alltime";
+            "https://mods.paradoxplaza.com/authors/River-mochi/cities_skylines_2?games=cities_skylines_2&orderBy=desc&sortBy=best&time=alltime";
         private const string kUrlDiscord =
             "https://discord.gg/HTav7ARPs2";
 
