@@ -8,7 +8,7 @@
   <!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
   <LongDescription>### Magic Mail
 
-**UPDATED for 1.5* game patch!**
+**UPDATED for 1.6* game patch!**
 
 - Control post offices, post-vans, sorting facilities, and post-trucks.
 - Also provides some auto 'magic' fixes for the mail system.
@@ -81,9 +81,9 @@ tags: unreliable mail service, broken mail bug fixes, post van, post truck, deli
   <Dependency Id="" />
   <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
   <ChangeLog>
-- fix paradox link for name correction
+- Update for game patch 1.6
 </ChangeLog>
   <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
-  <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
   <ExternalLink Type="github" Url="https://github.com/River-Mochi/MagicMail" />
+  <ExternalLink Type="discord" Url="https://discord.gg/gwXgvtyhjc" />
 </Publish>

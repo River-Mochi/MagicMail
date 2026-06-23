@@ -70,7 +70,7 @@ namespace MagicMail
         private const string kUrlParadox =
             "https://mods.paradoxplaza.com/authors/River-mochi/cities_skylines_2?games=cities_skylines_2&orderBy=desc&sortBy=best&time=alltime";
         private const string kUrlDiscord =
-            "https://discord.gg/HTav7ARPs2";
+            "https://discord.gg/gwXgvtyhjc";
 
         // ---- Localization keys for Status text ----
         private const string StatusNoFacilitiesKey = "MM_STATUS_NO_FACILITIES";
@@ -170,6 +170,71 @@ namespace MagicMail
             }
         }
 
+          // --------------------------------------------------------------------
+        // ACTIONS TAB: POST VAN OPTIONS (second)
+        // --------------------------------------------------------------------
+
+        /// <summary>
+        /// Master toggle for changing postal capacities (vans, trucks, payload).</summary>
+        [SettingsUISection(kActionsTab, PostVanGroup)]
+        public bool ChangeCapacity
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Post van mail load multiplier (percent).
+        /// Applied to PostVanData.m_MailCapacity (payload per van).
+        /// 100% = vanilla; higher values let each van carry more mail.</summary>
+        [SettingsUISection(kActionsTab, PostVanGroup)]
+        [SettingsUISlider(
+            min = 100,
+            max = 500,
+            step = 10,
+            scalarMultiplier = 1,
+            unit = Unit.kPercentage)]
+        [SettingsUIHideByCondition(typeof(Setting), nameof(ChangeCapacity), true)]
+        public int PostVanMailLoadPercentage
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Post van fleet size multiplier (percent).
+        /// Applied to PostFacilityData.m_PostVanCapacity (vans per facility).</summary>
+        [SettingsUISection(kActionsTab, PostVanGroup)]
+        [SettingsUISlider(
+            min = 50,
+            max = 300,
+            step = 10,
+            scalarMultiplier = 1,
+            unit = Unit.kPercentage)]
+        [SettingsUIHideByCondition(typeof(Setting), nameof(ChangeCapacity), true)]
+        public int PostVanFleetSizePercentage
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Post truck fleet size multiplier (percent).
+        /// Applied to PostFacilityData.m_PostTruckCapacity (trucks per facility).</summary>
+        [SettingsUISection(kActionsTab, PostVanGroup)]
+        [SettingsUISlider(
+            min = 50,
+            max = 300,
+            step = 10,
+            scalarMultiplier = 1,
+            unit = Unit.kPercentage)]
+        [SettingsUIHideByCondition(typeof(Setting), nameof(ChangeCapacity), true)]
+        public int TruckCapacityPercentage
+        {
+            get;
+            set;
+        }
+
         // --------------------------------------------------------------------
         // ACTIONS TAB: POST OFFICE OPTIONS
         // --------------------------------------------------------------------
@@ -246,70 +311,7 @@ namespace MagicMail
             set;
         }
 
-        // --------------------------------------------------------------------
-        // ACTIONS TAB: POST VAN OPTIONS (second)
-        // --------------------------------------------------------------------
-
-        /// <summary>
-        /// Master toggle for changing postal capacities (vans, trucks, payload).</summary>
-        [SettingsUISection(kActionsTab, PostVanGroup)]
-        public bool ChangeCapacity
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Post van mail load multiplier (percent).
-        /// Applied to PostVanData.m_MailCapacity (payload per van).
-        /// 100% = vanilla; higher values let each van carry more mail.</summary>
-        [SettingsUISection(kActionsTab, PostVanGroup)]
-        [SettingsUISlider(
-            min = 100,
-            max = 500,
-            step = 10,
-            scalarMultiplier = 1,
-            unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(ChangeCapacity), true)]
-        public int PostVanMailLoadPercentage
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Post van fleet size multiplier (percent).
-        /// Applied to PostFacilityData.m_PostVanCapacity (vans per facility).</summary>
-        [SettingsUISection(kActionsTab, PostVanGroup)]
-        [SettingsUISlider(
-            min = 50,
-            max = 300,
-            step = 10,
-            scalarMultiplier = 1,
-            unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(ChangeCapacity), true)]
-        public int PostVanFleetSizePercentage
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Post truck fleet size multiplier (percent).
-        /// Applied to PostFacilityData.m_PostTruckCapacity (trucks per facility).</summary>
-        [SettingsUISection(kActionsTab, PostVanGroup)]
-        [SettingsUISlider(
-            min = 50,
-            max = 300,
-            step = 10,
-            scalarMultiplier = 1,
-            unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(ChangeCapacity), true)]
-        public int TruckCapacityPercentage
-        {
-            get;
-            set;
-        }
+      
 
         // --------------------------------------------------------------------
         // ACTIONS TAB: POST SORTING FACILITY OPTIONS (last)
