@@ -28,17 +28,17 @@ namespace MagicMail
         kActionsTab, kStatusTab, kAboutTab)]
     [SettingsUIGroupOrder(
         ResetGroup,
-        PostOfficeGroup, PostVanGroup,
+        PostVanGroup,
+        PostOfficeGroup,
         PostSortingFacilityGroup,
         StatusSummaryGroup, StatusActivityGroup,
         kAboutInfoGroup, kAboutLinksGroup)]
     [SettingsUIShowGroupName(
+        ResetGroup,
+        PostVanGroup,
         PostOfficeGroup,
         PostSortingFacilityGroup,
-        PostVanGroup,
-        ResetGroup,
-        StatusSummaryGroup,
-        StatusActivityGroup,
+        StatusSummaryGroup, StatusActivityGroup,
         kAboutLinksGroup)]
     public sealed class Setting : ModSetting
     {

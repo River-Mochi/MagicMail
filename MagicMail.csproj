@@ -17,9 +17,6 @@
 	    <AssemblyVersion>$(Version).0</AssemblyVersion>
 	    <FileVersion>$(Version).0</FileVersion>  <!-- for file properties -->
 
-
-        <!--The folder where Game.dll is located. Set it only if the game is not installed in the default location, otherwise keep it empty-->
-        <RootNamespace>MagicMail</RootNamespace>
         <!-- Assembly identity -->
         <RootNamespace>MagicMail</RootNamespace>
         <AssemblyName>MagicMail</AssemblyName>
@@ -91,6 +88,5 @@
 
         <Exec Command="&quot;$(SystemRoot)\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -ExecutionPolicy Bypass -File &quot;$(PublishConfigScript)&quot; -Path &quot;$(MSBuildProjectDirectory)\$(PublishConfigurationPath)&quot; -Version &quot;$(Version)&quot; -GameVersion &quot;$(GameVersion)&quot; -Eol lf -LeftAlignBlocks" />
     </Target>
-
 
 </Project>
