@@ -8,11 +8,14 @@
 
 // Systems/MailCapacitySystem.cs
 // One-shot system: applies van + facility capacity multipliers when settings change.
+// Uses PrefabBase authoring values as vanilla baselines so scaling never stacks.
 
 namespace MagicMail
 {
+    using Colossal.Serialization.Entities;
     using Game;
     using Game.Prefabs;
+    using Game.SceneFlow;
     using Unity.Entities;
     using Unity.Mathematics;
 
@@ -20,29 +23,61 @@ namespace MagicMail
     /// Updates post van and postal facility capacities when MagicMail sliders change.
     /// Driven by Setting.Apply() and then disables itself again.
     /// </summary>
-    public partial class MailCapacitySystem : GameSystemBase
+    public sealed partial class MailCapacitySystem : GameSystemBase
     {
-        // Last applied percentages; 100 = vanilla.
-        private int m_LastVanMailPercent = 100;
-        private int m_LastVanFleetPercent = 100;
-        private int m_LastTruckFleetPercent = 100;
-        private int m_LastSortingSpeedPercent = 100;
-        private int m_LastSortingStoragePercent = 100;
+        private PrefabSystem m_PrefabSystem = null!;
+        private EntityQuery m_PostFacilitiesQuery;
+        private EntityQuery m_PostVansQuery;
+
+        private struct FacilityBaseline
+        {
+            public int PostVanCapacity;
+            public int PostTruckCapacity;
+            public int MailCapacity;
+            public int SortingRate;
+        }
 
         protected override void OnCreate()
         {
             base.OnCreate();
 
-            // Only run if we actually have postal prefabs.
-            RequireForUpdate<PostFacilityData>();
-            RequireForUpdate<PostVanData>();
+            m_PrefabSystem = World.GetOrCreateSystemManaged<PrefabSystem>();
 
-            // Enabled only when Setting.Apply() asks for it.
+            // Cached prefab query: postal facility prefab entities.
+            m_PostFacilitiesQuery = SystemAPI.QueryBuilder()
+                .WithAll<PrefabData>()
+                .WithAllRW<PostFacilityData>()
+                .Build();
+
+            // Cached prefab query: post van prefab entities.
+            m_PostVansQuery = SystemAPI.QueryBuilder()
+                .WithAll<PrefabData>()
+                .WithAllRW<PostVanData>()
+                .Build();
+
+            RequireForUpdate(m_PostFacilitiesQuery);
+            RequireForUpdate(m_PostVansQuery);
+
+            // Run only when settings change or after a city load.
             Enabled = false;
         }
 
+        protected override void OnGameLoadingComplete(Purpose purpose, GameMode mode)
+        {
+            base.OnGameLoadingComplete(purpose, mode);
+
+            bool isRealGame =
+                mode == GameMode.Game &&
+                (purpose == Purpose.NewGame || purpose == Purpose.LoadGame);
+
+            if (isRealGame)
+            {
+                Enabled = true;
+            }
+        }
+
         /// <summary>
-        /// Run every tick while enabled; we disable ourselves after applying changes.
+        /// Runs immediately once enabled, then disables itself.
         /// </summary>
         public override int GetUpdateInterval(SystemUpdatePhase phase)
         {
@@ -51,6 +86,13 @@ namespace MagicMail
 
         protected override void OnUpdate()
         {
+            GameManager gm = GameManager.instance;
+            if (gm == null || !gm.gameMode.IsGame())
+            {
+                Enabled = false;
+                return;
+            }
+
             Setting? settings = Mod.Settings;
             if (settings == null)
             {
@@ -58,112 +100,176 @@ namespace MagicMail
                 return;
             }
 
-            bool changeCapacity = settings.ChangeCapacity;
+            // ChangeCapacity controls postal vehicle capacity sliders only.
+            bool changeVehicleCapacity = settings.ChangeCapacity;
 
-            // Clamp sliders to safe ranges.
-            var newVanMailPercent =
-                math.clamp(settings.PostVanMailLoadPercentage, 100, 500);
-            var newVanFleetPercent =
-                math.clamp(settings.PostVanFleetSizePercentage, 50, 300);
-            var newTruckFleetPercent =
-                math.clamp(settings.TruckCapacityPercentage, 50, 300);
-            var newSortingSpeedPercent =
-                math.clamp(settings.PSF_SortingSpeedPercentage, 50, 500);
-            var newSortingStoragePercent =
-                math.clamp(settings.PSF_StorageCapacityPercentage, 50, 300);
+            int vanMailPercent = math.clamp(settings.PostVanMailLoadPercentage, 100, 500);
+            int vanFleetPercent = math.clamp(settings.PostVanFleetSizePercentage, 50, 300);
+            int truckFleetPercent = math.clamp(settings.TruckCapacityPercentage, 50, 300);
 
-            // When ChangeCapacity is OFF, we logically force everything back to 100%.
-            if (!changeCapacity)
+            // Sorting sliders are in the sorting section and should work independently.
+            int sortingSpeedPercent = math.clamp(settings.PSF_SortingSpeedPercentage, 50, 500);
+            int sortingStoragePercent = math.clamp(settings.PSF_StorageCapacityPercentage, 50, 300);
+
+            if (!changeVehicleCapacity)
             {
-                newVanMailPercent = 100;
-                newVanFleetPercent = 100;
-                newTruckFleetPercent = 100;
-                newSortingSpeedPercent = 100;
-                newSortingStoragePercent = 100;
+                vanMailPercent = 100;
+                vanFleetPercent = 100;
+                truckFleetPercent = 100;
             }
 
-            bool vansChanged = newVanMailPercent != m_LastVanMailPercent;
-            bool facilityChanged =
-                newVanFleetPercent != m_LastVanFleetPercent ||
-                newTruckFleetPercent != m_LastTruckFleetPercent ||
-                newSortingSpeedPercent != m_LastSortingSpeedPercent ||
-                newSortingStoragePercent != m_LastSortingStoragePercent;
+            ApplyPostVanPayload(vanMailPercent);
+            ApplyPostFacilityValues(
+                vanFleetPercent,
+                truckFleetPercent,
+                sortingSpeedPercent,
+                sortingStoragePercent);
 
-            if (!vansChanged && !facilityChanged)
-            {
-                // Nothing to do; go back to sleep.
-                Enabled = false;
-                return;
-            }
-
-            // --- Post van mail capacity (payload) ---
-
-            if (vansChanged)
-            {
-                var mailScale =
-                    newVanMailPercent / (float)m_LastVanMailPercent;
-
-                foreach (RefRW<PostVanData> van in SystemAPI.Query<RefRW<PostVanData>>())
-                {
-                    ref PostVanData vanData = ref van.ValueRW;
-
-                    var newCapacity = (int)math.round(vanData.m_MailCapacity * mailScale);
-                    vanData.m_MailCapacity = math.max(1, newCapacity);
-                }
-
-                m_LastVanMailPercent = newVanMailPercent;
-            }
-
-            // --- Facility van/truck/sorting/storage ---
-
-            if (facilityChanged)
-            {
-                var vanFleetScale =
-                    newVanFleetPercent / (float)m_LastVanFleetPercent;
-                var truckFleetScale =
-                    newTruckFleetPercent / (float)m_LastTruckFleetPercent;
-                var sortingSpeedScale =
-                    newSortingSpeedPercent / (float)m_LastSortingSpeedPercent;
-                var sortingStorageScale =
-                    newSortingStoragePercent / (float)m_LastSortingStoragePercent;
-
-                foreach (RefRW<PostFacilityData> facility in SystemAPI.Query<RefRW<PostFacilityData>>())
-                {
-                    ref PostFacilityData data = ref facility.ValueRW;
-
-                    if (data.m_PostVanCapacity > 0 && vanFleetScale != 1f)
-                    {
-                        data.m_PostVanCapacity =
-                            math.max(0, (int)math.round(data.m_PostVanCapacity * vanFleetScale));
-                    }
-
-                    if (data.m_PostTruckCapacity > 0 && truckFleetScale != 1f)
-                    {
-                        data.m_PostTruckCapacity =
-                            math.max(0, (int)math.round(data.m_PostTruckCapacity * truckFleetScale));
-                    }
-
-                    if (data.m_SortingRate > 0 && sortingSpeedScale != 1f)
-                    {
-                        data.m_SortingRate =
-                            math.max(1, (int)math.round(data.m_SortingRate * sortingSpeedScale));
-                    }
-
-                    if (data.m_MailCapacity > 0 && sortingStorageScale != 1f)
-                    {
-                        data.m_MailCapacity =
-                            math.max(1, (int)math.round(data.m_MailCapacity * sortingStorageScale));
-                    }
-                }
-
-                m_LastVanFleetPercent = newVanFleetPercent;
-                m_LastTruckFleetPercent = newTruckFleetPercent;
-                m_LastSortingSpeedPercent = newSortingSpeedPercent;
-                m_LastSortingStoragePercent = newSortingStoragePercent;
-            }
-
-            // Back to disabled until the next Apply() call.
+            // Back to disabled until Setting.Apply() wakes us again.
             Enabled = false;
+        }
+
+        private void ApplyPostVanPayload(int vanMailPercent)
+        {
+            foreach ((RefRW<PostVanData> vanRef, Entity prefabEntity) in SystemAPI
+                         .Query<RefRW<PostVanData>>()
+                         .WithAll<PrefabData>()
+                         .WithEntityAccess())
+            {
+                ref PostVanData vanData = ref vanRef.ValueRW;
+
+                if (!TryGetPostVanBaseMailCapacity(prefabEntity, out int baseMailCapacity))
+                {
+                    continue;
+                }
+
+                int newMailCapacity = ScalePercentMin1(baseMailCapacity, vanMailPercent);
+                if (vanData.m_MailCapacity != newMailCapacity)
+                {
+                    vanData.m_MailCapacity = newMailCapacity;
+                }
+            }
+        }
+
+        private void ApplyPostFacilityValues(
+            int vanFleetPercent,
+            int truckFleetPercent,
+            int sortingSpeedPercent,
+            int sortingStoragePercent)
+        {
+            foreach ((RefRW<PostFacilityData> facilityRef, Entity prefabEntity) in SystemAPI
+                         .Query<RefRW<PostFacilityData>>()
+                         .WithAll<PrefabData>()
+                         .WithEntityAccess())
+            {
+                ref PostFacilityData data = ref facilityRef.ValueRW;
+
+                if (!TryGetPostFacilityBaseline(prefabEntity, out FacilityBaseline baseline))
+                {
+                    continue;
+                }
+
+                bool isSortingFacility = baseline.SortingRate > 0;
+
+                int newPostVanCapacity =
+                    ScalePercentKeepZero(baseline.PostVanCapacity, vanFleetPercent);
+
+                int newPostTruckCapacity =
+                    ScalePercentKeepZero(baseline.PostTruckCapacity, truckFleetPercent);
+
+                int newSortingRate = isSortingFacility
+                    ? ScalePercentMin1(baseline.SortingRate, sortingSpeedPercent)
+                    : baseline.SortingRate;
+
+                // Sorting storage slider should only affect sorting facilities.
+                // This avoids accidentally scaling normal post office storage.
+                int newMailCapacity = isSortingFacility
+                    ? ScalePercentMin1(baseline.MailCapacity, sortingStoragePercent)
+                    : baseline.MailCapacity;
+
+                if (data.m_PostVanCapacity != newPostVanCapacity)
+                {
+                    data.m_PostVanCapacity = newPostVanCapacity;
+                }
+
+                if (data.m_PostTruckCapacity != newPostTruckCapacity)
+                {
+                    data.m_PostTruckCapacity = newPostTruckCapacity;
+                }
+
+                if (data.m_SortingRate != newSortingRate)
+                {
+                    data.m_SortingRate = newSortingRate;
+                }
+
+                if (data.m_MailCapacity != newMailCapacity)
+                {
+                    data.m_MailCapacity = newMailCapacity;
+                }
+            }
+        }
+
+        private bool TryGetPostVanBaseMailCapacity(Entity prefabEntity, out int baseMailCapacity)
+        {
+            baseMailCapacity = 0;
+
+            if (!m_PrefabSystem.TryGetPrefab(prefabEntity, out PrefabBase prefabBase))
+            {
+                return false;
+            }
+
+            if (!prefabBase.TryGet(out Game.Prefabs.PostVan postVan))
+            {
+                return false;
+            }
+
+            baseMailCapacity = postVan.m_MailCapacity;
+            return baseMailCapacity > 0;
+        }
+
+       private bool TryGetPostFacilityBaseline(Entity prefabEntity, out FacilityBaseline baseline)
+        {
+            baseline = default;
+
+            if (!m_PrefabSystem.TryGetPrefab(prefabEntity, out PrefabBase prefabBase))
+            {
+                return false;
+            }
+
+            if (!prefabBase.TryGet(out Game.Prefabs.PostFacility postFacility))
+            {
+                return false;
+            }
+
+            baseline = new FacilityBaseline
+            {
+                PostVanCapacity = postFacility.m_PostVanCapacity,
+                PostTruckCapacity = postFacility.m_PostTruckCapacity,
+                MailCapacity = postFacility.m_MailStorageCapacity,
+                SortingRate = postFacility.m_SortingRate,
+            };
+
+            return true;
+        }
+
+        private static int ScalePercentMin1(int baseValue, int percent)
+        {
+            if (baseValue <= 0)
+            {
+                return 0;
+            }
+
+            return math.max(1, (int)math.round(baseValue * percent / 100f));
+        }
+
+        private static int ScalePercentKeepZero(int baseValue, int percent)
+        {
+            if (baseValue <= 0)
+            {
+                return 0;
+            }
+
+            return math.max(1, (int)math.round(baseValue * percent / 100f));
         }
     }
 }
