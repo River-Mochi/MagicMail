@@ -1,4 +1,4 @@
-﻿<Publish>
+<Publish>
   <!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
   <ModId Value="125343" />
   <!--Name of the mod to display to players-->
@@ -16,7 +16,7 @@
 ### How to Use
 
 - **Quick Start Button**  1-Click to apply all recommended settings.
-    - not sure what to do? Just use this button, done - play with a better working mail system.
+- not sure what to do? Just use this button, done - play with a better working mail system.
 
 ### Power Users
 - Adjust post-van mail load, fleet size, and post-truck fleet size.
@@ -58,7 +58,7 @@ https://www.paradoxinteractive.com/games/cities-skylines-ii/news/bridges-bikes-b
 
 tags: unreliable mail service, broken mail bug fixes, post van, post truck, delivery
 
-  </LongDescription>
+</LongDescription>
   <!--Thumbnail-->
   <Thumbnail Value="Properties/Images/10Thumbnail.jpg" />
 <!-- Screenshot, can be set multiple times -->
@@ -74,15 +74,15 @@ tags: unreliable mail service, broken mail bug fixes, post van, post truck, deli
   <!--Link to the forum post where the mod can be discussed-->
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/magic-mail.1877962/" />
   <!--Version of the mod-->
-  <ModVersion Value="1.1.4" />
+  <ModVersion Value="1.1.5" />
   <!--Recommended version of the base game to use the mod-->
-  <GameVersion Value="1.5.*" />
+  <GameVersion Value="1.6.*" />
   <!--Dependency for the mod, can be set multiple times-->
   <Dependency Id="" />
   <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
   <ChangeLog>
 - fix paradox link for name correction
-  </ChangeLog>
+</ChangeLog>
   <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
   <ExternalLink Type="github" Url="https://github.com/River-Mochi/MagicMail" />
