@@ -6,7 +6,8 @@
   <!--Short description of the mod-->
   <ShortDescription Value="Post office fixes, mail tweaks, and capacity controls." />
   <!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
-  <LongDescription>### Magic Mail
+  <LongDescription>
+### Magic Mail
 
 **UPDATED for 1.6* game patch!**
 
@@ -27,16 +28,12 @@
 ### Fixes for mail issues
 1. **auto Fix** low amount of local mail by magically topping up mail when storage drops below a certain amount (you can choose).
 2. **auto Fix** mail overflow by trimming overfilled mail buffers so they do not remain blocked forever (for PO and Sorters).
-3. **auto Fix** low amount of unsorted mail at sorting facilities to keep the sorting active. 
+3. **auto Fix** low amount of unsorted mail at sorting facilities to keep the sorting active.
 Currently, cargo shipyards could be shipping out most of the unsorted mail leaving very little for local sorting (reference below).
 4. Fixes are workaround solutions until CO fixes the mail transfer process.
 
-### 11+ Languages
-- Français French, Deutsch German, Español Spanish,  Italiano Italian
-- English, 简体中文 Simplified Chinese, 한국어 Korean, Português Brasil
-- 繁體中文 Traditional Chinese, 日本語 Japanese, Polski Polish
-- WIP: Thai ภาษาไทย, Vietnamese Tiếng Việt
-
+### 11+ Languages supported
+Hello, Bonjour, Hallo, Hola, Ciao, 你好, 안녕하세요, Olá, 你好, こんにちは, Cześć, สวัสดี, Xin chào
 
 ### Compatibility
 - Safe to remove at any time; postal facilities will fall back to the game's default.
