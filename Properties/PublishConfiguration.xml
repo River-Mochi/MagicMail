@@ -77,7 +77,9 @@ tags: unreliable mail service, broken mail bug fixes, post van, post truck, deli
   <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
   <ChangeLog>
 - add Portuguese translation
-- increase mail capacity system
+- increase van mail capacity system
+- increase fleet size capacities for vans + trucks
+- increse sorting facility storage percetage
 - internal refactor and cleanup
 </ChangeLog>
   <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
