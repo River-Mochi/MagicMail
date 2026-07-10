@@ -32,7 +32,7 @@ namespace MagicMail
             return new Dictionary<string, string>
             {
                 // Mod title
-                { m_Setting.GetSettingsLocaleID(), "Magic Mail [MM]" },
+                { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
                 { m_Setting.GetOptionTabLocaleID(Setting.kActionsTab), "Actions" },

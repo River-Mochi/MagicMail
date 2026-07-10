@@ -103,7 +103,7 @@ namespace MagicMail
             // ChangeCapacity controls postal vehicle capacity sliders only.
             bool changeVehicleCapacity = settings.ChangeCapacity;
 
-            int vanMailPercent = math.clamp(settings.PostVanMailLoadPercentage, 100, 500);
+            int vanMailPercent = math.clamp(settings.PostVanMailLoadPercentage, 100, 1000);
             int vanFleetPercent = math.clamp(settings.PostVanFleetSizePercentage, 50, 300);
             int truckFleetPercent = math.clamp(settings.TruckCapacityPercentage, 50, 300);
 

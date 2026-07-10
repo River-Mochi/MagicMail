@@ -30,7 +30,7 @@
 Currently, cargo shipyards could be shipping out most of the unsorted mail leaving very little for local sorting (reference below).
 4. Fixes are workaround solutions until Pdx/IFS fixes the mail transfer process.
 
-### 12 Languages supported
+### 13 Languages supported
 Hello, Bonjour, Hallo, Hola, Ciao, 你好, 안녕하세요, Olá, 你好, こんにちは, Cześć, สวัสดี, Xin chào
 
 ### Compatibility
@@ -69,7 +69,7 @@ tags: unreliable mail service, broken mail bug fixes, post van, post truck, deli
   <!--Link to the forum post where the mod can be discussed-->
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/magic-mail.1877962/" />
   <!--Version of the mod-->
-  <ModVersion Value="1.1.5" />
+  <ModVersion Value="1.2.0" />
   <!--Recommended version of the base game to use the mod-->
   <GameVersion Value="1.6.*" />
   <!--Dependency for the mod, can be set multiple times-->
