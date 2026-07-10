@@ -58,12 +58,12 @@ tags: unreliable mail service, broken mail bug fixes, post van, post truck, deli
   <Thumbnail Value="Properties/Images/10Thumbnail.jpg" />
 <!-- Screenshot, can be set multiple times -->
 <Screenshot Value="Properties/Images/20-image-mm-EN.jpg" />
-<Screenshot Value="Properties/Images/25-image-mm-capacities.jpg" />
 <Screenshot Value="Properties/Images/30-image-mm-EN.jpg" />
+<Screenshot Value="Properties/Images/35-image-mm-capacities.jpg" />
 <Screenshot Value="Properties/Images/40-image-mm-EN.jpg" />
 <Screenshot Value="Properties/Images/50-image-mm-EN.jpg" />
 <Screenshot Value="Properties/Images/70-image-mm-ZH_CN.jpg" />
-  <Screenshot Value="" />
+<Screenshot Value="Properties/Images/80-image-Languages.jpg" />
   <!--Tag, can be set multiple times-->
   <Tag Value="Code Mod" />
   <!--Link to the forum post where the mod can be discussed-->
@@ -76,11 +76,11 @@ tags: unreliable mail service, broken mail bug fixes, post van, post truck, deli
   <Dependency Id="" />
   <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
   <ChangeLog>
-- add Portuguese translation
-- increase van mail capacity system
-- increase fleet size capacities for vans + trucks
-- increse sorting facility storage percetage
-- internal refactor and cleanup
+- Add European Portuguese translation
+- Post-van mail capacity load limit now higher
+- Post-van and post-truck fleet limits now higher
+- Sorting facility storage percetage now a higher limit
+- Internal refactor and cleanup
 </ChangeLog>
   <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="github" Url="https://github.com/River-Mochi/MagicMail" />
