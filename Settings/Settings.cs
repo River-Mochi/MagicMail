@@ -338,7 +338,7 @@ namespace MagicMail
         [SettingsUISection(kActionsTab, PostSortingFacilityGroup)]
         [SettingsUISlider(
             min = 50,
-            max = 300,
+            max = 500,
             step = 10,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
