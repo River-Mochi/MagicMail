@@ -40,7 +40,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab),   "Sobre" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Estação de correios" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Assistência à distribuição postal" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "Carrinhas e camiões postais" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Centro de triagem" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup),               "Repor" },

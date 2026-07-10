@@ -39,7 +39,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab),   "概要" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "郵便局" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "郵便配送サポート" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "郵便バン＆トラック" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "仕分け施設" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup),               "リセット" },

@@ -40,7 +40,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab),   "Giới thiệu" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Bưu điện" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Hỗ trợ điều phối bưu chính" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "Xe bưu phẩm" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Trung tâm phân loại" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup),               "Đặt lại" },
