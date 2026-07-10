@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab),   "About" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Post office" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Postal Dispatch Assist" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "Post vans & trucks" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Sorting facility" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup),               "Reset" },

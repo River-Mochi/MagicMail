@@ -104,12 +104,12 @@ namespace MagicMail
             bool changeVehicleCapacity = settings.ChangeCapacity;
 
             int vanMailPercent = math.clamp(settings.PostVanMailLoadPercentage, 100, 1000);
-            int vanFleetPercent = math.clamp(settings.PostVanFleetSizePercentage, 50, 300);
-            int truckFleetPercent = math.clamp(settings.TruckCapacityPercentage, 50, 300);
+            int vanFleetPercent = math.clamp(settings.PostVanFleetSizePercentage, 50, 1000);
+            int truckFleetPercent = math.clamp(settings.TruckCapacityPercentage, 50, 1000);
 
             // Sorting sliders are in the sorting section and should work independently.
             int sortingSpeedPercent = math.clamp(settings.PSF_SortingSpeedPercentage, 50, 500);
-            int sortingStoragePercent = math.clamp(settings.PSF_StorageCapacityPercentage, 50, 300);
+            int sortingStoragePercent = math.clamp(settings.PSF_StorageCapacityPercentage, 50, 500);
 
             if (!changeVehicleCapacity)
             {

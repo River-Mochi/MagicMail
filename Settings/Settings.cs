@@ -207,7 +207,7 @@ namespace MagicMail
         [SettingsUISection(kActionsTab, PostVanGroup)]
         [SettingsUISlider(
             min = 50,
-            max = 300,
+            max = 1000,
             step = 10,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
@@ -224,7 +224,7 @@ namespace MagicMail
         [SettingsUISection(kActionsTab, PostVanGroup)]
         [SettingsUISlider(
             min = 50,
-            max = 300,
+            max = 1000,
             step = 10,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]

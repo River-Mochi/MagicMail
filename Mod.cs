@@ -11,62 +11,40 @@
 
 namespace MagicMail
 {
-    using System.Reflection;             // Assembly version
-    using Colossal;                      // IDictionarySource
-    using Colossal.IO.AssetDatabase;     // AssetDatabase.LoadSettings
-    using Colossal.Localization;         // LocalizationManager
-    using Colossal.Logging;              // ILog, LogManager
-    using Game;                          // UpdateSystem, SystemUpdatePhase
-    using Game.Modding;                  // IMod
-    using Game.SceneFlow;                // GameManager
+    using System;
+    using System.Reflection;
+    using Colossal.IO.AssetDatabase;
+    using Colossal.Localization;
+    using Colossal.Logging;
+    using Game;
+    using Game.Modding;
+    using Game.SceneFlow;
 
     /// <summary>
-    /// Mod entry point for MagicMail [MM].
-    /// Registers settings, locales, and the ECS systems.
+    /// Registers Magic Mail settings, localization, and systems.
     /// </summary>
     public sealed class Mod : IMod
     {
-        // ---- PUBLIC CONSTANTS / METADATA ----
-
         public const string ModId = "MagicMail";
         public const string ModName = "Magic Mail";
         public const string ModTag = "[MM]";
 
-        /// <summary>
-        /// Read Version from .csproj (3-part).
-        /// </summary>
         public static readonly string ModVersion =
             Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0";
 
-        /// <summary>
-        /// Logger for this mod.
-        /// </summary>
         public static readonly ILog s_Log =
             LogManager.GetLogger(ModId).SetShowsErrorsInUI(false);
 
-        /// <summary>
-        /// Global settings instance.
-        /// </summary>
         public static Setting? Settings
         {
-            get; private set;
+            get;
+            private set;
         }
-
-        // ---- PRIVATE STATE ----
 
         private static bool s_BannerLogged;
 
-        // --------------------------------------------------------------------
-        // IMod
-        // --------------------------------------------------------------------
-
-        /// <summary>
-        /// Called by the game during world initialization.
-        /// </summary>
-        /// <param name="updateSystem">Update system scheduler.</param>
         public void OnLoad(UpdateSystem updateSystem)
         {
-            // One-time banner.
             if (!s_BannerLogged)
             {
                 s_BannerLogged = true;
@@ -80,84 +58,58 @@ namespace MagicMail
                 return;
             }
 
-            // Settings must exist before locales so labels resolve correctly.
             Setting setting = new Setting(this);
             Settings = setting;
 
-            // Register locales.
-            AddLocaleSource("en-US", new LocaleEN(setting));
+            LocalizationManager? localizationManager = gameManager.localizationManager;
+            if (localizationManager == null)
+            {
+                s_Log.Warn("LocalizationManager is null; locale sources were not registered.");
+            }
+            else
+            {
+                try
+                {
+                    localizationManager.AddSource("en-US", new LocaleEN(setting));
+                    localizationManager.AddSource("de-DE", new LocaleDE(setting));
+                    localizationManager.AddSource("fr-FR", new LocaleFR(setting));
+                    localizationManager.AddSource("es-ES", new LocaleES(setting));
+                    localizationManager.AddSource("it-IT", new LocaleIT(setting));
+                    localizationManager.AddSource("ja-JP", new LocaleJA(setting));
+                    localizationManager.AddSource("ko-KR", new LocaleKO(setting));
+                    localizationManager.AddSource("pl-PL", new LocalePL(setting));
+                    localizationManager.AddSource("pt-BR", new LocalePT_BR(setting));
+                    localizationManager.AddSource("pt-PT", new LocalePT_PT(setting));
+                    localizationManager.AddSource("zh-HANS", new LocaleZH_CN(setting));
+                    localizationManager.AddSource("zh-HANT", new LocaleZH_HANT(setting));
+                    localizationManager.AddSource("th-TH", new LocaleTH(setting));
+                    localizationManager.AddSource("vi-VN", new LocaleVI(setting));
+                }
+                catch (Exception ex)
+                {
+                    s_Log.Error(
+                        $"Localization registration failed: {ex.GetType().Name}: {ex.Message}");
+                }
+            }
 
-            // Ready for future locales
-            AddLocaleSource("de-DE", new LocaleDE(setting));
-            AddLocaleSource("fr-FR", new LocaleFR(setting));
-            AddLocaleSource("es-ES", new LocaleES(setting));
-            AddLocaleSource("it-IT", new LocaleIT(setting));
-            AddLocaleSource("ja-JP", new LocaleJA(setting));
-            AddLocaleSource("ko-KR", new LocaleKO(setting));
-            AddLocaleSource("pl-PL", new LocalePL(setting));
-            AddLocaleSource("pt-BR", new LocalePT_BR(setting));
-            AddLocaleSource("zh-HANS", new LocaleZH_CN(setting));   // Simplified Chinese
-            AddLocaleSource("zh-HANT", new LocaleZH_HANT(setting)); // Traditional Chinese
-            AddLocaleSource("th-TH", new LocaleTH(setting));        // requires Thai mod
-            AddLocaleSource("vi-VN", new LocaleVI(setting));        // requires Vietnamese mod
+            AssetDatabase.global.LoadSettings(
+                ModId,
+                setting,
+                new Setting(this));
 
-            // Load persisted settings or create defaults on first run.
-            AssetDatabase.global.LoadSettings(ModId, setting, new Setting(this));
-
-            // Register in Options UI
             setting.RegisterInOptionsUI();
 
-            // GameSimulation systems:
-            // - MailCapacitySystem: one-shot capacity update when sliders change
-            // - MagicMailSystem: slow, periodic magic top-ups + overflow cleanup
-            updateSystem.UpdateBefore<MagicMailSystem>(SystemUpdatePhase.GameSimulation);
-            updateSystem.UpdateBefore<MailCapacitySystem>(SystemUpdatePhase.GameSimulation);
+            updateSystem.UpdateBefore<MagicMailSystem>(
+                SystemUpdatePhase.GameSimulation);
+
+            updateSystem.UpdateBefore<MailCapacitySystem>(
+                SystemUpdatePhase.GameSimulation);
         }
 
-        /// <summary>
-        /// Called by the game when the mod is unloaded.
-        /// </summary>
         public void OnDispose()
         {
-            s_Log.Info("OnDispose");
-
-            if (Settings != null)
-            {
-                Settings.UnregisterInOptionsUI();
-                Settings = null;
-            }
-        }
-
-        // --------------------------------------------------------------------
-        // Localization helper
-        // --------------------------------------------------------------------
-
-        /// <summary>
-        /// Wrapper around LocalizationManager.AddSource that catches exceptions
-        /// so fragile localization mods can't crash us.
-        /// </summary>
-        private static void AddLocaleSource(string localeId, IDictionarySource source)
-        {
-            if (string.IsNullOrEmpty(localeId))
-            {
-                return;
-            }
-
-            LocalizationManager? lm = GameManager.instance?.localizationManager;
-            if (lm == null)
-            {
-                s_Log.Warn($"AddLocaleSource: No LocalizationManager; cannot add source for '{localeId}'.");
-                return;
-            }
-
-            try
-            {
-                lm.AddSource(localeId, source);
-            }
-            catch (System.Exception ex)
-            {
-                s_Log.Warn($"AddLocaleSource: AddSource for '{localeId}' failed: {ex.GetType().Name}: {ex.Message}");
-            }
+            Settings?.UnregisterInOptionsUI();
+            Settings = null;
         }
     }
 }
