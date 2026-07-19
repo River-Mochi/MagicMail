@@ -13,9 +13,11 @@ namespace MagicMail
 {
     using System;
     using System.Reflection;
+
     using Colossal.IO.AssetDatabase;
     using Colossal.Localization;
     using Colossal.Logging;
+
     using Game;
     using Game.Modding;
     using Game.SceneFlow;
