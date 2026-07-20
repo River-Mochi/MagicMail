@@ -12,10 +12,11 @@
         <Nullable>enable</Nullable>
 
         <!-- Single source of truth -->
-        <GameVersion>1.6.*</GameVersion>
-	    <Version>1.2.0</Version>
+	    <Version>1.2.1</Version>
 	    <AssemblyVersion>$(Version).0</AssemblyVersion>
 	    <FileVersion>$(Version).0</FileVersion>  <!-- for file properties -->
+
+        <GameVersion>1.6.*</GameVersion>
 
         <!-- Assembly identity -->
         <RootNamespace>MagicMail</RootNamespace>
