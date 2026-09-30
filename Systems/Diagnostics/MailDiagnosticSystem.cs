@@ -91,7 +91,7 @@ namespace MagicMail
 
         protected override void OnUpdate()
         {
-            Setting? settings = Mod.Settings;
+            MailSettings? settings = Mod.Settings;
             GameManager? gameManager = GameManager.instance;
             if (settings == null || gameManager == null || !gameManager.gameMode.IsGame())
             {
@@ -134,7 +134,7 @@ namespace MagicMail
             }
         }
 
-        private void LogSettings(Setting settings)
+        private void LogSettings(MailSettings settings)
         {
             AddLine(
                 $"[MAIL SETTINGS] preset={GetPresetName(settings)} " +
@@ -222,7 +222,7 @@ namespace MagicMail
             EndProducerRequestEvidence();
         }
 
-        private static string GetPresetName(Setting settings)
+        private static string GetPresetName(MailSettings settings)
         {
             bool vanilla =
                 !settings.PO_GetLocalMail &&
