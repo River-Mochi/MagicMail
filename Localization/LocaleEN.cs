@@ -239,8 +239,8 @@ namespace MagicMail
                   "No rescue activity recorded in the last scan." },
 
                 {
-                    "MM_STATUS_SUMMARY",
-                    "Post offices: {0} | Sorting PO: {1} | Sorting facilities: {2}"
+                    "MM_STATUS_SUMMARY", 
+                    "Post offices: {0} | Sorting post offices: {1} | Sorting facilities: {2}"
                 },
 
                 {

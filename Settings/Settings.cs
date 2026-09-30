@@ -404,7 +404,7 @@ namespace MagicMail
                 return string.Format(
                     L(
                         StatusSummaryKey,
-                        "Post offices: {0} | Sorting PO: {1} | Sorting facilities: {2}"),
+                        "Post offices: {0} | Sorting post offices: {1} | Sorting facilities: {2}"),
                     MagicMailSystem.s_LastPostOfficeCount,
                     MagicMailSystem.s_LastSortingPostOfficeCount,
                     MagicMailSystem.s_LastSortingFacilityCount);
