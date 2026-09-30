@@ -157,7 +157,7 @@ namespace MagicMail
                 }
 
                 SetToVanilla();
-                Apply();
+                ApplyAndSave();
             }
         }
 
@@ -174,7 +174,7 @@ namespace MagicMail
                 }
 
                 SetRecommended();
-                Apply();
+                ApplyAndSave();
             }
         }
 
