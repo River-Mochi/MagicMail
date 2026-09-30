@@ -45,9 +45,9 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "정보" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "우편 배송 도우미" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "바닐라 보조" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "우편 밴 & 트럭" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "우편 분류 시설" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "전용 우편 분류 시설" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "초기화" },
 
                 // Groups (Status tab)
@@ -58,54 +58,46 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "정보" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "링크" },
 
-                // ---- Post Office ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "로컬 우편 부족 보완" },
+                // ---- Post Office / Vanilla Assist ----
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "로컬 우편 부족 구조" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
-                    "활성화하면 로컬 우편이 너무 적을 때 소량의 우편이 자동으로 추가됩니다.\n" +
-                    "밴을 더 생성하는 건 아니고, 약간 마법처럼... 하지만 진짜예요 :)"
+                    "먼저 게임의 일반 우편 운송을 시도합니다.\n" +
+                    "로컬 우편이 여러 번 확인해도 매우 낮게 유지되면 Magic Mail이 소량을 보충합니다.\n" +
+                    "분류 업그레이드가 있는 우체국에도 적용됩니다."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "로컬 우편 기준" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "로컬 우편 구조 기준" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
-                    "로컬 우편이 선택한 비율 아래로 내려가면\n" +
-                    "우체국이 로컬 우편을 더 가져옵니다.\n" +
-                    "건물 최대 저장량을 기준으로 한 비율입니다.\n" +
-                    "예: <최대 저장량 = 100,000>, <기준 = 5%>일 때\n" +
-                    "로컬 우편이 <5,000> 미만이면 우편을 더 가져옵니다."
+                    "로컬 우편이 건물 최대 저장량의 이 비율에 도달하면 부족으로 봅니다.\n" +
+                    "여러 번 확인해도 낮게 유지될 때만 구조가 실행됩니다."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "로컬 우편 보충량" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "로컬 우편 구조량" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingPercentage)),
-                    "로컬 우편을 가져올 때 추가할 비율입니다(마법 보충).\n" +
-                    "바닐라 최대치가 <100,000>이고 <10%>로 설정했다면\n" +
-                    "필요할 때 <10,000>이 추가됩니다."
+                    "구조가 실행될 때 추가할 로컬 우편의 양입니다.\n" +
+                    "건물 최대 저장량의 비율입니다."
                 },
 
-                // Global overflow toggle (PO + PSF)
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "우편 넘침 수정" },
+                // Global overflow toggle (PO + sorting)
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "우편 과적 구조" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
-                    "우편이 너무 많으면 시설에서 소량을 마법처럼 정리합니다.\n" +
-                    "초과 저장 우편은 배달된 것으로 처리하고 제거합니다.\n" +
-                    "시설이 계속 가득 찬 채 멈추는 것을 막아줍니다.\n" +
+                    "우편 시설이 너무 가득 차면 Magic Mail이 저장 우편을 선택한 수준까지 줄입니다.\n" +
+                    "로컬 + 미분류 + 발송 우편을 모두 계산해 게임이 잘못 계산할 수 있는 과적도 잡아냅니다.\n" +
                     "완전한 바닐라 동작을 원하면 끄세요."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "우체국 넘침 기준" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "우체국 과적 기준" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_OverflowPercentage)),
-                    "우체국의 전체 우편이 이 비율에 도달하면 모드가\n" +
-                    "저장된 우편을 이 수준까지 줄입니다."
+                    "저장된 전체 우편이 이 수준을 넘으면 Magic Mail이 다시 줄입니다.\n" +
+                    "일반 우체국과 분류 업그레이드 우체국에 적용됩니다."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "분류 시설 넘침 기준" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "분류 시설 과적 기준" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_OverflowPercentage)),
-                    "분류 시설의 전체 우편이 이 비율에 도달하면 모드가\n" +
-                    "저장된 우편을 이 수준까지 줄입니다."
+                    "전용 우편 분류 시설의 전체 저장 우편이 이 수준을 넘으면\n" +
+                    "Magic Mail이 다시 줄입니다."
                 },
 
                 // ---- Post Vans & Trucks ----
@@ -113,129 +105,137 @@ namespace MagicMail
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
                     "밴과 트럭 용량을 바꾸려면 켜세요. 끄면\n" +
-                    "아래 용량 슬라이더가 모두 숨겨지고\n" +
-                    "슬라이더 값과 상관없이 바닐라 게임 값이 사용됩니다."
+                    "아래 용량 슬라이더가 숨겨지고\n" +
+                    "다른 값이 남아 있어도 게임 기본값을 사용합니다."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "우편 밴 적재량" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
-                    "우편 밴 한 대가 실을 수 있는 우편량을 조절합니다.\n" +
-                    "<100% = 바닐라 적재량>"
+                    "각 우편 밴이 실을 수 있는 우편량을 조절합니다.\n" +
+                    "<100% = 바닐라 적재량.>"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "우편 밴 보유 대수" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "우편 밴 보유량" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "각 우편 건물이 보유하고 출동시킬 수 있는 우편 밴 수를 조절합니다.\n" +
-                    "<100% = 바닐라 보유 대수>"
+                    "<100% = 바닐라 보유량.>"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "우편 트럭 보유 대수" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "우편 트럭 보유량" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
-                    "각 분류 시설(및 우편 트럭이 있는 시설)이 보유하고\n" +
-                    "출동시킬 수 있는 우편 트럭 수를 조절합니다.\n" +
-                    "<100% = 바닐라 보유 대수>"
+                    "우편 트럭이 있는 시설이 보유하고 출동시킬 수 있는 우편 트럭 수를 조절합니다.\n" +
+                    "<100% = 바닐라 보유량.>"
                 },
 
-                // ---- Sorting Facility ----
+                // ---- Dedicated Sorting Facility ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)), "분류 속도" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
-                    "**분류** 시설의 기본 분류 속도에 적용되는 배율입니다.\n" +
+                    "전용 우편 분류 시설의 배율입니다.\n" +
+                    "우체국의 분류 업그레이드는 변경하지 않습니다.\n" +
                     "<100% = 바닐라>."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "분류 시설 저장 용량" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
-                    "**우편 저장 용량**을 조절합니다.\n" +
+                    "전용 우편 분류 시설의 우편 저장량을 조절합니다.\n" +
+                    "우체국의 분류 업그레이드는 변경하지 않습니다.\n" +
                     "<100% = 바닐라>."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "미분류 우편 부족 보완" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "미분류 우편 부족 구조" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
-                    "활성화하면 미분류 우편이 너무 적을 때 소량이 자동으로 추가됩니다.\n" +
-                    "분류 시설이 계속 일할 수 있게 해 줍니다.\n" +
-                    "화물 항구가 있으면 분류 시설에 우편이 충분히 들어오지 않는 현재 버그를 위한 임시 해결책입니다."
+                    "먼저 게임이 미분류 우편을 정상적으로 공급하게 둡니다.\n" +
+                    "전용 분류 시설의 재고가 여러 번 확인해도 매우 낮게 유지되면\n" +
+                    "Magic Mail이 소량을 보충합니다."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "미분류 우편 기준" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "미분류 우편 구조 기준" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
-                    "미분류 우편이 전체 저장 용량의 이 낮은 비율 아래로 내려가면\n" +
-                    "미분류 우편을 조금 더 가져옵니다."
+                    "미분류 우편이 최대 저장량의 이 비율에 도달하면 부족으로 봅니다.\n" +
+                    "여러 번 확인해도 낮게 유지될 때만 구조가 실행됩니다."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "미분류 우편 보충량" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "미분류 우편 구조량" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
-                    "미분류 우편을 가져올 때 추가하는 양입니다(마법 보충).\n" +
-                    "최대 저장 용량에 대한 비율입니다.\n" +
-                    "바닐라 <최대 = 250,000>이고 <10%>라면 <25,000>이 추가됩니다."
+                    "구조가 실행될 때 추가할 미분류 우편의 양입니다.\n" +
+                    "최대 저장량의 비율입니다."
                 },
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "게임 기본값" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "모든 설정을 게임 원래 기본 동작(바닐라)으로 되돌립니다." },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "추천" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "모든 설정을 게임의 원래 기본 동작(바닐라)으로 되돌립니다." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "권장" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**빠른 시작** – 추천 우편 설정을 한 번에 적용합니다.\n" +
-                    "쉬운 모드: 한 번 클릭하면 끝!"
+                    "**바닐라 보조** - 빠른 시작.\n" +
+                    "먼저 기본 우편 물류가 작동하게 하고, 지속되는 부족이나 과적만 구조합니다.\n" +
+                    "권장 용량 조정도 함께 적용합니다."
                 },
 
                 // ---- Status tab ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), string.Empty },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)), "마지막 백그라운드 스캔에서 확인한 우체국, 우편 밴, 분류 시설, 우편 트럭 요약입니다." },
-
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
+                    "상태 페이지를 열 때 확인된 우편 건물입니다.\n" +
+                    "\n" +
+                    "**우체국** = 일반 우체국.\n" +
+                    "**분류 시설** = 전용 우편 분류 시설.\n" +
+                    "**분류 우체국** = <분류 업그레이드가 있는 Westmont Tower>.\n" +
+                    "- **Skyscrapers DLC**가 필요합니다."
+                },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusVehicleSummary)), string.Empty },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusVehicleSummary)),
+                    "상태 페이지를 열 때의 우편 차량 용량입니다.\n" +
+                    "\n" +
+                    "**우편 밴** = 지역 수거·배달 차량.\n" +
+                    "**우편 트럭** = 시설 사이에서 우편을 운반하는 트럭."
+                },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "월간 우편" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusCityMailSummary)),
-                    "최근 도시 전체의 우편 흐름을 보여 줍니다.\n" +
+                    "최근 도시 전체 우편 흐름을 보여줍니다.\n" +
                     "\n" +
                     "**누적** = 시민이 만든 우편량.\n" +
-                    "**처리** = 우편망이 실제로 처리한 우편량.\n" +
+                    "**처리** = 우편망이 실제로 처리한 양.\n" +
                     "\n" +
-                    "- 처리가 누적보다 자주 높으면 우편망 처리 능력이 충분합니다.\n" +
-                    "- 누적이 오랫동안 처리보다 높게 유지되면\n" +
-                    "도시에서 처리할 수 있는 양보다 우편을 더 많이 만들고 있다는 뜻입니다.\n" +
-                    "시설이나 밴을 더 추가하거나 설정을 조정하세요."
+                    "- 처리가 누적보다 자주 높으면 우편망 용량이 충분합니다.\n" +
+                    "- 누적이 오랫동안 처리보다 높으면\n" +
+                    "도시가 우편망이 감당할 수 있는 양보다 더 많이 만들고 있습니다.\n" +
+                    "시설이나 밴을 늘리거나 설정을 조정하세요."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "활동" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "마지막 업데이트에서 실행된 우편 보충과 넘침 정리 횟수입니다." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "마지막 Magic Mail 구조 처리에서 발생한 구조와 과적 정리입니다." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.WriteReport)), "보고서 기록" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.WriteReport)),
+                    "옵션이 열린 동안 상세 우편 스캔을 **한 번만** 실행하고\n" +
+                    "<Logs/MagicMail.log>에 기록합니다. 백그라운드 기록은 없습니다."
+                },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenLog)), "로그 열기" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenLog)), "<Logs/MagicMail.log>를 열거나, 아직 파일이 없으면 Logs 폴더를 엽니다." },
 
                 // ---- Status text templates (for MagicMailSystem) ----
-                { "MM_STATUS_NO_FACILITIES", "아직 처리된 우편 시설이 없습니다. 도시를 열고 시뮬레이션을 잠시 실행하세요." },
-
-                { "MM_STATUS_NO_ACTIVITY", "아직 기록된 활동이 없습니다." },
-
-                { "MM_STATUS_SUMMARY", "우체국 {0} | 우편 밴 {1} | 분류 시설 {2} | 우편 트럭 {3}" },
-
-                { "MM_STATUS_ACTIVITY", "로컬 우편 보충 {0} | 미분류 우편 보충 {1} | 넘침 정리 {2}" },
-
-                { "MM_STATUS_CITY_MAIL_NOT_READY", "도시 우편 통계가 아직 준비되지 않았습니다. 도시를 열고 시뮬레이션을 잠시 실행하세요." },
-
+                { "MM_STATUS_NO_FACILITIES", "우편 시설을 찾지 못했습니다. 도시를 연 뒤 상태 페이지를 다시 여세요." },
+                { "MM_STATUS_NO_ACTIVITY", "기록된 구조 활동이 없습니다." },
+                { "MM_STATUS_SUMMARY", "우체국: {0} | 분류 우체국: {1} | 분류 시설: {2}" },
+                { "MM_STATUS_VEHICLES", "우편 밴: {0} | 우편 트럭: {1}" },
+                { "MM_STATUS_ACTIVITY", "로컬 구조 {0} | 미분류 구조 {1} | 과적 정리 {2}" },
+                { "MM_STATUS_CITY_MAIL_NOT_READY", "도시 우편 통계를 아직 사용할 수 없습니다. 도시를 열고 시뮬레이션을 잠시 실행하세요." },
                 { "MM_STATUS_CITY_MAIL", "누적 {0} | 처리 {1}" },
 
                 // ---- About tab: info ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModNameDisplay)), "모드" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModNameDisplay)), "이 모드의 표시 이름입니다." },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModVersionDisplay)), "버전" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "현재 모드 버전입니다." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "현재 모드 버전과 빌드 종류입니다." },
 
                 // ---- About tab: links ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mochi's Paradox mods" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "**Magic Mail**과 다른 모드의 **Paradox** 페이지를 엽니다." },
-
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mochi의 Paradox 모드" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "**Magic Mail** 및 다른 모드의 **Paradox** 페이지를 엽니다." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)), "브라우저에서 **Discord** 피드백 채팅을 엽니다." },
-
             };
         }
 

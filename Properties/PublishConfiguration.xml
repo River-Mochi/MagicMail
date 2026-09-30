@@ -24,15 +24,18 @@
 - Simple city-wide mail statistics and recent activity in the Status tab.
 - All items are Optional and can be reset to game defaults (vanilla).
 
-### Fixes for mail issues - all optional,  mod could just be used just for capacity if preferred.
 
-1. **auto Fix** low amount of local mail by topping up mail when storage drops below a certain amount (you can choose).
+### Mail fixes - all optional; the mod can also be used only to adjust mail capacity.
+
+1. **Vanilla Assist** lets normal transfers try first, then tops up Local Mail if it stays too low for several checks.
 2. **auto Fix** mail overflow by trimming overfilled mail buffers so they do not remain blocked forever (for PO and Sorters).
-3. **auto Fix** low amount of unsorted mail at sorting facilities to keep the sorting active.
+3. **Vanilla Assist** does the same for Unsorted Mail at dedicated sorting facilities.
+
+
 Currently, cargo shipyards could be shipping out most of the unsorted mail leaving very little for local sorting (reference below).
 4. Fixes are workaround solutions until Pdx/IFS fixes the mail transfer process.
 
-### 12+ Languages supported
+### 15+ Languages supported
 
 Hello, Bonjour, Hallo, Hola, Ciao, 你好, 안녕하세요, Olá, 你好, こんにちは, Cześć, สวัสดี, Xin chào, Merhaba, Привіт
 
@@ -72,14 +75,18 @@ tags: postal helper, unreliable mail service, broken mail bug fixes, post van li
 <!--Link to the forum post where the mod can be discussed-->
 <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/magic-mail.1877962/" />
 <!--Version of the mod-->
-<ModVersion Value="1.2.2" />
+<ModVersion Value="1.3.0" />
 <!--Recommended version of the base game to use the mod-->
 <GameVersion Value="1.6.*" />
 <!--Dependency for the mod, can be set multiple times-->
 <Dependency Id="" />
 <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 <ChangeLog>
-- Updated for game patch 1.6.2
+- Updated for game 1.6.2.
+- Mail rescues now let normal game transfers try first before stepping in.
+- Added support for post offices with sorting upgrades, including SK Westmont Tower.
+- Recommended sorting speed is now 150%; post-van mail load remains 200%.
+- Added an on-demand Write Report button for troubleshooting.
 </ChangeLog>
 <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 <ExternalLink Type="github" Url="https://github.com/River-Mochi/MagicMail" />

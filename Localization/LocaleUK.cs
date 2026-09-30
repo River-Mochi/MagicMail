@@ -41,231 +41,201 @@ namespace MagicMail
 
                 // Tabs
                 { m_Setting.GetOptionTabLocaleID(Setting.kActionsTab), "Дії" },
-                { m_Setting.GetOptionTabLocaleID(Setting.kStatusTab),  "Стан" },
-                { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab),   "Про мод" },
+                { m_Setting.GetOptionTabLocaleID(Setting.kStatusTab), "Стан" },
+                { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Про мод" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Допомога поштовій доставці" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "Поштові фургони й вантажівки" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Сортувальний центр" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup),               "Скидання" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Допомога vanilla" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Поштові фургони й вантажівки" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Окремий сортувальний центр" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Скидання" },
 
                 // Groups (Status tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.StatusSummaryGroup),  "Сканування міста" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.StatusSummaryGroup), "Сканування міста" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.StatusActivityGroup), "Останнє оновлення" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup),  "Інформація" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Інформація" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Посилання" },
 
-                // ---- Post Office ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Виправити нестачу місцевої пошти" },
+                // ---- Post Office / Vanilla Assist ----
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Порятунок при нестачі місцевої пошти" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
-                    "Якщо ввімкнено, невелика кількість пошти з’являється, коли її стає надто мало.\n " +
-                    "Додаткові фургони не створюються; це ніби магія... але справжня :)"
+                    "Спочатку дозволяє грі спробувати звичайні поштові перевезення.\n" +
+                    "Якщо місцевої пошти дуже мало протягом кількох перевірок, Magic Mail додає невелике аварійне поповнення.\n" +
+                    "Також діє для поштового відділення з покращенням сортування."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Поріг місцевої пошти" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Поріг порятунку місцевої пошти" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
-                    "Якщо місцева пошта опускається нижче вибраного вами відсотка,\n " +
-                    "поштове відділення починає отримувати більше місцевої пошти.\n" +
-                    "Це відсоток від максимальної місткості сховища будівлі.\n" +
-                    "Напр., якщо <макс. сховище = 100,000> і <поріг = 5%>,\n" +
-                    "коли місцева пошта < <5,000>, додається більше пошти."
+                    "Місцева пошта вважається низькою при досягненні цього відсотка від максимального сховища будівлі.\n" +
+                    "Порятунок спрацьовує лише якщо рівень залишається низьким кілька перевірок поспіль."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Обсяг отримання місцевої пошти" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Обсяг порятунку місцевої пошти" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingPercentage)),
-                    "Відсоток, що додається під час отримання місцевої пошти (магічне поповнення).\n" +
-                    "Якщо максимум vanilla = <100,000>, а тут встановлено <10%>,\n" +
-                    "то за потреби додається <10,000>."
+                    "Скільки місцевої пошти додати, коли спрацьовує порятунок.\n" +
+                    "Обсяг задається у відсотках від максимального сховища будівлі."
                 },
 
-                // Global overflow toggle (PO + PSF)
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Виправити переповнення пошти" },
+                // Global overflow toggle (PO + sorting)
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Порятунок від переповнення пошти" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
-                    "Коли пошти забагато, об’єкти виконують невелике магічне очищення.\n " +
-                    "Надлишкова збережена пошта вважається доставленою та видаляється.\n " +
-                    "Це не дає об’єктам назавжди застрягати переповненими.\n " +
-                    "Вимкніть, щоб зберегти чисту поведінку vanilla."
+                    "Якщо поштова споруда переповнюється, Magic Mail зменшує запас пошти до вибраного рівня.\n" +
+                    "Враховується місцева + несортована + вихідна пошта, що допомагає виявляти переповнення, яке гра може рахувати неправильно.\n" +
+                    "Вимкніть для повністю vanilla-поведінки."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Поріг переповнення поштового відділення" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_OverflowPercentage)),
-                    "Коли загальна кількість пошти у відділенні досягає цього відсотка, мод\n" +
-                    "видаляє достатньо збереженої пошти, щоб повернути її до цього рівня."
+                    "Коли загальний запас пошти перевищує цей рівень, Magic Mail зменшує його.\n" +
+                    "Діє для звичайних відділень і відділень з покращенням сортування."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Поріг переповнення сортувального центру" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_OverflowPercentage)),
-                    "Коли загальна кількість пошти в сортувальному центрі досягає цього відсотка, мод\n" +
-                    "видаляє достатньо збереженої пошти, щоб повернути її до цього рівня."
+                    "Коли загальний запас пошти в окремому сортувальному центрі перевищує цей рівень,\n" +
+                    "Magic Mail зменшує його."
                 },
 
                 // ---- Post Vans & Trucks ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ChangeCapacity)), "Змінити місткість" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ChangeCapacity)), "Змінювати місткість" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
-                    "Увімкніть, щоб змінювати місткість фургонів і вантажівок. Коли вимкнено,\n" +
-                    "усі повзунки місткості нижче приховані, а\n" +
-                    "значення vanilla (гри) використовуються, навіть якщо повзунки залишилися на інших значеннях."
+                    "Увімкніть, щоб змінювати місткість фургонів і вантажівок. Якщо вимкнено,\n" +
+                    "повзунки нижче приховані та\n" +
+                    "використовуються vanilla-значення, навіть якщо інші значення залишилися збереженими."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Завантаження поштового фургона" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "Визначає, скільки пошти може перевозити кожен поштовий фургон.\n" +
-                    "<100% = вантажопідйомність vanilla.>"
+                    "<100% = vanilla-завантаження.>"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Розмір парку поштових фургонів" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
-                    "Визначає, скільки поштових фургонів може мати й відправляти кожна поштова будівля.\n" +
-                    "<100% = розмір парку vanilla.>"
+                    "Визначає, скільки поштових фургонів може мати й відправляти кожна поштова споруда.\n" +
+                    "<100% = vanilla-розмір парку.>"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Розмір парку поштових вантажівок" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
-                    "Визначає, скільки поштових вантажівок може мати й відправляти кожен сортувальний центр\n " +
-                    "(і будь-який об’єкт із поштовими вантажівками).\n " +
-                    "<100% = розмір парку vanilla.>"
+                    "Визначає, скільки поштових вантажівок може мати й відправляти споруда, що їх використовує.\n" +
+                    "<100% = vanilla-розмір парку.>"
                 },
 
-                // ---- Sorting Facility ----
+                // ---- Dedicated Sorting Facility ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)), "Швидкість сортування" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
-                    "Множник для **сортувальних** центрів. Застосовується до базової швидкості сортування.\n " +
+                    "Множник для окремих сортувальних центрів.\n" +
+                    "Не змінює покращення сортування поштового відділення.\n" +
                     "<100% = vanilla>."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Місткість сховища сортування" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Місткість сортувального сховища" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
-                    "Керує **сховищем пошти**.\n " +
+                    "Керує сховищем пошти в окремих сортувальних центрах.\n" +
+                    "Не змінює покращення сортування поштового відділення.\n" +
                     "<100% = vanilla>."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Виправити нестачу несортованої пошти" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Порятунок при нестачі несортованої пошти" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
-                    "Коли ввімкнено, трохи несортованої пошти магічно з’являється, якщо запас стає надто малим.\n " +
-                    "Це підтримує роботу сортувальних будівель.\n" +
-                    "Це тимчасове виправлення поточної помилки, через яку сортувальні центри не отримують достатньо пошти за наявності вантажного порту."
+                    "Спочатку дозволяє грі нормально доставляти несортовану пошту.\n" +
+                    "Якщо в окремому сортувальному центрі її дуже мало протягом кількох перевірок,\n" +
+                    "Magic Mail додає невелике аварійне поповнення."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Поріг несортованої пошти" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Поріг порятунку несортованої пошти" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
-                    "Якщо несортована пошта опускається нижче цього малого відсотка загальної місткості сховища,\n" +
-                    "отримується трохи додаткової несортованої пошти.\n"
+                    "Несортована пошта вважається низькою при досягненні цього відсотка від максимального сховища.\n" +
+                    "Порятунок спрацьовує лише якщо рівень залишається низьким кілька перевірок поспіль."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Обсяг отримання несортованої пошти" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Обсяг порятунку несортованої пошти" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
-                    "Додаткова пошта, що додається під час отримання несортованої пошти (магічне поповнення).\n" +
-                    "Кількість є відсотком від максимальної місткості сховища.\n" +
-                    "Якщо vanilla <макс = 250,000> і тут встановлено <10%>, тоді додається <25,000>."
+                    "Скільки несортованої пошти додати, коли спрацьовує порятунок.\n" +
+                    "Обсяг задається у відсотках від максимального сховища."
                 },
 
                 // ---- RESET BUTTONS ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Стандартні налаштування гри" },
-                {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)),
-                    "Відновлює всі налаштування до оригінальної стандартної поведінки гри (vanilla)."
-                },
-
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Налаштування гри" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Повертає всі параметри до оригінальної поведінки гри (vanilla)." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Рекомендовано" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Швидкий старт** – застосовує всі рекомендовані поштові налаштування.\n" +
-                    "Простий режим: 1 клік — і готово!"
+                    "**Допомога vanilla** - Швидкий старт.\n" +
+                    "Спочатку дає працювати звичайній поштовій логістиці, а потім рятує лише тривалу нестачу або переповнення.\n" +
+                    "Також застосовує рекомендовані налаштування місткості."
                 },
 
                 // ---- Status tab ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), string.Empty },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
-                    "Підсумок поштових відділень, фургонів, сортувальних центрів і поштових вантажівок, оброблених під час останнього фонового сканування."
+                    "Поштові будівлі, знайдені під час відкриття сторінки «Стан».\n" +
+                    "\n" +
+                    "**Поштові відділення** = звичайні відділення.\n" +
+                    "**Сортувальні центри** = окремі поштові сортувальні центри.\n" +
+                    "**Відділення із сортуванням** = <Westmont Tower з покращенням сортування>.\n" +
+                    "- Потрібен **DLC Skyscrapers**."
                 },
-
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusVehicleSummary)), string.Empty },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusVehicleSummary)),
+                    "Місткість поштового транспорту під час відкриття сторінки «Стан».\n" +
+                    "\n" +
+                    "**Поштові фургони** = місцевий збір і доставка.\n" +
+                    "**Поштові вантажівки** = перевозять пошту між спорудами."
+                },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "Пошта за місяць" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusCityMailSummary)),
-                    "Показує недавній потік пошти по всьому місту.\n\n" +
+                    "Показує останній потік пошти по всьому місту.\n" +
+                    "\n" +
                     "**Накопичено** = скільки пошти створили мешканці.\n" +
-                    "**Оброблено**  = скільки пошти фактично опрацювала мережа.\n\n" +
-                    "- Якщо Оброблено часто більше за Накопичено, поштова мережа має достатню пропускну здатність.\n " +
+                    "**Оброблено** = скільки пошти мережа фактично опрацювала.\n" +
+                    "\n" +
+                    "- Якщо Оброблено часто вище за Накопичено, поштова мережа має достатню пропускну здатність.\n" +
                     "- Якщо Накопичено довго залишається вище за Оброблено,\n" +
                     "місто створює більше пошти, ніж мережа може опрацювати.\n" +
-                    "Додайте більше об’єктів, фургонів або змініть налаштування."
+                    "Додайте споруди, фургони або змініть налаштування."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "Активність" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "Порятунки й очищення переповнення з останнього циклу порятунку Magic Mail." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.WriteReport)), "Записати звіт" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)),
-                    "Кількість поповнень пошти й очищень переповнення, виконаних під час останнього оновлення."
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.WriteReport)),
+                    "Виконує **одноразове** детальне сканування пошти, поки відкриті Параметри,\n" +
+                    "і записує звіт у <Logs/MagicMail.log>. Без фонових записів."
                 },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenLog)), "Відкрити журнал" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenLog)), "Відкриває <Logs/MagicMail.log> або папку Logs, якщо файла ще немає." },
 
                 // ---- Status text templates (for MagicMailSystem) ----
-                { "MM_STATUS_NO_FACILITIES",
-                  "Поштові об’єкти ще не оброблялися. Відкрийте місто й дайте симуляції попрацювати." },
-
-                { "MM_STATUS_NO_ACTIVITY",
-                  "Активність ще не зафіксована." },
-
-                {
-                    "MM_STATUS_SUMMARY",
-                    "{0} поштових відділень | {1} поштових фургонів | {2} сортувальних будівель | {3} поштових вантажівок"
-                },
-
-                {
-                    "MM_STATUS_ACTIVITY",
-                    "{0} поповнень місцевої пошти | {1} поповнень несортованої пошти | {2} очищень переповнення"
-                },
-
-                { "MM_STATUS_CITY_MAIL_NOT_READY",
-                  "Статистика міської пошти ще недоступна. Відкрийте місто й дайте симуляції попрацювати." },
-
-                {
-                    "MM_STATUS_CITY_MAIL",
-                    "{0} накопичено | {1} оброблено"
-                },
+                { "MM_STATUS_NO_FACILITIES", "Поштових споруд не знайдено. Відкрийте місто, потім знову відкрийте «Стан»." },
+                { "MM_STATUS_NO_ACTIVITY", "Активність порятунку не зафіксована." },
+                { "MM_STATUS_SUMMARY", "Поштові відділення: {0} | Відділення із сортуванням: {1} | Сортувальні центри: {2}" },
+                { "MM_STATUS_VEHICLES", "Поштові фургони: {0} | Поштові вантажівки: {1}" },
+                { "MM_STATUS_ACTIVITY", "{0} порятунків місцевої | {1} порятунків несортованої | {2} очищень переповнення" },
+                { "MM_STATUS_CITY_MAIL_NOT_READY", "Статистика пошти міста ще недоступна. Відкрийте місто й дайте симуляції трохи попрацювати." },
+                { "MM_STATUS_CITY_MAIL", "{0} накопичено | {1} оброблено" },
 
                 // ---- About tab: info ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModNameDisplay)), "Мод" },
-                {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.ModNameDisplay)),
-                    "Відображувана назва цього мода."
-                },
-
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModNameDisplay)), "Відображувана назва цього мода." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModVersionDisplay)), "Версія" },
-                {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)),
-                    "Поточна версія мода."
-                },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "Поточна версія мода та тип збірки." },
 
                 // ---- About tab: links ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mochi's Paradox mods" },
-                {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)),
-                    "Відкрити вебсторінку **Paradox** для **Magic Mail** та інших модів."
-                },
-
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Моди Mochi на Paradox" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "Відкриває сторінку **Paradox** для **Magic Mail** та інших модів." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
-                {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)),
-                    "Відкрити чат відгуків **Discord** у браузері."
-                },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)), "Відкриває чат відгуків **Discord** у браузері." },
             };
         }
 

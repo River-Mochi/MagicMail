@@ -45,9 +45,9 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Sobre" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Ajuda na entrega postal" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Assistência vanilla" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Vans e caminhões postais" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Centro de triagem" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Centro de triagem dedicado" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Redefinir" },
 
                 // Groups (Status tab)
@@ -58,184 +58,184 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Informações" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Links" },
 
-                // ---- Post Office ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Corrigir pouco correio local" },
+                // ---- Post Office / Vanilla Assist ----
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Resgatar correio local baixo" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
-                    "Quando ativado, aparece um pouco de correio se o estoque ficar baixo demais.\n" +
-                    "Não cria vans extras; é tipo mágica... mas de verdade :)"
+                    "Deixa o jogo tentar primeiro as transferências normais de correio.\n" +
+                    "Se o correio local continuar muito baixo por várias verificações, Magic Mail adiciona uma pequena reposição de emergência.\n" +
+                    "Também vale para agências com melhoria de triagem."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Limite de correio local" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Limite de resgate do correio local" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
-                    "Se o correio local cair abaixo da porcentagem que você escolher,\n" +
-                    "a agência busca mais correio local.\n" +
-                    "É uma porcentagem da capacidade máxima do prédio.\n" +
-                    "Ex.: <armazenamento máx. = 100.000> e <limite = 5%>,\n" +
-                    "quando o correio local < <5.000>, mais correio é buscado."
+                    "O correio local é considerado baixo ao chegar a esta porcentagem do armazenamento máximo do prédio.\n" +
+                    "O resgate só ocorre se continuar baixo por várias verificações."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Quantidade de correio local" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Quantidade de resgate do correio local" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingPercentage)),
-                    "Porcentagem adicionada ao buscar correio local (reposição mágica).\n" +
-                    "Se o máximo vanilla = <100.000> e estiver em <10%>,\n" +
-                    "<10.000> são adicionados quando necessário."
+                    "Quanto correio local adicionar quando o resgate ocorrer.\n" +
+                    "É uma porcentagem do armazenamento máximo do prédio."
                 },
 
-                // Global overflow toggle (PO + PSF)
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Corrigir excesso de correio" },
+                // Global overflow toggle (PO + sorting)
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Resgatar excesso de correio" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
-                    "Quando há correio demais, as instalações fazem uma pequena limpeza mágica.\n" +
-                    "O correio armazenado em excesso é tratado como entregue e removido.\n" +
-                    "Isso evita que as instalações fiquem travadas cheias para sempre.\n" +
-                    "Desative para manter o comportamento vanilla puro."
+                    "Se uma instalação postal ficar cheia demais, Magic Mail reduz o correio armazenado até o nível escolhido.\n" +
+                    "Conta correio local + não triado + de saída, ajudando a detectar excesso que o jogo pode calcular errado.\n" +
+                    "Desative para comportamento vanilla puro."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Limite de excesso da agência" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_OverflowPercentage)),
-                    "Quando o total de correio numa agência chega a esta porcentagem, o mod\n" +
-                    "remove o suficiente para voltar a este nível."
+                    "Quando o total armazenado passa deste nível, Magic Mail reduz novamente.\n" +
+                    "Vale para agências comuns e agências com melhoria de triagem."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Limite de excesso do centro de triagem" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Limite de excesso da triagem" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_OverflowPercentage)),
-                    "Quando o total de correio num centro de triagem chega a esta porcentagem, o mod\n" +
-                    "remove o suficiente para voltar a este nível."
+                    "Quando o total armazenado em um centro de triagem dedicado passa deste nível,\n" +
+                    "Magic Mail reduz novamente."
                 },
 
                 // ---- Post Vans & Trucks ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ChangeCapacity)), "Alterar capacidades" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
-                    "Ative para mudar as capacidades de vans e caminhões. Quando desligado,\n" +
-                    "os controles de capacidade abaixo ficam ocultos e\n" +
-                    "os valores vanilla do jogo são usados mesmo que os controles tenham outros valores."
+                    "Ative para modificar capacidades de vans e caminhões. Quando desligado,\n" +
+                    "os controles abaixo ficam ocultos e\n" +
+                    "os valores vanilla são usados mesmo que outros valores tenham ficado salvos."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Carga da van postal" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "Controla quanto correio cada van postal pode carregar.\n" +
                     "<100% = carga vanilla.>"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Tamanho da frota de vans" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
-                    "Controla quantas vans cada prédio postal pode ter e despachar.\n" +
+                    "Controla quantas vans cada prédio postal pode possuir e despachar.\n" +
                     "<100% = frota vanilla.>"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Tamanho da frota de caminhões" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
-                    "Controla quantos caminhões postais cada centro de triagem (e qualquer instalação com caminhões postais)\n" +
-                    "pode ter e despachar.\n" +
+                    "Controla quantos caminhões postais cada instalação com caminhões pode possuir e despachar.\n" +
                     "<100% = frota vanilla.>"
                 },
 
-                // ---- Sorting Facility ----
+                // ---- Dedicated Sorting Facility ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)), "Velocidade de triagem" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
-                    "Multiplicador dos centros de **triagem**. Aplica-se à velocidade base de triagem.\n" +
+                    "Multiplicador para centros de triagem dedicados.\n" +
+                    "Não altera a melhoria de triagem de uma agência.\n" +
                     "<100% = vanilla>."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Capacidade de armazenamento" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Capacidade de armazenamento da triagem" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
-                    "Controla o **armazenamento de correio**.\n" +
+                    "Controla o armazenamento de correio dos centros de triagem dedicados.\n" +
+                    "Não altera a melhoria de triagem de uma agência.\n" +
                     "<100% = vanilla>."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Corrigir pouco correio não triado" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Resgatar correio não triado baixo" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
-                    "Quando ativado, aparece um pouco de correio não triado se o estoque ficar baixo demais.\n" +
-                    "Isso mantém os centros de triagem funcionando.\n" +
-                    "É uma solução temporária para um bug atual em que os centros de triagem não recebem correio suficiente quando há um porto de carga."
+                    "Deixa o jogo fornecer correio não triado normalmente primeiro.\n" +
+                    "Se um centro dedicado continuar muito baixo por várias verificações,\n" +
+                    "Magic Mail adiciona uma pequena reposição de emergência."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Limite de correio não triado" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Limite de resgate do correio não triado" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
-                    "Se o correio não triado cair abaixo desta pequena porcentagem da capacidade total,\n" +
-                    "um pouco mais de correio não triado é buscado."
+                    "O correio não triado é considerado baixo ao chegar a esta porcentagem do armazenamento máximo.\n" +
+                    "O resgate só ocorre se continuar baixo por várias verificações."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Quantidade de correio não triado" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Quantidade de resgate do correio não triado" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
-                    "Correio extra adicionado ao buscar correio não triado (reposição mágica).\n" +
-                    "A quantidade é uma porcentagem da capacidade máxima.\n" +
-                    "Se vanilla <máx. = 250.000> e estiver em <10%>, então <25.000> são adicionados."
+                    "Quanto correio não triado adicionar quando o resgate ocorrer.\n" +
+                    "É uma porcentagem do armazenamento máximo."
                 },
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Padrões do jogo" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Restaura todas as configurações para o comportamento padrão original do jogo (vanilla)." },
-
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Restaura todas as opções para o comportamento original do jogo (vanilla)." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Recomendado" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Início rápido** – aplica todas as configurações postais recomendadas.\n" +
-                    "Modo fácil: 1 clique e pronto!"
+                    "**Assistência vanilla** - Início rápido.\n" +
+                    "Deixa a logística normal trabalhar primeiro e só resgata faltas persistentes ou excesso.\n" +
+                    "Também aplica os ajustes de capacidade recomendados."
                 },
 
                 // ---- Status tab ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), string.Empty },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)), "Resumo das agências, vans, centros de triagem e caminhões processados na última varredura em segundo plano." },
-
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
+                    "Prédios postais encontrados ao abrir a página Status.\n" +
+                    "\n" +
+                    "**Agências postais** = agências comuns.\n" +
+                    "**Centros de triagem** = centros postais dedicados.\n" +
+                    "**Agências com triagem** = <Westmont Tower com melhoria de triagem>.\n" +
+                    "- Requer o **DLC Skyscrapers**."
+                },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusVehicleSummary)), string.Empty },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusVehicleSummary)),
+                    "Capacidade dos veículos postais ao abrir a página Status.\n" +
+                    "\n" +
+                    "**Vans postais** = coleta e entrega local.\n" +
+                    "**Caminhões postais** = levam correio entre instalações."
+                },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "Correio mensal" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusCityMailSummary)),
-                    "Mostra o fluxo recente de correio na cidade inteira.\n" +
+                    "Mostra o fluxo recente de correio da cidade toda.\n" +
                     "\n" +
-                    "**Acumulado** = quanto correio os cidadãos geraram.\n" +
-                    "**Processado** = quanto correio a rede realmente conseguiu processar.\n" +
+                    "**Acumulado** = correio gerado pelos cidadãos.\n" +
+                    "**Processado** = correio realmente tratado pela rede.\n" +
                     "\n" +
-                    "- Se Processado costuma ser maior que Acumulado, sua rede postal tem capacidade suficiente.\n" +
-                    "- Se Acumulado ficar acima de Processado por muito tempo,\n" +
-                    "a cidade está gerando mais correio do que a rede consegue lidar.\n" +
-                    "Adicione instalações ou vans, ou ajuste suas configurações."
+                    "- Se Processado costuma ser maior que Acumulado, a rede tem capacidade suficiente.\n" +
+                    "- Se Acumulado fica acima de Processado por muito tempo,\n" +
+                    "a cidade gera mais correio do que a rede consegue tratar.\n" +
+                    "Adicione instalações, vans ou ajuste as opções."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "Atividade" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "Conta as reposições de correio e limpezas de excesso feitas na última atualização." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "Resgates e limpezas de excesso da última passagem de resgate do Magic Mail." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.WriteReport)), "Gravar relatório" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.WriteReport)),
+                    "Executa **uma única vez** uma varredura postal detalhada com as Opções abertas\n" +
+                    "e grava o relatório em <Logs/MagicMail.log>. Sem registro em segundo plano."
+                },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenLog)), "Abrir log" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenLog)), "Abre <Logs/MagicMail.log> ou a pasta Logs se o arquivo ainda não existir." },
 
                 // ---- Status text templates (for MagicMailSystem) ----
-                { "MM_STATUS_NO_FACILITIES", "Nenhuma instalação postal foi processada ainda. Abra uma cidade e deixe a simulação rodar." },
-
-                { "MM_STATUS_NO_ACTIVITY", "Nenhuma atividade registrada ainda." },
-
-                { "MM_STATUS_SUMMARY", "{0} agências | {1} vans postais | {2} centros de triagem | {3} caminhões postais" },
-
-                { "MM_STATUS_ACTIVITY", "{0} reposições locais | {1} reposições não triadas | {2} limpezas de excesso" },
-
-                { "MM_STATUS_CITY_MAIL_NOT_READY", "As estatísticas de correio da cidade ainda não estão disponíveis. Abra uma cidade e deixe a simulação rodar." },
-
+                { "MM_STATUS_NO_FACILITIES", "Nenhuma instalação postal encontrada. Abra uma cidade e depois abra Status novamente." },
+                { "MM_STATUS_NO_ACTIVITY", "Nenhuma atividade de resgate registrada." },
+                { "MM_STATUS_SUMMARY", "Agências postais: {0} | Agências com triagem: {1} | Centros de triagem: {2}" },
+                { "MM_STATUS_VEHICLES", "Vans postais: {0} | Caminhões postais: {1}" },
+                { "MM_STATUS_ACTIVITY", "{0} resgates locais | {1} resgates não triados | {2} limpezas de excesso" },
+                { "MM_STATUS_CITY_MAIL_NOT_READY", "As estatísticas postais da cidade ainda não estão disponíveis. Abra uma cidade e deixe a simulação rodar." },
                 { "MM_STATUS_CITY_MAIL", "{0} acumulado | {1} processado" },
 
                 // ---- About tab: info ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModNameDisplay)), "Mod" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModNameDisplay)), "Nome exibido deste mod." },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModVersionDisplay)), "Versão" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "Versão atual do mod." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "Versão atual do mod e tipo de compilação." },
 
                 // ---- About tab: links ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mochi's Paradox mods" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "Abre a página da **Paradox** para **Magic Mail** e outros mods." },
-
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mods do Mochi no Paradox" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "Abre a página **Paradox** de **Magic Mail** e outros mods." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)), "Abre o chat de feedback do **Discord** no navegador." },
-
             };
         }
 

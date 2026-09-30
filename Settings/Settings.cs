@@ -77,6 +77,7 @@ namespace MagicMail
         private const string StatusNoFacilitiesKey = "MM_STATUS_NO_FACILITIES";
         private const string StatusNoActivityKey = "MM_STATUS_NO_ACTIVITY";
         private const string StatusSummaryKey = "MM_STATUS_SUMMARY";
+        private const string StatusVehiclesKey = "MM_STATUS_VEHICLES";
         private const string StatusActivityKey = "MM_STATUS_ACTIVITY";
         private const string StatusCityMailNotReadyKey = "MM_STATUS_CITY_MAIL_NOT_READY";
         private const string StatusCityMailKey = "MM_STATUS_CITY_MAIL";
@@ -110,18 +111,24 @@ namespace MagicMail
         {
             base.Apply();
 
+            // Status is built only when the Options UI reads it. Mark the cached
+            // snapshot dirty so changed capacities/settings can refresh immediately.
+            MailStatus.MarkDirty();
+
             World? world = World.DefaultGameObjectInjectionWorld;
             if (world == null || !world.IsCreated)
             {
                 return;
             }
 
-            // Slow periodic scan (magic top-ups + overflow).
+            // The rescue system should run only when at least one rescue feature
+            // is enabled. Capacity-only users get no recurring MagicMail scan.
             MagicMailSystem? magicSystem =
                 world.GetExistingSystemManaged<MagicMailSystem>();
             if (magicSystem != null)
             {
-                magicSystem.Enabled = true;
+                magicSystem.SetRescueEnabled(
+                    MagicMailSystem.NeedsRescue(this));
             }
 
             // One-shot capacity updater – gives "instant" slider changes.
@@ -393,23 +400,43 @@ namespace MagicMail
         {
             get
             {
-                if (MagicMailSystem.s_LastFacilityCount == 0)
+                MailStatus.RefreshIfNeeded();
+
+                if (MailStatus.s_LastFacilityCount == 0)
                 {
                     return L(
                         StatusNoFacilitiesKey,
-                        "No postal facilities processed yet. Open a city and let the simulation run.");
+                        "No postal facilities found. Open a city, then open Status again.");
                 }
 
                 return string.Format(
                     L(
                         StatusSummaryKey,
-                        "{0} post offices | {1} sorting post offices | {2} post-vans | {3} sorting facilities | {4} post trucks"),
-                    MagicMailSystem.s_LastPostOfficeCount,
-                    MagicMailSystem.s_LastSortingPostOfficeCount,
-                    MagicMailSystem.s_LastPostVanCapacityTotal,
-                    MagicMailSystem.s_LastSortingFacilityCount,
-                    MagicMailSystem.s_LastPostTruckCapacityTotal);
+                        "Post offices: {0} | Sorting post offices: {1} | Sorting facilities: {2}"),
+                    MailStatus.s_LastPostOfficeCount,
+                    MailStatus.s_LastSortingPostOfficeCount,
+                    MailStatus.s_LastSortingFacilityCount);
+            }
+        }
 
+        [SettingsUISection(kStatusTab, StatusSummaryGroup)]
+        public string StatusVehicleSummary
+        {
+            get
+            {
+                MailStatus.RefreshIfNeeded();
+
+                if (MailStatus.s_LastFacilityCount == 0)
+                {
+                    return string.Empty;
+                }
+
+                return string.Format(
+                    L(
+                        StatusVehiclesKey,
+                        "Post-vans: {0} | Post trucks: {1}"),
+                    MailStatus.s_LastPostVanCapacityTotal,
+                    MailStatus.s_LastPostTruckCapacityTotal);
             }
         }
 
@@ -418,8 +445,10 @@ namespace MagicMail
         {
             get
             {
-                if (MagicMailSystem.s_LastCityAccumulatedMail == 0 &&
-                    MagicMailSystem.s_LastCityProcessedMail == 0)
+                MailStatus.RefreshIfNeeded();
+
+                if (MailStatus.s_LastCityAccumulatedMail == 0 &&
+                    MailStatus.s_LastCityProcessedMail == 0)
                 {
                     return L(
                         StatusCityMailNotReadyKey,
@@ -430,8 +459,8 @@ namespace MagicMail
                     L(
                         StatusCityMailKey,
                         "{0} accumulated | {1} processed"),
-                    MagicMailSystem.s_LastCityAccumulatedMail.ToString("N0"),
-                    MagicMailSystem.s_LastCityProcessedMail.ToString("N0"));
+                    MailStatus.s_LastCityAccumulatedMail.ToString("N0"),
+                    MailStatus.s_LastCityProcessedMail.ToString("N0"));
             }
         }
 
@@ -440,7 +469,9 @@ namespace MagicMail
         {
             get
             {
-                if (MagicMailSystem.s_LastFacilityCount == 0)
+                MailStatus.RefreshIfNeeded();
+
+                if (MailStatus.s_LastFacilityCount == 0)
                 {
                     return L(
                         StatusNoActivityKey,
@@ -451,9 +482,27 @@ namespace MagicMail
                     L(
                         StatusActivityKey,
                         "{0} local rescues | {1} unsorted rescues | {2} overflow cleanups"),
-                    MagicMailSystem.s_LastPostOfficeGets,
-                    MagicMailSystem.s_LastSortingGets,
-                    MagicMailSystem.s_LastOverflowClamps);
+                    MailStatus.s_LastPostOfficeGets,
+                    MailStatus.s_LastSortingGets,
+                    MailStatus.s_LastOverflowClamps);
+            }
+        }
+
+        [SettingsUIButtonGroup(StatusActivityGroup)]
+        [SettingsUIButton]
+        [SettingsUISection(kStatusTab, StatusActivityGroup)]
+        public bool WriteReport
+        {
+            set
+            {
+                if (!value)
+                {
+                    return;
+                }
+
+                // One-time detailed scan while Options is open/paused.
+                // No recurring Release logging is enabled by this button.
+                MailStatus.RefreshNow(writeToLog: true);
             }
         }
 
@@ -481,7 +530,7 @@ namespace MagicMail
         public string ModNameDisplay => $"{Mod.ModName} {Mod.ModTag}";
 
         [SettingsUISection(kAboutTab, kAboutInfoGroup)]
-        public string ModVersionDisplay => Mod.ModVersion;
+        public string ModVersionDisplay => $"{Mod.ModVersion} {Mod.BuildDisplayName}";
 
         // --------------------------------------------------------------------
         // ABOUT TAB: LINKS
@@ -575,7 +624,7 @@ namespace MagicMail
             PSF_GettingThresholdPercentage = 5;
             PSF_GettingPercentage = 10;
 
-            PSF_SortingSpeedPercentage = 200;
+            PSF_SortingSpeedPercentage = 150;
             PSF_StorageCapacityPercentage = 100;
 
             // Recommended vehicle tuning.

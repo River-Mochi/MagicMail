@@ -81,9 +81,9 @@ namespace MagicMail
                 m_MissingProducerRequests.Remove(producerEntity);
             }
 
-            var persistentTwoPlus = 0;
-            var persistentThreePlus = 0;
-            var maxSnapshots = 0;
+            int persistentTwoPlus = 0;
+            int persistentThreePlus = 0;
+            int maxSnapshots = 0;
             m_PersistentMissingProducerRequests.Clear();
 
             foreach (KeyValuePair<Entity, MissingProducerRequestState> pair in

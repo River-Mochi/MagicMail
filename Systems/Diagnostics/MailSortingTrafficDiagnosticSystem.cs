@@ -101,8 +101,8 @@ namespace MagicMail
         protected override void OnUpdate()
         {
             using NativeArray<Entity> facilities = m_FacilityQuery.ToEntityArray(Allocator.Temp);
-            var sortingFacilities = new HashSet<Entity>();
-            var prefabNames = new Dictionary<Entity, string>();
+            HashSet<Entity> sortingFacilities = new HashSet<Entity>();
+            Dictionary<Entity, string> prefabNames = new Dictionary<Entity, string>();
 
             foreach (Entity facilityEntity in facilities)
             {
@@ -119,7 +119,7 @@ namespace MagicMail
                 prefabNames[facilityEntity] = prefabName;
             }
 
-            var targetedTrucks = new Dictionary<Entity, Dictionary<Entity, TruckObservation>>();
+            Dictionary<Entity, Dictionary<Entity, TruckObservation>> targetedTrucks = new Dictionary<Entity, Dictionary<Entity, TruckObservation>>();
             foreach ((RefRO<Game.Vehicles.DeliveryTruck> truckRef, RefRO<Target> targetRef, Entity truckEntity) in
                      SystemAPI.Query<RefRO<Game.Vehicles.DeliveryTruck>, RefRO<Target>>().WithEntityAccess())
             {
@@ -231,7 +231,7 @@ namespace MagicMail
             Game.Buildings.PostFacility facility =
                 EntityManager.GetComponentData<Game.Buildings.PostFacility>(facilityEntity);
 
-            var observation = new FacilityObservation
+            FacilityObservation observation = new FacilityObservation
             {
                 Local = EconomyUtils.GetResources(Resource.LocalMail, resources),
                 Unsorted = EconomyUtils.GetResources(Resource.UnsortedMail, resources),
@@ -290,7 +290,7 @@ namespace MagicMail
             bool isGuest,
             bool isTarget)
         {
-            var result = new TruckObservation
+            TruckObservation result = new TruckObservation
             {
                 PrefabName = "unknown",
                 VehicleKind = "TRUCK",
@@ -416,7 +416,7 @@ namespace MagicMail
                 return default;
             }
 
-            var result = new RequestObservation
+            RequestObservation result = new RequestObservation
             {
                 Entity = requestEntity,
                 Exists = EntityManager.Exists(requestEntity),
