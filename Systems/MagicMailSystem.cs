@@ -118,14 +118,14 @@ namespace MagicMail
             bool fixOverflow = settings.FixMailOverflow;
 
             using NativeArray<Entity> postEntities = m_PostFacilitiesQuery.ToEntityArray(Allocator.Temp);
-            var facilityCount = postEntities.Length;
-            var postOfficeCount = 0;
-            var sortingFacilityCount = 0;
-            var postOfficeGets = 0;
-            var sortingGets = 0;
-            var overflowClamps = 0;
-            var totalPostVanCapacity = 0;
-            var totalPostTruckCapacity = 0;
+            int facilityCount = postEntities.Length;
+            int postOfficeCount = 0;
+            int sortingFacilityCount = 0;
+            int postOfficeGets = 0;
+            int sortingGets = 0;
+            int overflowClamps = 0;
+            int totalPostVanCapacity = 0;
+            int totalPostTruckCapacity = 0;
 
             foreach (var postEntity in postEntities)
             {
@@ -147,8 +147,8 @@ namespace MagicMail
                     continue;
                 }
 
-                var mailCapacity = postFacilityData.m_MailCapacity;
-                var sortingRate = postFacilityData.m_SortingRate;
+                int mailCapacity = postFacilityData.m_MailCapacity;
+                int sortingRate = postFacilityData.m_SortingRate;
 
                 if (!entityManager.HasBuffer<Resources>(postEntity))
                 {

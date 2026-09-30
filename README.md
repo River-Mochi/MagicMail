@@ -210,7 +210,7 @@ is already running fine without them.
 
 ---
 
-### 8 Languages
+### 16 Languages
 
 - Français French, Deutsch German, Español Spanish,  Italiano Italian
 - English, 简体中文 (Simplified Chinese), 한국어 Korean, Português Brazilian

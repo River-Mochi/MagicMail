@@ -576,7 +576,7 @@ namespace MagicMail
         {
             LocalizationDictionary? dict = GameManager.instance?.localizationManager?.activeDictionary;
             if (dict != null &&
-                dict.TryGetValue(key, out var value) &&
+                dict.TryGetValue(key, out string? value) &&
                 !string.IsNullOrWhiteSpace(value))
             {
                 return value;
