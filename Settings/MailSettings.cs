@@ -61,18 +61,18 @@ namespace MagicMail
         public const string kAboutInfoGroup = "AboutInfo";
         public const string kAboutLinksGroup = "AboutLinks";
 
-        /// <summary>
-        /// Internal flag used to avoid resetting options on every load.</summary>
-        [SettingsUIHidden]
-        public bool NotFirstTime
-        {
-            get;
-            set;
-        }
 
         /// <summary>
-        /// Constructs the settings object and initializes defaults on first creation.</summary>
+        /// Constructs the settings object with game-default values.
+        /// Saved values are overlaid by LoadSettings().
+        /// </summary>
         /// <param name="mod">Mod instance passed by the game.</param>
+        public MailSettings(IMod mod)
+            : base(mod)
+        {
+            SetDefaults();
+        }
+
         public MailSettings(IMod mod)
             : base(mod)
         {
