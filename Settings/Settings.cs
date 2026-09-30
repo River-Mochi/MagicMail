@@ -560,17 +560,17 @@ namespace MagicMail
         /// Recommended MagicMail tuning preset.</summary>
         private void SetRecommended()
         {
-            // Post offices: auto-get local mail when low (magic top-up).
+            // Post offices: rescue Local Mail only after it stays low across several scans.
             PO_GetLocalMail = true;
             PO_GettingThresholdPercentage = 5;
             PO_GettingPercentage = 10;
 
-            // Global overflow fix for PO + sorting (magic cleanup).
+            // Postal facilities: rescue actual overfill using Local + Unsorted + Outgoing mail.
             FixMailOverflow = true;
             PO_OverflowPercentage = 85;
             PSF_OverflowPercentage = 85;
 
-            // Sorting facilities: auto-get unsorted mail when low (magic top-up).
+            // Dedicated sorting facilities: rescue Unsorted Mail only after it stays low across several scans.
             PSF_GetUnsortedMail = true;
             PSF_GettingThresholdPercentage = 5;
             PSF_GettingPercentage = 10;
@@ -578,7 +578,7 @@ namespace MagicMail
             PSF_SortingSpeedPercentage = 200;
             PSF_StorageCapacityPercentage = 100;
 
-            // Capacities enabled by default.
+            // Recommended vehicle tuning.
             ChangeCapacity = true;
             PostVanMailLoadPercentage = 200;
             PostVanFleetSizePercentage = 100;
