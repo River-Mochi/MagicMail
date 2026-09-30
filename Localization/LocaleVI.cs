@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Vietnamese localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleVI : IDictionarySource
+    public class LocaleVI : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

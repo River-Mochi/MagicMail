@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Italian localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleIT : IDictionarySource
+    public class LocaleIT : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

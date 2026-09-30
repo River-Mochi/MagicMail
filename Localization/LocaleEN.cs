@@ -19,7 +19,7 @@ namespace MagicMail
 
     /// <summary>
     /// English localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleEN : IDictionarySource
+    public class LocaleEN : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

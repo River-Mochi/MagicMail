@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Turkish localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleTR : IDictionarySource
+    public class LocaleTR : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

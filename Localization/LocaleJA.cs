@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Japanese localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleJA : IDictionarySource
+    public class LocaleJA : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

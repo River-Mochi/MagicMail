@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Korean localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleKO : IDictionarySource
+    public class LocaleKO : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

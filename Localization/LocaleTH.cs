@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Thai localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleTH : IDictionarySource
+    public class LocaleTH : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

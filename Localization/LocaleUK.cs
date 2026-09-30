@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Ukrainian localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleUK : IDictionarySource
+    public class LocaleUK : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

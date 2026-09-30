@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// French localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleFR : IDictionarySource
+    public class LocaleFR : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

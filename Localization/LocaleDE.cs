@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// German localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleDE : IDictionarySource
+    public class LocaleDE : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Spanish localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleES : IDictionarySource
+    public class LocaleES : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

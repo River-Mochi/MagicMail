@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Polish localization source for Magic Mail [MM].</summary>
-    public sealed class LocalePL : IDictionarySource
+    public class LocalePL : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

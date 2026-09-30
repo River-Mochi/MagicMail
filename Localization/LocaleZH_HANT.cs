@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// Traditional Chinese localization source for Magic Mail [MM].</summary>
-    public sealed class LocaleZH_HANT : IDictionarySource
+    public class LocaleZH_HANT : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 

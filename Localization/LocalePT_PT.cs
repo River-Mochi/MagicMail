@@ -16,7 +16,7 @@ namespace MagicMail
 
     /// <summary>
     /// European Portuguese localization source for Magic Mail [MM].</summary>
-    public sealed class LocalePT_PT : IDictionarySource
+    public class LocalePT_PT : IDictionarySource
     {
         private readonly MailSettings m_Setting;
 
