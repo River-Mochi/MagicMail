@@ -13,9 +13,6 @@ namespace MagicMail
 {
     using System.Collections.Generic;
     using Colossal;
-    using Game.Citizens;
-    using Game.Simulation;
-    using Microsoft.SqlServer.Server;
 
     /// <summary>
     /// English localization source for Magic Mail [MM].</summary>
