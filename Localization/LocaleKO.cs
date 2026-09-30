@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "정보" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "바닐라 보조" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "우편 배송 지원" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "우편 밴 & 트럭" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "전용 우편 분류 시설" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "초기화" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "정보" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "링크" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "로컬 우편 부족 구조" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "게임 기본값" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "모든 설정을 게임의 원래 기본 동작(바닐라)으로 되돌립니다." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "모든 설정을 게임의 원래 기본 동작으로 되돌립니다." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "권장" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**바닐라 보조** - 빠른 시작.\n" +
-                    "먼저 기본 우편 물류가 작동하게 하고, 지속되는 부족이나 과적만 구조합니다.\n" +
+                    "**우편 배송 지원** - 빠른 시작.\n" +
+                    "먼저 기본 우편 물류가 작동하게 하고, 반복되는 부족이나 과적만 구조합니다.\n" +
                     "권장 용량 조정도 함께 적용합니다."
                 },
 

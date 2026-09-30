@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Sobre" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Assistência vanilla" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Assistência à distribuição postal" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Carrinhas e camiões postais" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Centro de triagem dedicado" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Repor" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Informação" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Ligações" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Resgatar correio local baixo" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -106,25 +106,25 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
                     "Ative para modificar capacidades de carrinhas e camiões. Quando desligado,\n" +
                     "os controlos abaixo ficam ocultos e\n" +
-                    "são usados os valores vanilla mesmo que outros valores tenham ficado guardados."
+                    "são usados os valores vanilla do jogo mesmo que outros valores tenham ficado guardados."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Carga da carrinha postal" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "Controla quanto correio cada carrinha postal pode transportar.\n" +
-                    "<100% = carga vanilla.>"
+                    "<100% = carga vanilla normal.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Tamanho da frota de carrinhas" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "Controla quantas carrinhas cada edifício postal pode possuir e enviar.\n" +
-                    "<100% = frota vanilla.>"
+                    "<100% = frota vanilla normal.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Tamanho da frota de camiões" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
                     "Controla quantos camiões postais cada instalação com camiões pode possuir e enviar.\n" +
-                    "<100% = frota vanilla.>"
+                    "<100% = frota vanilla normal.>"
                 },
 
                 // ---- Dedicated Sorting Facility ----
@@ -133,14 +133,14 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
                     "Multiplicador para centros de triagem dedicados.\n" +
                     "Não altera a melhoria de triagem de uma estação postal.\n" +
-                    "<100% = vanilla>."
+                    "<100% = vanilla normal>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Capacidade de armazenamento da triagem" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
                     "Controla o armazenamento de correio dos centros de triagem dedicados.\n" +
                     "Não altera a melhoria de triagem de uma estação postal.\n" +
-                    "<100% = vanilla>."
+                    "<100% = vanilla normal>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Resgatar correio não triado baixo" },
                 {
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Predefinições do jogo" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Repõe todas as opções no comportamento original do jogo (vanilla)." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Repõe todas as opções no comportamento predefinido original do jogo." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Recomendado" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Assistência vanilla** - Início rápido.\n" +
-                    "Deixa a logística normal trabalhar primeiro e só resgata faltas persistentes ou excesso.\n" +
+                    "**Assistência à distribuição postal** - Início rápido.\n" +
+                    "Deixa a logística normal trabalhar primeiro e depois resgata faltas recorrentes ou excesso.\n" +
                     "Também aplica os ajustes de capacidade recomendados."
                 },
 

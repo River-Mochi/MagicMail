@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "情報" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "バニラ補助" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "郵便配送アシスト" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "郵便バン＆トラック" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "専用仕分け施設" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "リセット" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "情報" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "リンク" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "ローカル郵便不足を救済" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "ゲーム既定値" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "すべての設定をゲーム本来の動作（バニラ）に戻します。" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "すべての設定をゲーム本来の標準動作に戻します。" },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "おすすめ" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**バニラ補助** - クイックスタート。\n" +
-                    "まず通常の郵便物流に任せ、長引く不足やあふれだけを救済します。\n" +
+                    "**郵便配送アシスト** - クイックスタート。\n" +
+                    "まず通常の郵便物流に任せ、繰り返す不足やあふれだけを救済します。\n" +
                     "おすすめの容量調整も適用します。"
                 },
 

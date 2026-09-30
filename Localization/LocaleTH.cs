@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "เกี่ยวกับ" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "ตัวช่วยวานิลลา" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "ตัวช่วยการจัดส่งไปรษณีย์" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "รถตู้และรถบรรทุกไปรษณีย์" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "ศูนย์คัดแยกเฉพาะ" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "รีเซ็ต" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "ข้อมูล" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "ลิงก์" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "ช่วยเมื่อจดหมายท้องถิ่นต่ำ" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -106,25 +106,25 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
                     "เปิดเพื่อปรับความจุรถตู้และรถบรรทุก เมื่อปิด\n" +
                     "ตัวเลื่อนด้านล่างจะถูกซ่อน และ\n" +
-                    "เกมจะใช้ค่าปกติแม้จะเคยตั้งค่าอื่นไว้"
+                    "เกมจะใช้ค่าวานิลลาปกติ แม้จะเคยตั้งค่าอื่นไว้"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "ปริมาณบรรทุกของรถตู้ไปรษณีย์" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "กำหนดว่ารถตู้ไปรษณีย์แต่ละคันบรรทุกจดหมายได้เท่าไร\n" +
-                    "<100% = ปริมาณบรรทุกวานิลลา>"
+                    "<100% = ปริมาณบรรทุกวานิลลาปกติ>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "ขนาดกองรถตู้ไปรษณีย์" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "กำหนดจำนวนรถตู้ที่อาคารไปรษณีย์แต่ละแห่งมีและส่งออกได้\n" +
-                    "<100% = จำนวนรถวานิลลา>"
+                    "<100% = จำนวนรถวานิลลาปกติ>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "ขนาดกองรถบรรทุกไปรษณีย์" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
                     "กำหนดจำนวนรถบรรทุกไปรษณีย์ที่สถานที่ซึ่งมีรถบรรทุกสามารถมีและส่งออกได้\n" +
-                    "<100% = จำนวนรถวานิลลา>"
+                    "<100% = จำนวนรถวานิลลาปกติ>"
                 },
 
                 // ---- Dedicated Sorting Facility ----
@@ -133,14 +133,14 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
                     "ตัวคูณสำหรับศูนย์คัดแยกเฉพาะ\n" +
                     "ไม่เปลี่ยนอัปเกรดคัดแยกของที่ทำการไปรษณีย์\n" +
-                    "<100% = วานิลลา>"
+                    "<100% = วานิลลาปกติ>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "ความจุคลังคัดแยก" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
                     "กำหนดพื้นที่เก็บจดหมายของศูนย์คัดแยกเฉพาะ\n" +
                     "ไม่เปลี่ยนอัปเกรดคัดแยกของที่ทำการไปรษณีย์\n" +
-                    "<100% = วานิลลา>"
+                    "<100% = วานิลลาปกติ>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "ช่วยเมื่อจดหมายยังไม่คัดต่ำ" },
                 {
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "ค่าเริ่มต้นของเกม" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "คืนค่าทั้งหมดเป็นพฤติกรรมดั้งเดิมของเกม (วานิลลา)" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "คืนค่าทั้งหมดเป็นพฤติกรรมเริ่มต้นดั้งเดิมของเกม" },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "แนะนำ" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**ตัวช่วยวานิลลา** - เริ่มด่วน\n" +
-                    "ให้ระบบไปรษณีย์ปกติทำงานก่อน แล้วช่วยเฉพาะปัญหาขาดต่อเนื่องหรือคลังล้น\n" +
+                    "**ตัวช่วยการจัดส่งไปรษณีย์** - เริ่มด่วน\n" +
+                    "ให้ระบบไปรษณีย์ปกติทำงานก่อน แล้วช่วยเฉพาะปัญหาขาดที่เกิดซ้ำหรือคลังล้น\n" +
                     "ใช้ค่าปรับความจุที่แนะนำด้วย"
                 },
 

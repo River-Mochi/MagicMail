@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Giới thiệu" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Hỗ trợ vanilla" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Hỗ trợ điều phối bưu chính" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Xe van & xe tải bưu điện" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Cơ sở phân loại chuyên dụng" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Đặt lại" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Thông tin" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Liên kết" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Cứu khi thư nội địa quá thấp" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -106,25 +106,25 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
                     "Bật để thay đổi sức chứa của xe van và xe tải. Khi tắt,\n" +
                     "các thanh chỉnh bên dưới sẽ bị ẩn và\n" +
-                    "game dùng giá trị vanilla dù các giá trị khác vẫn còn được lưu."
+                    "game dùng giá trị vanilla bình thường dù các giá trị khác vẫn còn được lưu."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Tải thư của xe van" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "Điều chỉnh lượng thư mỗi xe van bưu điện có thể chở.\n" +
-                    "<100% = tải vanilla.>"
+                    "<100% = tải vanilla bình thường.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Quy mô đội xe van" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "Điều chỉnh số xe van mỗi tòa nhà bưu điện có thể sở hữu và điều động.\n" +
-                    "<100% = quy mô vanilla.>"
+                    "<100% = quy mô vanilla bình thường.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Quy mô đội xe tải" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
                     "Điều chỉnh số xe tải bưu điện mà mỗi cơ sở có xe tải có thể sở hữu và điều động.\n" +
-                    "<100% = quy mô vanilla.>"
+                    "<100% = quy mô vanilla bình thường.>"
                 },
 
                 // ---- Dedicated Sorting Facility ----
@@ -133,14 +133,14 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
                     "Hệ số cho cơ sở phân loại chuyên dụng.\n" +
                     "Không thay đổi nâng cấp phân loại của bưu điện.\n" +
-                    "<100% = vanilla>."
+                    "<100% = vanilla bình thường>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Sức chứa kho phân loại" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
                     "Điều chỉnh kho thư của cơ sở phân loại chuyên dụng.\n" +
                     "Không thay đổi nâng cấp phân loại của bưu điện.\n" +
-                    "<100% = vanilla>."
+                    "<100% = vanilla bình thường>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Cứu khi thư chưa phân loại quá thấp" },
                 {
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Mặc định của game" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Khôi phục mọi cài đặt về hành vi mặc định gốc của game (vanilla)." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Khôi phục mọi cài đặt về hành vi mặc định ban đầu của game." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Khuyến nghị" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Hỗ trợ vanilla** - Khởi động nhanh.\n" +
-                    "Để hệ thống bưu điện bình thường hoạt động trước, rồi chỉ cứu thiếu hụt kéo dài hoặc quá đầy.\n" +
+                    "**Hỗ trợ điều phối bưu chính** - Khởi động nhanh.\n" +
+                    "Để hệ thống bưu điện bình thường hoạt động trước, rồi cứu các thiếu hụt lặp lại hoặc tình trạng quá đầy.\n" +
                     "Cũng áp dụng các điều chỉnh sức chứa được khuyến nghị."
                 },
 

@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Про мод" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Допомога vanilla" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Допомога поштовій доставці" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Поштові фургони й вантажівки" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Окремий сортувальний центр" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Скидання" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Інформація" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Посилання" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Порятунок при нестачі місцевої пошти" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -106,25 +106,25 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
                     "Увімкніть, щоб змінювати місткість фургонів і вантажівок. Якщо вимкнено,\n" +
                     "повзунки нижче приховані та\n" +
-                    "використовуються vanilla-значення, навіть якщо інші значення залишилися збереженими."
+                    "використовуються звичайні vanilla-значення гри, навіть якщо інші значення залишилися збереженими."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Завантаження поштового фургона" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "Визначає, скільки пошти може перевозити кожен поштовий фургон.\n" +
-                    "<100% = vanilla-завантаження.>"
+                    "<100% = звичайне vanilla-завантаження.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Розмір парку поштових фургонів" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "Визначає, скільки поштових фургонів може мати й відправляти кожна поштова споруда.\n" +
-                    "<100% = vanilla-розмір парку.>"
+                    "<100% = звичайний vanilla-розмір парку.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Розмір парку поштових вантажівок" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
                     "Визначає, скільки поштових вантажівок може мати й відправляти споруда, що їх використовує.\n" +
-                    "<100% = vanilla-розмір парку.>"
+                    "<100% = звичайний vanilla-розмір парку.>"
                 },
 
                 // ---- Dedicated Sorting Facility ----
@@ -133,14 +133,14 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
                     "Множник для окремих сортувальних центрів.\n" +
                     "Не змінює покращення сортування поштового відділення.\n" +
-                    "<100% = vanilla>."
+                    "<100% = звичайне vanilla>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Місткість сортувального сховища" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
                     "Керує сховищем пошти в окремих сортувальних центрах.\n" +
                     "Не змінює покращення сортування поштового відділення.\n" +
-                    "<100% = vanilla>."
+                    "<100% = звичайне vanilla>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Порятунок при нестачі несортованої пошти" },
                 {
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Налаштування гри" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Повертає всі параметри до оригінальної поведінки гри (vanilla)." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Повертає всі параметри до оригінальної стандартної поведінки гри." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Рекомендовано" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Допомога vanilla** - Швидкий старт.\n" +
-                    "Спочатку дає працювати звичайній поштовій логістиці, а потім рятує лише тривалу нестачу або переповнення.\n" +
+                    "**Допомога поштовій доставці** - Швидкий старт.\n" +
+                    "Спочатку дає працювати звичайній поштовій логістиці, а потім рятує повторювану нестачу або переповнення.\n" +
                     "Також застосовує рекомендовані налаштування місткості."
                 },
 

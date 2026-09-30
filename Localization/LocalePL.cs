@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Informacje" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Pomoc vanilla" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Wsparcie dostaw pocztowych" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Furgonetki i ciężarówki" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Dedykowana sortownia" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Resetuj" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Informacje" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Linki" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Ratowanie niskiej lokalnej poczty" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -106,25 +106,25 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
                     "Włącz, aby zmieniać pojemności furgonetek i ciężarówek. Po wyłączeniu\n" +
                     "suwaki poniżej są ukryte i\n" +
-                    "używane są wartości vanilla, nawet jeśli inne wartości pozostały zapisane."
+                    "używane są wartości vanilla gry, nawet jeśli inne wartości pozostały zapisane."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Ładunek furgonetki pocztowej" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "Steruje ilością poczty przewożonej przez każdą furgonetkę.\n" +
-                    "<100% = ładunek vanilla.>"
+                    "<100% = normalny ładunek vanilla.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Wielkość floty furgonetek" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "Steruje liczbą furgonetek, które każdy budynek pocztowy może posiadać i wysyłać.\n" +
-                    "<100% = flota vanilla.>"
+                    "<100% = normalna flota vanilla.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Wielkość floty ciężarówek" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
                     "Steruje liczbą ciężarówek pocztowych, które może posiadać i wysyłać obiekt z ciężarówkami.\n" +
-                    "<100% = flota vanilla.>"
+                    "<100% = normalna flota vanilla.>"
                 },
 
                 // ---- Dedicated Sorting Facility ----
@@ -133,14 +133,14 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
                     "Mnożnik dla dedykowanych sortowni.\n" +
                     "Nie zmienia ulepszenia sortowania w urzędzie pocztowym.\n" +
-                    "<100% = vanilla>."
+                    "<100% = normalne vanilla>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Pojemność magazynu sortowni" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
                     "Steruje magazynem poczty w dedykowanych sortowniach.\n" +
                     "Nie zmienia ulepszenia sortowania w urzędzie pocztowym.\n" +
-                    "<100% = vanilla>."
+                    "<100% = normalne vanilla>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Ratowanie niskiej niesortowanej poczty" },
                 {
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Ustawienia gry" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Przywraca wszystkie ustawienia do oryginalnego zachowania gry (vanilla)." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Przywraca wszystkie ustawienia do oryginalnego domyślnego zachowania gry." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Zalecane" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Pomoc vanilla** - Szybki start.\n" +
-                    "Najpierw pozwala działać normalnej logistyce, a potem ratuje tylko trwałe braki lub przepełnienie.\n" +
+                    "**Wsparcie dostaw pocztowych** - Szybki start.\n" +
+                    "Najpierw pozwala działać normalnej logistyce, a potem ratuje powtarzające się braki lub przepełnienie.\n" +
                     "Stosuje też zalecane ustawienia pojemności."
                 },
 

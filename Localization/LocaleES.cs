@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Acerca de" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Ayuda vanilla" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Asistencia de reparto postal" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Furgonetas y camiones" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Centro de clasificación dedicado" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Restablecer" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Info" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Enlaces" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Rescatar correo local bajo" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Valores del juego" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Restaura todas las opciones al comportamiento original del juego (vanilla)." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Restaura todas las opciones al comportamiento predeterminado original del juego." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Recomendado" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Ayuda vanilla** - Inicio rápido.\n" +
-                    "Deja trabajar primero la logística normal y solo rescata faltas persistentes o desbordamientos.\n" +
+                    "**Asistencia de reparto postal** - Inicio rápido.\n" +
+                    "Deja trabajar primero la logística normal y luego rescata faltas repetidas o desbordamientos.\n" +
                     "También aplica los ajustes de capacidad recomendados."
                 },
 

@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Hakkında" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Vanilla yardımı" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Posta dağıtım desteği" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Posta minibüsleri ve kamyonları" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Özel ayırma tesisi" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Sıfırla" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Bilgi" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Bağlantılar" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Düşük yerel postayı kurtar" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -106,25 +106,25 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
                     "Minibüs ve kamyon kapasitelerini değiştirmek için açın. Kapalıyken\n" +
                     "aşağıdaki kapasite kaydırıcıları gizlenir ve\n" +
-                    "başka değerler kayıtlı olsa bile vanilla değerleri kullanılır."
+                    "başka değerler kayıtlı olsa bile oyunun normal vanilla değerleri kullanılır."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Posta minibüsü yükü" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "Her posta minibüsünün ne kadar posta taşıyabileceğini ayarlar.\n" +
-                    "<100% = vanilla yükü.>"
+                    "<100% = normal vanilla yükü.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Posta minibüsü filo büyüklüğü" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "Her posta binasının sahip olabileceği ve gönderebileceği minibüs sayısını ayarlar.\n" +
-                    "<100% = vanilla filo büyüklüğü.>"
+                    "<100% = normal vanilla filo büyüklüğü.>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Posta kamyonu filo büyüklüğü" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
                     "Posta kamyonu olan her tesisin sahip olabileceği ve gönderebileceği kamyon sayısını ayarlar.\n" +
-                    "<100% = vanilla filo büyüklüğü.>"
+                    "<100% = normal vanilla filo büyüklüğü.>"
                 },
 
                 // ---- Dedicated Sorting Facility ----
@@ -133,14 +133,14 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
                     "Özel ayırma tesisleri için çarpan.\n" +
                     "Bir postanenin ayırma yükseltmesini değiştirmez.\n" +
-                    "<100% = vanilla>."
+                    "<100% = normal vanilla>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Ayırma depolama kapasitesi" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
                     "Özel ayırma tesislerinin posta deposunu ayarlar.\n" +
                     "Bir postanenin ayırma yükseltmesini değiştirmez.\n" +
-                    "<100% = vanilla>."
+                    "<100% = normal vanilla>."
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Düşük ayrılmamış postayı kurtar" },
                 {
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Oyun varsayılanları" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Tüm ayarları oyunun orijinal varsayılan davranışına (vanilla) döndürür." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Tüm ayarları oyunun orijinal varsayılan davranışına döndürür." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Önerilen" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Vanilla yardımı** - Hızlı Başlangıç.\n" +
-                    "Önce normal posta lojistiğinin çalışmasına izin verir, sonra yalnızca kalıcı eksikleri veya taşmayı kurtarır.\n" +
+                    "**Posta dağıtım desteği** - Hızlı Başlangıç.\n" +
+                    "Önce normal posta lojistiğinin çalışmasına izin verir, sonra tekrarlayan eksikleri veya taşmayı kurtarır.\n" +
                     "Önerilen kapasite ayarlarını da uygular."
                 },
 

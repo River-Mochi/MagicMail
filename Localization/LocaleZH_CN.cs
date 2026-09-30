@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "关于" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "原版辅助" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "邮政调度辅助" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "邮政面包车和卡车" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "专用分拣设施" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "重置" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "信息" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "链接" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "救援本地邮件不足" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -106,25 +106,25 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
                     "启用后可修改面包车和卡车容量。关闭时，\n" +
                     "下方容量滑块会隐藏，并且\n" +
-                    "即使之前保存了其他数值，也会使用游戏原版数值。"
+                    "即使之前保存了其他数值，也会使用游戏正常的原版数值。"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "邮政面包车载量" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "控制每辆邮政面包车可携带多少邮件。\n" +
-                    "<100% = 原版载量。>"
+                    "<100% = 正常原版载量。>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "邮政面包车车队规模" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "控制每个邮政建筑可拥有和派出多少辆邮政面包车。\n" +
-                    "<100% = 原版车队规模。>"
+                    "<100% = 正常原版车队规模。>"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "邮政卡车车队规模" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
                     "控制拥有邮政卡车的设施可拥有和派出多少辆邮政卡车。\n" +
-                    "<100% = 原版车队规模。>"
+                    "<100% = 正常原版车队规模。>"
                 },
 
                 // ---- Dedicated Sorting Facility ----
@@ -133,14 +133,14 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
                     "专用于分拣设施的倍率。\n" +
                     "不会改变邮局的分拣升级。\n" +
-                    "<100% = 原版>。"
+                    "<100% = 正常原版>。"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "分拣存储容量" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
                     "控制专用分拣设施的邮件存储容量。\n" +
                     "不会改变邮局的分拣升级。\n" +
-                    "<100% = 原版>。"
+                    "<100% = 正常原版>。"
                 },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "救援未分拣邮件不足" },
                 {
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "游戏默认值" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "将所有设置恢复为游戏原本的默认行为（原版）。" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "将所有设置恢复为游戏原本的默认行为。" },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "推荐" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**原版辅助** - 快速开始。\n" +
-                    "先让原版邮件物流工作，只在持续缺货或溢出时介入。\n" +
+                    "**邮政调度辅助** - 快速开始。\n" +
+                    "先让正常邮件物流工作，然后仅在反复缺货或溢出时介入。\n" +
                     "同时应用推荐的容量调整。"
                 },
 

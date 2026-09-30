@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Info" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Vanilla-Hilfe" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Postzustellungs-Hilfe" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Postwagen & LKW" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Eigene Sortieranlage" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Zurücksetzen" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Info" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Links" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Wenig lokale Post retten" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Spiel-Standards" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Setzt alle Einstellungen auf das ursprüngliche Verhalten des Spiels (Vanilla) zurück." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Setzt alle Einstellungen auf das ursprüngliche Standardverhalten des Spiels zurück." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Empfohlen" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Vanilla-Hilfe** – Schnellstart.\n" +
-                    "Lässt zuerst die normale Postlogistik arbeiten und rettet erst anhaltende Engpässe oder Überfüllung.\n" +
+                    "**Postzustellungs-Hilfe** – Schnellstart.\n" +
+                    "Lässt zuerst die normale Postlogistik arbeiten und rettet dann wiederholte Engpässe oder Überfüllung.\n" +
                     "Wendet außerdem die empfohlenen Kapazitätswerte an."
                 },
 

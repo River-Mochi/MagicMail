@@ -45,7 +45,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Info" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Aiuto vanilla" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Assistenza alla distribuzione postale" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Furgoni e camion postali" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Centro di smistamento dedicato" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Ripristina" },
@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Info" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Link" },
 
-                // ---- Post Office / Postal Dispatch Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Soccorri posta locale bassa" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -164,12 +164,12 @@ namespace MagicMail
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Valori del gioco" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Ripristina tutte le impostazioni al comportamento originale del gioco (vanilla)." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Ripristina tutte le impostazioni al comportamento predefinito originale del gioco." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Consigliato" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Aiuto vanilla** - Avvio rapido.\n" +
-                    "Lascia lavorare prima la logistica normale, poi interviene su carenze persistenti o eccessi.\n" +
+                    "**Assistenza alla distribuzione postale** - Avvio rapido.\n" +
+                    "Lascia lavorare prima la logistica normale, poi interviene su carenze ripetute o eccessi.\n" +
                     "Applica anche le regolazioni di capacità consigliate."
                 },
 
