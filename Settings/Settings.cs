@@ -592,7 +592,7 @@ namespace MagicMail
             PSF_GettingThresholdPercentage = 5;
             PSF_GettingPercentage = 10;
 
-            PSF_SortingSpeedPercentage = 200;
+            PSF_SortingSpeedPercentage = 150;
             PSF_StorageCapacityPercentage = 100;
 
             // Recommended vehicle tuning.

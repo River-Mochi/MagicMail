@@ -247,7 +247,7 @@ namespace MagicMail
                 settings.PSF_GetUnsortedMail &&
                 settings.PSF_GettingThresholdPercentage == 5 &&
                 settings.PSF_GettingPercentage == 10 &&
-                settings.PSF_SortingSpeedPercentage == 200 &&
+                settings.PSF_SortingSpeedPercentage == 150 &&
                 settings.PSF_StorageCapacityPercentage == 100 &&
                 settings.ChangeCapacity &&
                 settings.PostVanMailLoadPercentage == 200 &&
