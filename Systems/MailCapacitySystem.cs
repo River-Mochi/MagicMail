@@ -107,7 +107,7 @@ namespace MagicMail
             int vanFleetPercent = math.clamp(settings.PostVanFleetSizePercentage, 50, 1000);
             int truckFleetPercent = math.clamp(settings.TruckCapacityPercentage, 50, 1000);
 
-            // Sorting sliders are in the sorting section and should work independently.
+            // Dedicated sorting-facility sliders work independently of vehicle capacity.
             int sortingSpeedPercent = math.clamp(settings.PSF_SortingSpeedPercentage, 50, 500);
             int sortingStoragePercent = math.clamp(settings.PSF_StorageCapacityPercentage, 50, 500);
 
@@ -169,27 +169,33 @@ namespace MagicMail
                     continue;
                 }
 
+                // A PostFacilityData prefab can also be a service-upgrade prefab
+                // (for example Westmont Tower's underground sorting upgrade).
+                // The dedicated sorter speed/storage controls must not modify those.
                 bool isServiceUpgrade =
                     EntityManager.HasComponent<ServiceUpgradeData>(prefabEntity);
 
-                bool isDedicatedSortingFacility = !isServiceUpgrade && baseline.SortingRate > 0;
-                bool isSortingFacility = baseline.SortingRate > 0;
+                bool isDedicatedSortingFacility =
+                    !isServiceUpgrade &&
+                    baseline.SortingRate > 0;
 
+                // General fleet controls still scale any postal prefab contribution,
+                // including capacity contributed by an installed service upgrade.
                 int newPostVanCapacity =
                     ScalePercentKeepZero(baseline.PostVanCapacity, vanFleetPercent);
 
                 int newPostTruckCapacity =
                     ScalePercentKeepZero(baseline.PostTruckCapacity, truckFleetPercent);
 
+                // Sorting speed/storage sliders apply only to dedicated sorting buildings,
+                // not sorting upgrades installed on post offices.
                 int newSortingRate = isDedicatedSortingFacility
-                ? ScalePercentMin1(baseline.SortingRate, sortingSpeedPercent)
-                : baseline.SortingRate;
+                    ? ScalePercentMin1(baseline.SortingRate, sortingSpeedPercent)
+                    : baseline.SortingRate;
 
-                // Sorting storage slider should only affect sorting facilities.
-                // This avoids accidentally scaling normal post office storage.
                 int newMailCapacity = isDedicatedSortingFacility
-                ? ScalePercentMin1(baseline.MailCapacity, sortingStoragePercent)
-                : baseline.MailCapacity;
+                    ? ScalePercentMin1(baseline.MailCapacity, sortingStoragePercent)
+                    : baseline.MailCapacity;
 
                 if (data.m_PostVanCapacity != newPostVanCapacity)
                 {
@@ -231,7 +237,9 @@ namespace MagicMail
             return baseMailCapacity > 0;
         }
 
-       private bool TryGetPostFacilityBaseline(Entity prefabEntity, out FacilityBaseline baseline)
+        private bool TryGetPostFacilityBaseline(
+            Entity prefabEntity,
+            out FacilityBaseline baseline)
         {
             baseline = default;
 
