@@ -79,7 +79,15 @@ namespace MagicMail
                 int storedTotal = local + unsorted + outgoing;
                 int aiStoredBase = local + unsorted;
 
-                string role = effectiveData.m_SortingRate == 0 ? "POST_OFFICE" : "SORTING";
+                string role;
+
+                if (effectiveData.m_SortingRate == 0)
+                    { role = "POST_OFFICE"; }
+                else if (effectiveData.m_PostVanCapacity > 0)
+                    { role = "POST_OFFICE_SORTING"; }
+                else
+                    { role = "SORTING_FACILITY"; }
+
                 string fill = effectiveData.m_MailCapacity > 0
                     ? $"{storedTotal * 100.0 / effectiveData.m_MailCapacity:0.0}%"
                     : "n/a";
