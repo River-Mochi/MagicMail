@@ -15,6 +15,7 @@ namespace MagicMail
 {
     using System.Text;
     using CS2Shared.RiverMochi;
+    using Game;
     using Game.SceneFlow;
     using Unity.Entities;
 
@@ -232,7 +233,7 @@ namespace MagicMail
             system = null!;
 
             GameManager? gameManager = GameManager.instance;
-            if (gameManager == null || !gameManager.gameMode.IsGame())
+            if (gameManager == null || gameManager.gameMode != GameMode.Game)
             {
                 s_WasInGame = false;
                 return false;
