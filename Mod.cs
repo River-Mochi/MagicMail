@@ -51,7 +51,7 @@ namespace MagicMail
 #endif
             );
 
-        public static Setting? Settings
+        public static MailSettings? Settings
         {
             get;
             private set;
@@ -77,7 +77,7 @@ namespace MagicMail
                 return;
             }
 
-            Setting setting = new Setting(this);
+            MailSettings setting = new MailSettings(this);
             Settings = setting;
 
             LocalizationManager? localizationManager = gameManager.localizationManager;
@@ -115,7 +115,7 @@ namespace MagicMail
             AssetDatabase.global.LoadSettings(
                 ModId,
                 setting,
-                new Setting(this));
+                new MailSettings(this));
 
             setting.RegisterInOptionsUI();
 

@@ -21,7 +21,7 @@ namespace MagicMail
 
     /// <summary>
     /// Updates post van and postal facility capacities when MagicMail sliders change.
-    /// Driven by Setting.Apply() and then disables itself again.
+    /// Driven by MailSettings.Apply() and then disables itself again.
     /// </summary>
     public sealed partial class MailCapacitySystem : GameSystemBase
     {
@@ -93,7 +93,7 @@ namespace MagicMail
                 return;
             }
 
-            Setting? settings = Mod.Settings;
+            MailSettings? settings = Mod.Settings;
             if (settings == null)
             {
                 Enabled = false;
@@ -125,7 +125,7 @@ namespace MagicMail
                 sortingSpeedPercent,
                 sortingStoragePercent);
 
-            // Back to disabled until Setting.Apply() wakes us again.
+            // Back to disabled until MailSettings.Apply() wakes us again.
             Enabled = false;
         }
 

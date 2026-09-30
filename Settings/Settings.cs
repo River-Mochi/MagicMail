@@ -6,7 +6,7 @@
 // This notice MUST be kept with copies or substantial portions of this code.
 // ================= </copyright> ======================
 
-// Settings/Setting.cs
+// Settings/MailSettings.cs
 // Options UI and configuration for MagicMail [MM].
 
 namespace MagicMail
@@ -41,7 +41,7 @@ namespace MagicMail
         PostSortingFacilityGroup,
         StatusSummaryGroup, StatusActivityGroup,
         kAboutLinksGroup)]
-    public sealed class Setting : ModSetting
+    public class MailSettings : ModSetting
     {
         // ---- TABS ----
 
@@ -94,7 +94,7 @@ namespace MagicMail
         /// <summary>
         /// Constructs the settings object and initializes defaults on first creation.</summary>
         /// <param name="mod">Mod instance passed by the game.</param>
-        public Setting(IMod mod)
+        public MailSettings(IMod mod)
             : base(mod)
         {
             // First run: start from pure game defaults (vanilla).
@@ -202,7 +202,7 @@ namespace MagicMail
             step = 10,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(ChangeCapacity), true)]
+        [SettingsUIHideByCondition(typeof(MailSettings), nameof(ChangeCapacity), true)]
         public int PostVanMailLoadPercentage
         {
             get;
@@ -219,7 +219,7 @@ namespace MagicMail
             step = 10,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(ChangeCapacity), true)]
+        [SettingsUIHideByCondition(typeof(MailSettings), nameof(ChangeCapacity), true)]
         public int PostVanFleetSizePercentage
         {
             get;
@@ -236,7 +236,7 @@ namespace MagicMail
             step = 10,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(ChangeCapacity), true)]
+        [SettingsUIHideByCondition(typeof(MailSettings), nameof(ChangeCapacity), true)]
         public int TruckCapacityPercentage
         {
             get;
@@ -261,7 +261,7 @@ namespace MagicMail
             step = 1,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(PO_GetLocalMail), true)]
+        [SettingsUIHideByCondition(typeof(MailSettings), nameof(PO_GetLocalMail), true)]
         public int PO_GettingThresholdPercentage
         {
             get;
@@ -275,7 +275,7 @@ namespace MagicMail
             step = 1,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(PO_GetLocalMail), true)]
+        [SettingsUIHideByCondition(typeof(MailSettings), nameof(PO_GetLocalMail), true)]
         public int PO_GettingPercentage
         {
             get;
@@ -298,7 +298,7 @@ namespace MagicMail
             step = 1,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(FixMailOverflow), true)]
+        [SettingsUIHideByCondition(typeof(MailSettings), nameof(FixMailOverflow), true)]
         public int PO_OverflowPercentage
         {
             get;
@@ -312,7 +312,7 @@ namespace MagicMail
             step = 1,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(FixMailOverflow), true)]
+        [SettingsUIHideByCondition(typeof(MailSettings), nameof(FixMailOverflow), true)]
         public int PSF_OverflowPercentage
         {
             get;
@@ -370,7 +370,7 @@ namespace MagicMail
             step = 1,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(PSF_GetUnsortedMail), true)]
+        [SettingsUIHideByCondition(typeof(MailSettings), nameof(PSF_GetUnsortedMail), true)]
         public int PSF_GettingThresholdPercentage
         {
             get;
@@ -384,7 +384,7 @@ namespace MagicMail
             step = 1,
             scalarMultiplier = 1,
             unit = Unit.kPercentage)]
-        [SettingsUIHideByCondition(typeof(Setting), nameof(PSF_GetUnsortedMail), true)]
+        [SettingsUIHideByCondition(typeof(MailSettings), nameof(PSF_GetUnsortedMail), true)]
         public int PSF_GettingPercentage
         {
             get;

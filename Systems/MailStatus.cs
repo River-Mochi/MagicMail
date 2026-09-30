@@ -126,7 +126,7 @@ namespace MagicMail
             log.AppendLine($"{Mod.ModTag} Status Report");
             log.AppendLine($"Build: v{Mod.ModVersion} {Mod.BuildDisplayName}");
 
-            Setting? setting = Mod.Settings;
+            MailSettings? setting = Mod.Settings;
             if (setting != null)
             {
                 log.AppendLine(

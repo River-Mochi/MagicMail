@@ -62,7 +62,7 @@ namespace MagicMail
         internal static int s_LastCityAccumulatedMail;
         internal static int s_LastCityProcessedMail;
 
-        // ---- STATUS FIELDS (read by Setting.Status* properties) ----
+        // ---- STATUS FIELDS (read by MailSettings.Status* properties) ----
 
         internal static int s_LastFacilityCount;
         internal static int s_LastPostOfficeCount;
@@ -142,7 +142,7 @@ namespace MagicMail
         /// Per-update simulation logic for all post facilities.</summary>
         protected override void OnUpdate()
         {
-           Setting? settings = Mod.Settings;
+           MailSettings? settings = Mod.Settings;
             if (settings == null)
             {
                 return;
@@ -307,7 +307,7 @@ namespace MagicMail
             Entity postEntity,
             int mailCapacity,
             FacilityRole role,
-            Setting settings,
+            MailSettings settings,
             DynamicBuffer<Resources> resources,
             bool fixOverflow,
             ref int rescueCounter,
@@ -404,7 +404,7 @@ namespace MagicMail
         private void HandleSortingFacility(
             Entity postEntity,
             int mailCapacity,
-            Setting settings,
+            MailSettings settings,
             DynamicBuffer<Resources> resources,
             bool fixOverflow,
             ref int rescueCounter,
@@ -703,7 +703,7 @@ namespace MagicMail
         // --------------------------------------------------------------------
         // Internal helpers
         // --------------------------------------------------------------------
-         internal static bool NeedsRescue(Setting settings)
+         internal static bool NeedsRescue(MailSettings settings)
         {
             return settings.PO_GetLocalMail ||
                    settings.FixMailOverflow ||

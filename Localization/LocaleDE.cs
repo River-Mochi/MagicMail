@@ -18,12 +18,12 @@ namespace MagicMail
     /// German localization source for Magic Mail [MM].</summary>
     public sealed class LocaleDE : IDictionarySource
     {
-        private readonly Setting m_Setting;
+        private readonly MailSettings m_Setting;
 
         /// <summary>
         /// Constructs the German locale generator.</summary>
         /// <param name="setting">Settings object used for locale IDs.</param>
-        public LocaleDE(Setting setting)
+        public LocaleDE(MailSettings setting)
         {
             m_Setting = setting;
         }
@@ -40,143 +40,143 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(Setting.kActionsTab), "Aktionen" },
-                { m_Setting.GetOptionTabLocaleID(Setting.kStatusTab), "Status" },
-                { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Info" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "Aktionen" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "Status" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "Info" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Postzustellungs-Hilfe" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Postwagen & LKW" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Eigene Sortieranlage" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Zurücksetzen" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "Postzustellungs-Hilfe" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.PostVanGroup), "Postwagen & LKW" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.PostSortingFacilityGroup), "Eigene Sortieranlage" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.ResetGroup), "Zurücksetzen" },
 
                 // Groups (Status tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.StatusSummaryGroup), "Stadt-Scan" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.StatusActivityGroup), "Letztes Update" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusSummaryGroup), "Stadt-Scan" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "Letztes Update" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Info" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Links" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "Info" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "Links" },
 
                 // ---- Post Office / Dispatch Assist ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Wenig lokale Post retten" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "Wenig lokale Post retten" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PO_GetLocalMail)),
                     "Lässt zuerst die normalen Posttransfers des Spiels arbeiten.\n" +
                     "Bleibt die lokale Post mehrere Prüfungen lang sehr niedrig, fügt Magic Mail eine kleine Rettungsmenge hinzu.\n" +
                     "Gilt auch für Postämter mit Sortier-Upgrade."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Rettungsschwelle für lokale Post" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GettingThresholdPercentage)), "Rettungsschwelle für lokale Post" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PO_GettingThresholdPercentage)),
                     "Lokale Post gilt ab diesem Anteil des maximalen Gebäudespeichers als niedrig.\n" +
                     "Die Rettung greift nur, wenn der Wert mehrere Prüfungen lang niedrig bleibt."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Rettungsmenge für lokale Post" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GettingPercentage)), "Rettungsmenge für lokale Post" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PO_GettingPercentage)),
                     "Menge an lokaler Post, die bei einer Rettung hinzugefügt wird.\n" +
                     "Die Menge ist ein Prozentsatz des maximalen Gebäudespeichers."
                 },
 
                 // Global overflow toggle (PO + sorting)
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Post-Überfüllung beheben" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.FixMailOverflow)), "Post-Überfüllung beheben" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.FixMailOverflow)),
                     "Wird eine Posteinrichtung zu voll, reduziert Magic Mail die gespeicherte Post auf den gewählten Wert.\n" +
                     "Gezählt werden lokale, unsortierte und ausgehende Post, damit auch Überfüllungen erfasst werden, die das Spiel falsch berechnen kann.\n" +
                     "Für reines Vanilla-Verhalten deaktivieren."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Überfüllungsschwelle Postamt" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_OverflowPercentage)), "Überfüllungsschwelle Postamt" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_OverflowPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PO_OverflowPercentage)),
                     "Steigt die gesamte gespeicherte Post über diesen Wert, reduziert Magic Mail sie wieder.\n" +
                     "Gilt für normale Postämter und Postämter mit Sortier-Upgrade."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Überfüllungsschwelle Sortieranlage" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PSF_OverflowPercentage)), "Überfüllungsschwelle Sortieranlage" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_OverflowPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PSF_OverflowPercentage)),
                     "Steigt die gesamte gespeicherte Post in einer eigenen Sortieranlage über diesen Wert,\n" +
                     "reduziert Magic Mail sie wieder."
                 },
 
                 // ---- Post Vans & Trucks ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ChangeCapacity)), "Kapazitäten ändern" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.ChangeCapacity)), "Kapazitäten ändern" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.ChangeCapacity)),
                     "Aktivieren, um Kapazitäten von Postwagen und LKW zu ändern. Ist dies aus,\n" +
                     "werden die Regler darunter ausgeblendet und\n" +
                     "Vanilla-Werte verwendet, auch wenn andere Reglerwerte gespeichert sind."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Postwagen-Ladung" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PostVanMailLoadPercentage)), "Postwagen-Ladung" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PostVanMailLoadPercentage)),
                     "Bestimmt, wie viel Post jeder Postwagen transportieren kann.\n" +
                     "<100% = Vanilla-Ladung.>"
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Postwagen-Flottengröße" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PostVanFleetSizePercentage)), "Postwagen-Flottengröße" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PostVanFleetSizePercentage)),
                     "Bestimmt, wie viele Postwagen ein Postgebäude besitzen und losschicken kann.\n" +
                     "<100% = Vanilla-Flottengröße.>"
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Post-LKW-Flottengröße" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.TruckCapacityPercentage)), "Post-LKW-Flottengröße" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.TruckCapacityPercentage)),
                     "Bestimmt, wie viele Post-LKW eine Einrichtung mit Post-LKW besitzen und losschicken kann.\n" +
                     "<100% = Vanilla-Flottengröße.>"
                 },
 
                 // ---- Dedicated Sorting Facility ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)), "Sortiergeschwindigkeit" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PSF_SortingSpeedPercentage)), "Sortiergeschwindigkeit" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PSF_SortingSpeedPercentage)),
                     "Multiplikator für eigene Sortieranlagen.\n" +
                     "Ändert nicht das Sortier-Upgrade eines Postamts.\n" +
                     "<100% = Vanilla>."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Sortier-Speicherkapazität" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PSF_StorageCapacityPercentage)), "Sortier-Speicherkapazität" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PSF_StorageCapacityPercentage)),
                     "Bestimmt den Postspeicher eigener Sortieranlagen.\n" +
                     "Ändert nicht das Sortier-Upgrade eines Postamts.\n" +
                     "<100% = Vanilla>."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Wenig unsortierte Post retten" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PSF_GetUnsortedMail)), "Wenig unsortierte Post retten" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PSF_GetUnsortedMail)),
                     "Lässt das Spiel unsortierte Post zuerst normal liefern.\n" +
                     "Bleibt eine eigene Sortieranlage mehrere Prüfungen lang sehr niedrig,\n" +
                     "fügt Magic Mail eine kleine Rettungsmenge hinzu."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Rettungsschwelle für unsortierte Post" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PSF_GettingThresholdPercentage)), "Rettungsschwelle für unsortierte Post" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PSF_GettingThresholdPercentage)),
                     "Unsortierte Post gilt ab diesem Anteil des maximalen Speichers als niedrig.\n" +
                     "Die Rettung greift nur, wenn der Wert mehrere Prüfungen lang niedrig bleibt."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Rettungsmenge für unsortierte Post" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PSF_GettingPercentage)), "Rettungsmenge für unsortierte Post" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.PSF_GettingPercentage)),
                     "Menge an unsortierter Post, die bei einer Rettung hinzugefügt wird.\n" +
                     "Die Menge ist ein Prozentsatz des maximalen Speichers."
                 },
 
                 // ---- RESET BUTTONS ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Spiel-Standards" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Setzt alle Einstellungen auf das ursprüngliche Standardverhalten des Spiels zurück." },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Empfohlen" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.ResetToVanilla)), "Spiel-Standards" },
+                { m_Setting.GetOptionDescLocaleID(nameof(MailSettings.ResetToVanilla)), "Setzt alle Einstellungen auf das ursprüngliche Standardverhalten des Spiels zurück." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.ResetToRecommend)), "Empfohlen" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.ResetToRecommend)),
                     "**Postzustellungs-Hilfe** – Schnellstart.\n" +
                     "Lässt zuerst die normale Postlogistik arbeiten und rettet dann wiederholte Engpässe oder Überfüllung.\n" +
                     "Wendet außerdem die empfohlenen Kapazitätswerte an."
                 },
 
                 // ---- Status tab ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), string.Empty },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.StatusFacilitySummary)), string.Empty },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.StatusFacilitySummary)),
                     "Postgebäude, die beim Öffnen der Statusseite gefunden wurden.\n" +
                     "\n" +
                     "**Postämter** = normale Postämter.\n" +
@@ -184,17 +184,17 @@ namespace MagicMail
                     "**Postämter mit Sortierung** = <Westmont Tower mit Sortier-Upgrade>.\n" +
                     "- Benötigt den **Skyscrapers-DLC**."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusVehicleSummary)), string.Empty },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.StatusVehicleSummary)), string.Empty },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusVehicleSummary)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.StatusVehicleSummary)),
                     "Postfahrzeug-Kapazität beim Öffnen der Statusseite.\n" +
                     "\n" +
                     "**Postwagen** = Fahrzeuge für lokale Abholung und Zustellung.\n" +
                     "**Post-LKW** = LKW, die Post zwischen Einrichtungen transportieren."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "Monatliche Post" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.StatusCityMailSummary)), "Monatliche Post" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusCityMailSummary)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.StatusCityMailSummary)),
                     "Zeigt den aktuellen stadtweiten Postfluss.\n" +
                     "\n" +
                     "**Erzeugt** = wie viel Post die Bürger erstellt haben.\n" +
@@ -205,16 +205,16 @@ namespace MagicMail
                     "erzeugt die Stadt mehr Post als das Netz bewältigen kann.\n" +
                     "Baue mehr Einrichtungen oder Postwagen oder passe die Einstellungen an."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "Aktivität" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "Rettungen und Überfüllungs-Bereinigungen aus dem letzten Magic-Mail-Rettungsdurchlauf." },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.WriteReport)), "Bericht schreiben" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.StatusLastActivity)), "Aktivität" },
+                { m_Setting.GetOptionDescLocaleID(nameof(MailSettings.StatusLastActivity)), "Rettungen und Überfüllungs-Bereinigungen aus dem letzten Magic-Mail-Rettungsdurchlauf." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.WriteReport)), "Bericht schreiben" },
                 {
-                    m_Setting.GetOptionDescLocaleID(nameof(Setting.WriteReport)),
+                    m_Setting.GetOptionDescLocaleID(nameof(MailSettings.WriteReport)),
                     "Führt bei geöffneten Optionen einen **einmaligen** detaillierten Post-Scan aus\n" +
                     "und schreibt den Bericht in <Logs/MagicMail.log>. Keine Hintergrund-Protokollierung."
                 },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenLog)), "Log öffnen" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenLog)), "Öffnet <Logs/MagicMail.log> oder den Logs-Ordner, falls die Datei noch nicht existiert." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.OpenLog)), "Log öffnen" },
+                { m_Setting.GetOptionDescLocaleID(nameof(MailSettings.OpenLog)), "Öffnet <Logs/MagicMail.log> oder den Logs-Ordner, falls die Datei noch nicht existiert." },
 
                 // ---- Status text templates (for MagicMailSystem) ----
                 { "MM_STATUS_NO_FACILITIES", "Keine Posteinrichtungen gefunden. Öffne eine Stadt und dann erneut Status." },
@@ -226,16 +226,16 @@ namespace MagicMail
                 { "MM_STATUS_CITY_MAIL", "{0} erzeugt | {1} verarbeitet" },
 
                 // ---- About tab: info ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModNameDisplay)), "Mod" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModNameDisplay)), "Anzeigename dieses Mods." },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModVersionDisplay)), "Version" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "Aktuelle Mod-Version und Build-Typ." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.ModNameDisplay)), "Mod" },
+                { m_Setting.GetOptionDescLocaleID(nameof(MailSettings.ModNameDisplay)), "Anzeigename dieses Mods." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.ModVersionDisplay)), "Version" },
+                { m_Setting.GetOptionDescLocaleID(nameof(MailSettings.ModVersionDisplay)), "Aktuelle Mod-Version und Build-Typ." },
 
                 // ---- About tab: links ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mochis Paradox-Mods" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "Öffnet die **Paradox**-Seite für **Magic Mail** und weitere Mods." },
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)), "Öffnet den **Discord**-Feedback-Chat im Browser." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.OpenParadox)), "Mochis Paradox-Mods" },
+                { m_Setting.GetOptionDescLocaleID(nameof(MailSettings.OpenParadox)), "Öffnet die **Paradox**-Seite für **Magic Mail** und weitere Mods." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.OpenDiscord)), "Discord" },
+                { m_Setting.GetOptionDescLocaleID(nameof(MailSettings.OpenDiscord)), "Öffnet den **Discord**-Feedback-Chat im Browser." },
             };
         }
 
