@@ -73,17 +73,6 @@ namespace MagicMail
             SetDefaults();
         }
 
-        public MailSettings(IMod mod)
-            : base(mod)
-        {
-            // First run: start from pure game defaults (vanilla).
-            if (!NotFirstTime)
-            {
-                SetDefaults();    // SetDefaults => vanilla now.
-                NotFirstTime = true;
-            }
-        }
-
         /// <summary>
         /// Applies settings at runtime and ensures the managed systems are enabled.</summary>
         public override void Apply()
