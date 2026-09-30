@@ -21,28 +21,28 @@ namespace MagicMail
     /// Settings definition and UI bindings for MagicMail [MM].</summary>
     [FileLocation("ModsSettings/MagicMail/MagicMail")]
     [SettingsUITabOrder(
-        kActionsTab, kStatusTab, kAboutTab)]
+        ActionsTab, StatusTab, AboutTab)]
     [SettingsUIGroupOrder(
         ResetGroup,
         PostVanGroup,
         PostOfficeGroup,
         PostSortingFacilityGroup,
         StatusSummaryGroup, StatusActivityGroup,
-        kAboutInfoGroup, kAboutLinksGroup)]
+        AboutInfoGroup, AboutLinksGroup)]
     [SettingsUIShowGroupName(
         ResetGroup,
         PostVanGroup,
         PostOfficeGroup,
         PostSortingFacilityGroup,
         StatusSummaryGroup, StatusActivityGroup,
-        kAboutLinksGroup)]
+        AboutLinksGroup)]
     public partial class MailSettings : ModSetting
     {
         // ---- TABS ----
 
-        public const string kActionsTab = "Actions";
-        public const string kStatusTab = "Status";
-        public const string kAboutTab = "About";
+        public const string ActionsTab = "Actions";
+        public const string StatusTab = "Status";
+        public const string AboutTab = "About";
 
         // ---- ACTION GROUPS (Actions tab) ----
 
@@ -58,8 +58,8 @@ namespace MagicMail
 
         // ---- ABOUT GROUPS (About tab) ----
 
-        public const string kAboutInfoGroup = "AboutInfo";
-        public const string kAboutLinksGroup = "AboutLinks";
+        public const string AboutInfoGroup = "AboutInfo";
+        public const string AboutLinksGroup = "AboutLinks";
 
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace MagicMail
         // --------------------------------------------------------------------
 
         [SettingsUIButtonGroup(ResetGroup)]
-        [SettingsUISection(kActionsTab, ResetGroup)]
+        [SettingsUISection(ActionsTab, ResetGroup)]
         [SettingsUIButton]
         public bool ResetToVanilla
         {
@@ -130,7 +130,7 @@ namespace MagicMail
         }
 
         [SettingsUIButtonGroup(ResetGroup)]
-        [SettingsUISection(kActionsTab, ResetGroup)]
+        [SettingsUISection(ActionsTab, ResetGroup)]
         [SettingsUIButton]
         public bool ResetToRecommend
         {
@@ -152,7 +152,7 @@ namespace MagicMail
 
         /// <summary>
         /// Master toggle for changing postal capacities (vans, trucks, payload).</summary>
-        [SettingsUISection(kActionsTab, PostVanGroup)]
+        [SettingsUISection(ActionsTab, PostVanGroup)]
         public bool ChangeCapacity
         {
             get;
@@ -163,7 +163,7 @@ namespace MagicMail
         /// Post van mail load multiplier (percent).
         /// Applied to PostVanData.m_MailCapacity (payload per van).
         /// 100% = vanilla; higher values let each van carry more mail.</summary>
-        [SettingsUISection(kActionsTab, PostVanGroup)]
+        [SettingsUISection(ActionsTab, PostVanGroup)]
         [SettingsUISlider(
             min = 100,
             max = 1000,
@@ -180,7 +180,7 @@ namespace MagicMail
         /// <summary>
         /// Post van fleet size multiplier (percent).
         /// Applied to PostFacilityData.m_PostVanCapacity (vans per facility).</summary>
-        [SettingsUISection(kActionsTab, PostVanGroup)]
+        [SettingsUISection(ActionsTab, PostVanGroup)]
         [SettingsUISlider(
             min = 50,
             max = 1000,
@@ -197,7 +197,7 @@ namespace MagicMail
         /// <summary>
         /// Post truck fleet size multiplier (percent).
         /// Applied to PostFacilityData.m_PostTruckCapacity (trucks per facility).</summary>
-        [SettingsUISection(kActionsTab, PostVanGroup)]
+        [SettingsUISection(ActionsTab, PostVanGroup)]
         [SettingsUISlider(
             min = 50,
             max = 1000,
@@ -215,14 +215,14 @@ namespace MagicMail
         // ACTIONS TAB: POST OFFICE OPTIONS
         // --------------------------------------------------------------------
 
-        [SettingsUISection(kActionsTab, PostOfficeGroup)]
+        [SettingsUISection(ActionsTab, PostOfficeGroup)]
         public bool PO_GetLocalMail
         {
             get;
             set;
         }
 
-        [SettingsUISection(kActionsTab, PostOfficeGroup)]
+        [SettingsUISection(ActionsTab, PostOfficeGroup)]
         [SettingsUISlider(
             min = 0,
             max = 100,
@@ -236,7 +236,7 @@ namespace MagicMail
             set;
         }
 
-        [SettingsUISection(kActionsTab, PostOfficeGroup)]
+        [SettingsUISection(ActionsTab, PostOfficeGroup)]
         [SettingsUISlider(
             min = 0,
             max = 100,
@@ -252,14 +252,14 @@ namespace MagicMail
 
         /// <summary>
         /// Global overflow fix toggle (post offices + sorting facilities).</summary>
-        [SettingsUISection(kActionsTab, PostOfficeGroup)]
+        [SettingsUISection(ActionsTab, PostOfficeGroup)]
         public bool FixMailOverflow
         {
             get;
             set;
         }
 
-        [SettingsUISection(kActionsTab, PostOfficeGroup)]
+        [SettingsUISection(ActionsTab, PostOfficeGroup)]
         [SettingsUISlider(
             min = 0,
             max = 100,
@@ -273,7 +273,7 @@ namespace MagicMail
             set;
         }
 
-        [SettingsUISection(kActionsTab, PostOfficeGroup)]
+        [SettingsUISection(ActionsTab, PostOfficeGroup)]
         [SettingsUISlider(
             min = 0,
             max = 100,
@@ -295,7 +295,7 @@ namespace MagicMail
 
         /// <summary>
         /// Sorting speed multiplier for sorting facilities (percent).</summary>
-        [SettingsUISection(kActionsTab, PostSortingFacilityGroup)]
+        [SettingsUISection(ActionsTab, PostSortingFacilityGroup)]
         [SettingsUISlider(
             min = 50,
             max = 500,
@@ -311,7 +311,7 @@ namespace MagicMail
         /// <summary>
         /// Storage capacity multiplier for sorting facilities (percent).
         /// Scales PostFacilityData.m_MailCapacity only for facilities that sort mail.</summary>
-        [SettingsUISection(kActionsTab, PostSortingFacilityGroup)]
+        [SettingsUISection(ActionsTab, PostSortingFacilityGroup)]
         [SettingsUISlider(
             min = 50,
             max = 500,
@@ -324,14 +324,14 @@ namespace MagicMail
             set;
         }
 
-        [SettingsUISection(kActionsTab, PostSortingFacilityGroup)]
+        [SettingsUISection(ActionsTab, PostSortingFacilityGroup)]
         public bool PSF_GetUnsortedMail
         {
             get;
             set;
         }
 
-        [SettingsUISection(kActionsTab, PostSortingFacilityGroup)]
+        [SettingsUISection(ActionsTab, PostSortingFacilityGroup)]
         [SettingsUISlider(
             min = 0,
             max = 100,
@@ -345,7 +345,7 @@ namespace MagicMail
             set;
         }
 
-        [SettingsUISection(kActionsTab, PostSortingFacilityGroup)]
+        [SettingsUISection(ActionsTab, PostSortingFacilityGroup)]
         [SettingsUISlider(
             min = 0,
             max = 100,
@@ -378,7 +378,7 @@ namespace MagicMail
         /// </summary>
         public void SetToVanilla()
         {
-            // Vanilla-like behavior: no auto gets, no overflow cleanup, vanilla capacities.
+            // Game defaults: no rescues, no overflow cleanup, default capacities.
             PO_GetLocalMail = false;
             PO_GettingThresholdPercentage = 2;
             PO_GettingPercentage = 15;

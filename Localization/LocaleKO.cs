@@ -40,9 +40,9 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "작업" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "상태" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "정보" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.ActionsTab), "작업" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.StatusTab), "상태" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.AboutTab), "정보" },
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "우편 배송 지원" },
@@ -55,8 +55,8 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "최근 업데이트" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "정보" },
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "링크" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutInfoGroup), "정보" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutLinksGroup), "링크" },
 
                 // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "로컬 우편 부족 구조" },

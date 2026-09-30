@@ -40,9 +40,9 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "Aktionen" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "Status" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "Info" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.ActionsTab), "Aktionen" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.StatusTab), "Status" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.AboutTab), "Info" },
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "Postzustellungs-Hilfe" },
@@ -55,8 +55,8 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "Letztes Update" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "Info" },
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "Links" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutInfoGroup), "Info" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutLinksGroup), "Links" },
 
                 // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "Wenig lokale Post retten" },

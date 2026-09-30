@@ -30,19 +30,19 @@ namespace MagicMail
             "https://discord.gg/gwXgvtyhjc";
 
         // ---- Localization keys for Status text ----
-        private const string StatusNoFacilitiesKey = "MM_STATUS_NO_FACILITIES";
-        private const string StatusNoActivityKey = "MM_STATUS_NO_ACTIVITY";
-        private const string StatusSummaryKey = "MM_STATUS_SUMMARY";
-        private const string StatusVehiclesKey = "MM_STATUS_VEHICLES";
-        private const string StatusActivityKey = "MM_STATUS_ACTIVITY";
-        private const string StatusCityMailNotReadyKey = "MM_STATUS_CITY_MAIL_NOT_READY";
-        private const string StatusCityMailKey = "MM_STATUS_CITY_MAIL";
+        private const string kStatusNoFacilitiesKey = "MM_STATUS_NO_FACILITIES";
+        private const string kStatusNoActivityKey = "MM_STATUS_NO_ACTIVITY";
+        private const string kStatusSummaryKey = "MM_STATUS_SUMMARY";
+        private const string kStatusVehiclesKey = "MM_STATUS_VEHICLES";
+        private const string kStatusActivityKey = "MM_STATUS_ACTIVITY";
+        private const string kStatusCityMailNotReadyKey = "MM_STATUS_CITY_MAIL_NOT_READY";
+        private const string kStatusCityMailKey = "MM_STATUS_CITY_MAIL";
 
         // --------------------------------------------------------------------
         // STATUS TAB (localized with keys, data from MagicMailSystem)
         // --------------------------------------------------------------------
 
-        [SettingsUISection(kStatusTab, StatusSummaryGroup)]
+        [SettingsUISection(StatusTab, StatusSummaryGroup)]
         public string StatusFacilitySummary
         {
             get
@@ -52,13 +52,13 @@ namespace MagicMail
                 if (MailStatus.s_LastFacilityCount == 0)
                 {
                     return L(
-                        StatusNoFacilitiesKey,
+                        kStatusNoFacilitiesKey,
                         "No postal facilities found. Open a city, then open Status again.");
                 }
 
                 return string.Format(
                     L(
-                        StatusSummaryKey,
+                        kStatusSummaryKey,
                         "Post offices: {0} | Sorting post offices: {1} | Sorting facilities: {2}"),
                     MailStatus.s_LastPostOfficeCount,
                     MailStatus.s_LastSortingPostOfficeCount,
@@ -66,7 +66,7 @@ namespace MagicMail
             }
         }
 
-        [SettingsUISection(kStatusTab, StatusSummaryGroup)]
+        [SettingsUISection(StatusTab, StatusSummaryGroup)]
         public string StatusVehicleSummary
         {
             get
@@ -80,14 +80,14 @@ namespace MagicMail
 
                 return string.Format(
                     L(
-                        StatusVehiclesKey,
+                        kStatusVehiclesKey,
                         "Post-vans: {0} | Post trucks: {1}"),
                     MailStatus.s_LastPostVanCapacityTotal,
                     MailStatus.s_LastPostTruckCapacityTotal);
             }
         }
 
-        [SettingsUISection(kStatusTab, StatusSummaryGroup)]
+        [SettingsUISection(StatusTab, StatusSummaryGroup)]
         public string StatusCityMailSummary
         {
             get
@@ -98,20 +98,20 @@ namespace MagicMail
                     MailStatus.s_LastCityProcessedMail == 0)
                 {
                     return L(
-                        StatusCityMailNotReadyKey,
+                        kStatusCityMailNotReadyKey,
                         "City mail stats not available yet. Open a city and let the simulation run.");
                 }
 
                 return string.Format(
                     L(
-                        StatusCityMailKey,
+                        kStatusCityMailKey,
                         "{0} accumulated | {1} processed"),
                     MailStatus.s_LastCityAccumulatedMail.ToString("N0"),
                     MailStatus.s_LastCityProcessedMail.ToString("N0"));
             }
         }
 
-        [SettingsUISection(kStatusTab, StatusActivityGroup)]
+        [SettingsUISection(StatusTab, StatusActivityGroup)]
         public string StatusLastActivity
         {
             get
@@ -121,13 +121,13 @@ namespace MagicMail
                 if (MailStatus.s_LastFacilityCount == 0)
                 {
                     return L(
-                        StatusNoActivityKey,
+                        kStatusNoActivityKey,
                         "No activity recorded yet.");
                 }
 
                 return string.Format(
                     L(
-                        StatusActivityKey,
+                        kStatusActivityKey,
                         "{0} local rescues | {1} unsorted rescues | {2} overflow cleanups"),
                     MailStatus.s_LastPostOfficeGets,
                     MailStatus.s_LastSortingGets,
@@ -137,7 +137,7 @@ namespace MagicMail
 
         [SettingsUIButtonGroup(StatusActivityGroup)]
         [SettingsUIButton]
-        [SettingsUISection(kStatusTab, StatusActivityGroup)]
+        [SettingsUISection(StatusTab, StatusActivityGroup)]
         public bool WriteReport
         {
             set
@@ -155,7 +155,7 @@ namespace MagicMail
 
         [SettingsUIButtonGroup(StatusActivityGroup)]
         [SettingsUIButton]
-        [SettingsUISection(kStatusTab, StatusActivityGroup)]
+        [SettingsUISection(StatusTab, StatusActivityGroup)]
         public bool OpenLog
         {
             set
@@ -173,19 +173,19 @@ namespace MagicMail
         // ABOUT TAB: INFO
         // --------------------------------------------------------------------
 
-        [SettingsUISection(kAboutTab, kAboutInfoGroup)]
+        [SettingsUISection(AboutTab, AboutInfoGroup)]
         public string ModNameDisplay => $"{Mod.ModName} {Mod.ModTag}";
 
-        [SettingsUISection(kAboutTab, kAboutInfoGroup)]
+        [SettingsUISection(AboutTab, AboutInfoGroup)]
         public string ModVersionDisplay => $"{Mod.ModVersion} {Mod.BuildDisplayName}";
 
         // --------------------------------------------------------------------
         // ABOUT TAB: LINKS
         // --------------------------------------------------------------------
 
-        [SettingsUIButtonGroup(kAboutLinksGroup)]
+        [SettingsUIButtonGroup(AboutLinksGroup)]
         [SettingsUIButton]
-        [SettingsUISection(kAboutTab, kAboutLinksGroup)]
+        [SettingsUISection(AboutTab, AboutLinksGroup)]
         public bool OpenParadox
         {
             set
@@ -199,9 +199,9 @@ namespace MagicMail
             }
         }
 
-        [SettingsUIButtonGroup(kAboutLinksGroup)]
+        [SettingsUIButtonGroup(AboutLinksGroup)]
         [SettingsUIButton]
-        [SettingsUISection(kAboutTab, kAboutLinksGroup)]
+        [SettingsUISection(AboutTab, AboutLinksGroup)]
         public bool OpenDiscord
         {
             set

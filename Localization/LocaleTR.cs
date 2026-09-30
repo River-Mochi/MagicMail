@@ -40,9 +40,9 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "Eylemler" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "Durum" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "Hakkında" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.ActionsTab), "Eylemler" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.StatusTab), "Durum" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.AboutTab), "Hakkında" },
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "Posta dağıtım desteği" },
@@ -55,8 +55,8 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "Son güncelleme" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "Bilgi" },
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "Bağlantılar" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutInfoGroup), "Bilgi" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutLinksGroup), "Bağlantılar" },
 
                 // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "Düşük yerel postayı kurtar" },

@@ -40,9 +40,9 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "Acciones" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "Estado" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "Acerca de" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.ActionsTab), "Acciones" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.StatusTab), "Estado" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.AboutTab), "Acerca de" },
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "Asistencia de reparto postal" },
@@ -55,8 +55,8 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "Última actualización" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "Info" },
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "Enlaces" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutInfoGroup), "Info" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutLinksGroup), "Enlaces" },
 
                 // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "Rescatar correo local bajo" },

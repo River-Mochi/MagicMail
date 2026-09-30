@@ -40,9 +40,9 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "アクション" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "ステータス" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "情報" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.ActionsTab), "アクション" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.StatusTab), "ステータス" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.AboutTab), "情報" },
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "郵便配送アシスト" },
@@ -55,8 +55,8 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "最新の更新" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "情報" },
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "リンク" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutInfoGroup), "情報" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutLinksGroup), "リンク" },
 
                 // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "ローカル郵便不足を救済" },

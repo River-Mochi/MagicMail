@@ -40,9 +40,9 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "操作" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "状态" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "关于" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.ActionsTab), "操作" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.StatusTab), "状态" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.AboutTab), "关于" },
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "邮政调度辅助" },
@@ -55,8 +55,8 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "最近更新" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "信息" },
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "链接" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutInfoGroup), "信息" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutLinksGroup), "链接" },
 
                 // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "救援本地邮件不足" },

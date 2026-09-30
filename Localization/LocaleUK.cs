@@ -40,9 +40,9 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "Дії" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "Стан" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "Про мод" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.ActionsTab), "Дії" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.StatusTab), "Стан" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.AboutTab), "Про мод" },
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "Допомога поштовій доставці" },
@@ -55,8 +55,8 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "Останнє оновлення" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "Інформація" },
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "Посилання" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutInfoGroup), "Інформація" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutLinksGroup), "Посилання" },
 
                 // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "Порятунок при нестачі місцевої пошти" },

@@ -40,9 +40,9 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "การทำงาน" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "สถานะ" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "เกี่ยวกับ" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.ActionsTab), "การทำงาน" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.StatusTab), "สถานะ" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.AboutTab), "เกี่ยวกับ" },
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "ตัวช่วยการจัดส่งไปรษณีย์" },
@@ -55,8 +55,8 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "อัปเดตล่าสุด" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "ข้อมูล" },
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "ลิงก์" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutInfoGroup), "ข้อมูล" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutLinksGroup), "ลิงก์" },
 
                 // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "ช่วยเมื่อจดหมายท้องถิ่นต่ำ" },

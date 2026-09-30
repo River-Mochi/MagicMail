@@ -40,9 +40,9 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kActionsTab), "Tác vụ" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kStatusTab), "Trạng thái" },
-                { m_Setting.GetOptionTabLocaleID(MailSettings.kAboutTab), "Giới thiệu" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.ActionsTab), "Tác vụ" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.StatusTab), "Trạng thái" },
+                { m_Setting.GetOptionTabLocaleID(MailSettings.AboutTab), "Giới thiệu" },
 
                 // Groups (Actions tab)
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.PostOfficeGroup), "Hỗ trợ điều phối bưu chính" },
@@ -55,8 +55,8 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(MailSettings.StatusActivityGroup), "Cập nhật gần nhất" },
 
                 // Groups (About tab)
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutInfoGroup), "Thông tin" },
-                { m_Setting.GetOptionGroupLocaleID(MailSettings.kAboutLinksGroup), "Liên kết" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutInfoGroup), "Thông tin" },
+                { m_Setting.GetOptionGroupLocaleID(MailSettings.AboutLinksGroup), "Liên kết" },
 
                 // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(MailSettings.PO_GetLocalMail)), "Cứu khi thư nội địa quá thấp" },
