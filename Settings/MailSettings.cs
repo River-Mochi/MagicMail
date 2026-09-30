@@ -11,16 +11,11 @@
 
 namespace MagicMail
 {
-    using System;
     using Colossal.IO.AssetDatabase;
-    using Colossal.Localization;
-    using CS2Shared.RiverMochi;
     using Game.Modding;
-    using Game.SceneFlow;
     using Game.Settings;
     using Game.UI;
     using Unity.Entities;
-    using UnityEngine;
 
     /// <summary>
     /// Settings definition and UI bindings for MagicMail [MM].</summary>
@@ -41,7 +36,7 @@ namespace MagicMail
         PostSortingFacilityGroup,
         StatusSummaryGroup, StatusActivityGroup,
         kAboutLinksGroup)]
-    public class MailSettings : ModSetting
+    public partial class MailSettings : ModSetting
     {
         // ---- TABS ----
 
@@ -65,22 +60,6 @@ namespace MagicMail
 
         public const string kAboutInfoGroup = "AboutInfo";
         public const string kAboutLinksGroup = "AboutLinks";
-
-        // ---- LINKS ----
-
-        private const string kUrlParadox =
-            "https://mods.paradoxplaza.com/authors/River-mochi/cities_skylines_2?games=cities_skylines_2&orderBy=desc&sortBy=best&time=alltime";
-        private const string kUrlDiscord =
-            "https://discord.gg/gwXgvtyhjc";
-
-        // ---- Localization keys for Status text ----
-        private const string StatusNoFacilitiesKey = "MM_STATUS_NO_FACILITIES";
-        private const string StatusNoActivityKey = "MM_STATUS_NO_ACTIVITY";
-        private const string StatusSummaryKey = "MM_STATUS_SUMMARY";
-        private const string StatusVehiclesKey = "MM_STATUS_VEHICLES";
-        private const string StatusActivityKey = "MM_STATUS_ACTIVITY";
-        private const string StatusCityMailNotReadyKey = "MM_STATUS_CITY_MAIL_NOT_READY";
-        private const string StatusCityMailKey = "MM_STATUS_CITY_MAIL";
 
         /// <summary>
         /// Internal flag used to avoid resetting options on every load.</summary>
@@ -391,182 +370,6 @@ namespace MagicMail
             set;
         }
 
-        // --------------------------------------------------------------------
-        // STATUS TAB (localized with keys, data from MagicMailSystem)
-        // --------------------------------------------------------------------
-
-        [SettingsUISection(kStatusTab, StatusSummaryGroup)]
-        public string StatusFacilitySummary
-        {
-            get
-            {
-                MailStatus.RefreshIfNeeded();
-
-                if (MailStatus.s_LastFacilityCount == 0)
-                {
-                    return L(
-                        StatusNoFacilitiesKey,
-                        "No postal facilities found. Open a city, then open Status again.");
-                }
-
-                return string.Format(
-                    L(
-                        StatusSummaryKey,
-                        "Post offices: {0} | Sorting post offices: {1} | Sorting facilities: {2}"),
-                    MailStatus.s_LastPostOfficeCount,
-                    MailStatus.s_LastSortingPostOfficeCount,
-                    MailStatus.s_LastSortingFacilityCount);
-            }
-        }
-
-        [SettingsUISection(kStatusTab, StatusSummaryGroup)]
-        public string StatusVehicleSummary
-        {
-            get
-            {
-                MailStatus.RefreshIfNeeded();
-
-                if (MailStatus.s_LastFacilityCount == 0)
-                {
-                    return string.Empty;
-                }
-
-                return string.Format(
-                    L(
-                        StatusVehiclesKey,
-                        "Post-vans: {0} | Post trucks: {1}"),
-                    MailStatus.s_LastPostVanCapacityTotal,
-                    MailStatus.s_LastPostTruckCapacityTotal);
-            }
-        }
-
-        [SettingsUISection(kStatusTab, StatusSummaryGroup)]
-        public string StatusCityMailSummary
-        {
-            get
-            {
-                MailStatus.RefreshIfNeeded();
-
-                if (MailStatus.s_LastCityAccumulatedMail == 0 &&
-                    MailStatus.s_LastCityProcessedMail == 0)
-                {
-                    return L(
-                        StatusCityMailNotReadyKey,
-                        "City mail stats not available yet. Open a city and let the simulation run.");
-                }
-
-                return string.Format(
-                    L(
-                        StatusCityMailKey,
-                        "{0} accumulated | {1} processed"),
-                    MailStatus.s_LastCityAccumulatedMail.ToString("N0"),
-                    MailStatus.s_LastCityProcessedMail.ToString("N0"));
-            }
-        }
-
-        [SettingsUISection(kStatusTab, StatusActivityGroup)]
-        public string StatusLastActivity
-        {
-            get
-            {
-                MailStatus.RefreshIfNeeded();
-
-                if (MailStatus.s_LastFacilityCount == 0)
-                {
-                    return L(
-                        StatusNoActivityKey,
-                        "No activity recorded yet.");
-                }
-
-                return string.Format(
-                    L(
-                        StatusActivityKey,
-                        "{0} local rescues | {1} unsorted rescues | {2} overflow cleanups"),
-                    MailStatus.s_LastPostOfficeGets,
-                    MailStatus.s_LastSortingGets,
-                    MailStatus.s_LastOverflowClamps);
-            }
-        }
-
-        [SettingsUIButtonGroup(StatusActivityGroup)]
-        [SettingsUIButton]
-        [SettingsUISection(kStatusTab, StatusActivityGroup)]
-        public bool WriteReport
-        {
-            set
-            {
-                if (!value)
-                {
-                    return;
-                }
-
-                // One-time detailed scan while Options is open/paused.
-                // No recurring Release logging is enabled by this button.
-                MailStatus.RefreshNow(writeToLog: true);
-            }
-        }
-
-        [SettingsUIButtonGroup(StatusActivityGroup)]
-        [SettingsUIButton]
-        [SettingsUISection(kStatusTab, StatusActivityGroup)]
-        public bool OpenLog
-        {
-            set
-            {
-                if (!value)
-                {
-                    return;
-                }
-
-                ShellOpen.OpenModLogOrLogsFolder();
-            }
-        }
-
-        // --------------------------------------------------------------------
-        // ABOUT TAB: INFO
-        // --------------------------------------------------------------------
-
-        [SettingsUISection(kAboutTab, kAboutInfoGroup)]
-        public string ModNameDisplay => $"{Mod.ModName} {Mod.ModTag}";
-
-        [SettingsUISection(kAboutTab, kAboutInfoGroup)]
-        public string ModVersionDisplay => $"{Mod.ModVersion} {Mod.BuildDisplayName}";
-
-        // --------------------------------------------------------------------
-        // ABOUT TAB: LINKS
-        // --------------------------------------------------------------------
-
-        [SettingsUIButtonGroup(kAboutLinksGroup)]
-        [SettingsUIButton]
-        [SettingsUISection(kAboutTab, kAboutLinksGroup)]
-        public bool OpenParadox
-        {
-            set
-            {
-                if (!value)
-                {
-                    return;
-                }
-
-                TryOpenUrl(kUrlParadox);
-            }
-        }
-
-        [SettingsUIButtonGroup(kAboutLinksGroup)]
-        [SettingsUIButton]
-        [SettingsUISection(kAboutTab, kAboutLinksGroup)]
-        public bool OpenDiscord
-        {
-            set
-            {
-                if (!value)
-                {
-                    return;
-                }
-
-                TryOpenUrl(kUrlDiscord);
-            }
-        }
 
         // --------------------------------------------------------------------
         // DEFAULTS
@@ -634,37 +437,5 @@ namespace MagicMail
             TruckCapacityPercentage = 100;
         }
 
-        // --------------------------------------------------------------------
-        // HELPERS
-        // --------------------------------------------------------------------
-
-        /// <summary>
-        /// Looks up a localized string by key, falling back to English text if missing.</summary>
-        private static string L(string key, string fallback)
-        {
-            LocalizationDictionary? dict = GameManager.instance?.localizationManager?.activeDictionary;
-            if (dict != null &&
-                dict.TryGetValue(key, out string? value) &&
-                !string.IsNullOrWhiteSpace(value))
-            {
-                return value;
-            }
-
-            return fallback;
-        }
-
-        /// <summary>
-        /// Opens a URL via Unity’s Application.OpenURL, ignoring failures.</summary>
-        private static void TryOpenUrl(string url)
-        {
-            try
-            {
-                Application.OpenURL(url);
-            }
-            catch (Exception)
-            {
-                // Silent failure to avoid disrupting the Options UI.
-            }
-        }
     }
 }
