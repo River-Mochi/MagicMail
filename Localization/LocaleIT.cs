@@ -230,7 +230,7 @@ namespace MagicMail
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "Versione attuale della mod." },
 
                 // ---- About tab: links ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Paradox" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mochi's Paradox mods" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "Apre la pagina **Paradox** di **Magic Mail** e delle altre mod." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },

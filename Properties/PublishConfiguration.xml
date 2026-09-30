@@ -71,16 +71,14 @@ tags: postal helper, unreliable mail service, broken mail bug fixes, post van li
 <!--Link to the forum post where the mod can be discussed-->
 <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/magic-mail.1877962/" />
 <!--Version of the mod-->
-<ModVersion Value="1.2.1" />
+<ModVersion Value="1.2.2" />
 <!--Recommended version of the base game to use the mod-->
 <GameVersion Value="1.6.*" />
 <!--Dependency for the mod, can be set multiple times-->
 <Dependency Id="" />
 <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 <ChangeLog>
-- Added Ukrainian + Turkish translations.
-- Updated all existing translations.
-- Internal cleanup and optional DEBUG postal diagnostics.
+- Updated for game patch 1.6.2
 </ChangeLog>
 <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 <ExternalLink Type="github" Url="https://github.com/River-Mochi/MagicMail" />
