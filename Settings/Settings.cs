@@ -498,7 +498,7 @@ namespace MagicMail
         public string ModNameDisplay => $"{Mod.ModName} {Mod.ModTag}";
 
         [SettingsUISection(kAboutTab, kAboutInfoGroup)]
-        public string ModVersionDisplay => Mod.ModVersion;
+        public string ModVersionDisplay => $"{Mod.ModVersion} {Mod.BuildDisplayName}";
 
         // --------------------------------------------------------------------
         // ABOUT TAB: LINKS

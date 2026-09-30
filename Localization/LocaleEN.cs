@@ -271,7 +271,7 @@ namespace MagicMail
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModVersionDisplay)), "Version" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)),
-                    "Current mod version."
+                    "Current mod version and build type."
                 },
 
                 // ---- About tab: links ----

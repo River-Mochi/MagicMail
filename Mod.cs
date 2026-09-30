@@ -37,6 +37,7 @@ namespace MagicMail
 #else
         private const string kBuildType = "RELEASE";
 #endif
+        public static string BuildDisplayName => kBuildType == "RELEASE" ? "Release" : "Debug";
 
         public static readonly string ModVersion =
             Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0";
