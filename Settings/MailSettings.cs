@@ -364,15 +364,18 @@ namespace MagicMail
         // DEFAULTS
         // --------------------------------------------------------------------
 
+
         /// <summary>
-        /// Sets vanilla-like defaults (pure game defaults) for first run.</summary>
+        /// Sets the game default values.
+        /// </summary>
         public override void SetDefaults()
         {
             SetToVanilla();
         }
 
         /// <summary>
-        /// Vanilla / game-default behaviour: no magic, 100% capacities.</summary>
+        /// Restores the game's default behavior and capacity values.
+        /// </summary>
         public void SetToVanilla()
         {
             // Vanilla-like behavior: no auto gets, no overflow cleanup, vanilla capacities.
