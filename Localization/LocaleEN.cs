@@ -192,8 +192,19 @@ namespace MagicMail
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), string.Empty },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
-                    "Summary of regular post offices, sorting-upgraded post offices, vans,\n" +
-                    "dedicated sorting facilities, and post trucks from the last scan."
+                    "Postal buildings found in the last scan.\n\n" +
+                    "**Post offices** = regular post offices (PO).\n" +
+                    "**Sorting facilities** = dedicated Post Sorting Facilities.\n" +
+                    "**Sorting PO** = <Westmont Tower with Sorting Upgrade>.\n" +
+                    "- Requires **Skyscrapers DLC**."
+                },
+
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusVehicleSummary)), string.Empty },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusVehicleSummary)),
+                    "Postal vehicle capacity from the last scan.\n\n" +
+                    "**Post-vans** = local pickup and delivery vehicles.\n" +
+                    "**Post trucks** = trucks that move mail between facilities."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "Monthly mail" },
@@ -229,7 +240,12 @@ namespace MagicMail
 
                 {
                     "MM_STATUS_SUMMARY",
-                    "{0} post offices | {1} sorting post offices | {2} post-vans | {3} sorting facilities | {4} post trucks"
+                    "Post offices: {0} | Sorting PO: {1} | Sorting facilities: {2}"
+                },
+
+                {
+                    "MM_STATUS_VEHICLES",
+                    "Post-vans: {0} | Post trucks: {1}"
                 },
 
                 {
