@@ -110,9 +110,10 @@ namespace MagicMail
                 AddLine(
                     $"[MAIL MM LAST] facilities={MagicMailSystem.s_LastFacilityCount} " +
                     $"postOffices={MagicMailSystem.s_LastPostOfficeCount} " +
-                    $"sorting={MagicMailSystem.s_LastSortingFacilityCount} " +
-                    $"localTopups={MagicMailSystem.s_LastPostOfficeGets} " +
-                    $"unsortedTopups={MagicMailSystem.s_LastSortingGets} " +
+                    $"sortingPostOffices={MagicMailSystem.s_LastSortingPostOfficeCount} " +
+                    $"sortingFacilities={MagicMailSystem.s_LastSortingFacilityCount} " +
+                    $"localRescues={MagicMailSystem.s_LastPostOfficeGets} " +
+                    $"unsortedRescues={MagicMailSystem.s_LastSortingGets} " +
                     $"overflowCleanups={MagicMailSystem.s_LastOverflowClamps}");
                 LogCityAndProducerSummary();
                 LogRequestSummary();
