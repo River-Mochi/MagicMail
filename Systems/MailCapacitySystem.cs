@@ -169,6 +169,10 @@ namespace MagicMail
                     continue;
                 }
 
+                bool isServiceUpgrade =
+                    EntityManager.HasComponent<ServiceUpgradeData>(prefabEntity);
+
+                bool isDedicatedSortingFacility = !isServiceUpgrade && baseline.SortingRate > 0;
                 bool isSortingFacility = baseline.SortingRate > 0;
 
                 int newPostVanCapacity =
@@ -177,15 +181,15 @@ namespace MagicMail
                 int newPostTruckCapacity =
                     ScalePercentKeepZero(baseline.PostTruckCapacity, truckFleetPercent);
 
-                int newSortingRate = isSortingFacility
-                    ? ScalePercentMin1(baseline.SortingRate, sortingSpeedPercent)
-                    : baseline.SortingRate;
+                int newSortingRate = isDedicatedSortingFacility
+                ? ScalePercentMin1(baseline.SortingRate, sortingSpeedPercent)
+                : baseline.SortingRate;
 
                 // Sorting storage slider should only affect sorting facilities.
                 // This avoids accidentally scaling normal post office storage.
-                int newMailCapacity = isSortingFacility
-                    ? ScalePercentMin1(baseline.MailCapacity, sortingStoragePercent)
-                    : baseline.MailCapacity;
+                int newMailCapacity = isDedicatedSortingFacility
+                ? ScalePercentMin1(baseline.MailCapacity, sortingStoragePercent)
+                : baseline.MailCapacity;
 
                 if (data.m_PostVanCapacity != newPostVanCapacity)
                 {

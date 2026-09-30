@@ -61,7 +61,7 @@ namespace MagicMail
         public void OnLoad(UpdateSystem updateSystem)
         {
             // Direct-file logging keeps MagicMail messages out of Player.log.
-            LogUtils.Configure(ModId, s_Log);
+            ShellOpen.Configure(s_Log, ModId, ModTag);
 
             if (!s_BannerLogged)
             {

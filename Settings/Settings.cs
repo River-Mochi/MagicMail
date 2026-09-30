@@ -14,6 +14,7 @@ namespace MagicMail
     using System;
     using Colossal.IO.AssetDatabase;
     using Colossal.Localization;
+    using CS2Shared.RiverMochi;
     using Game.Modding;
     using Game.SceneFlow;
     using Game.Settings;
@@ -402,11 +403,13 @@ namespace MagicMail
                 return string.Format(
                     L(
                         StatusSummaryKey,
-                        "{0} post offices | {1} post-vans | {2} sorting buildings | {3} post trucks"),
+                        "{0} post offices | {1} sorting post offices | {2} post-vans | {3} sorting facilities | {4} post trucks"),
                     MagicMailSystem.s_LastPostOfficeCount,
+                    MagicMailSystem.s_LastSortingPostOfficeCount,
                     MagicMailSystem.s_LastPostVanCapacityTotal,
                     MagicMailSystem.s_LastSortingFacilityCount,
                     MagicMailSystem.s_LastPostTruckCapacityTotal);
+
             }
         }
 
@@ -447,10 +450,26 @@ namespace MagicMail
                 return string.Format(
                     L(
                         StatusActivityKey,
-                        "{0} local-mail pulls | {1} unsorted-mail pulls | {2} overflow cleanups"),
+                        "{0} local rescues | {1} unsorted rescues | {2} overflow cleanups"),
                     MagicMailSystem.s_LastPostOfficeGets,
                     MagicMailSystem.s_LastSortingGets,
                     MagicMailSystem.s_LastOverflowClamps);
+            }
+        }
+
+        [SettingsUIButtonGroup(StatusActivityGroup)]
+        [SettingsUIButton]
+        [SettingsUISection(kStatusTab, StatusActivityGroup)]
+        public bool OpenLog
+        {
+            set
+            {
+                if (!value)
+                {
+                    return;
+                }
+
+                ShellOpen.OpenModLogOrLogsFolder();
             }
         }
 

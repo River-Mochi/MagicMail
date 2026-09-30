@@ -45,9 +45,9 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab),   "About" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Postal Dispatch Assist" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Vanilla Assist" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "Post vans & trucks" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Sorting facility" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Dedicated sorting facility" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup),               "Reset" },
 
                 // Groups (Status tab)
@@ -58,54 +58,50 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup),  "Info" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Links" },
 
-                // ---- Post Office ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Fix low local mail" },
+                // ---- Post Office / Vanilla Assist ----
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Rescue low local mail" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
-                    "If enabled, then a small amount of mail appears if the mail ever gets too low.\n " +
-                    "Does not spawn extra vans; it's like magic...but real :)"
+                    "Lets the game try normal mail transfers first.\n" +
+                    "If local mail stays very low for several scans, Magic Mail adds a small rescue top-up.\n" +
+                    "Also applies to a post office with a sorting upgrade."
                 },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Local mail threshold" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Local mail rescue threshold" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
-                    "If local mail goes below this percentage (that you choose), it\n " +
-                    "triggers the post office to pull in more local mail.\n" +
-                    "This is a percentage of the building max storage.\n" +
-                    "E.g., if <max storage = 100,000> and <threshold = 5%>,\n" +
-                    "when local mail < <5,000> then more mail is fetched."
+                    "Marks local mail as low when it reaches this percentage of the building's max storage.\n" +
+                    "The rescue only runs if it stays low across several scans."
                 },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Local mail fetch amount" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Local mail rescue amount" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingPercentage)),
-                    "Percentage to add when fetching local mail (magic top-up).\n" +
-                    "If vanilla max = <100,000> and this is set to <10%>\n" +
-                    "then <10,000> is added when needed."
+                    "How much local mail to add when the rescue finally runs.\n" +
+                    "Amount is a percentage of the building's max storage."
                 },
 
-                // Global overflow toggle (PO + PSF)
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Fix mail overflow" },
+                // Global overflow toggle (PO + sorting)
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Rescue mail overflow" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
-                    "When there is too much mail, the facilities perform a small magic cleanup.\n " +
-                    "Excess stored mail is treated as delivered and removed.\n " +
-                    "This fix prevents facilities from getting stuck full forever.\n " +
-                    "Disable this to keep pure vanilla behavior."
+                    "If a postal facility gets too full, Magic Mail trims stored mail back to the chosen level.\n" +
+                    "It counts local + unsorted + outgoing mail, helping catch overfill the game can miscount.\n" +
+                    "Disable this for pure vanilla behavior."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Post office overflow threshold" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_OverflowPercentage)),
-                    "When the total mail at a post office reaches this percentage, the mod\n" +
-                    "deletes enough stored mail to bring it back down to this level."
+                    "When total stored mail goes above this level, Magic Mail trims it back down.\n" +
+                    "Applies to regular and sorting-upgraded post offices."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Sorting overflow threshold" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_OverflowPercentage)),
-                    "When the total mail at a sorting facility reaches this percentage, the mod\n" +
-                    "deletes enough stored mail to bring it back down to this level."
+                    "When total stored mail at a dedicated sorting facility goes above this level,\n" +
+                    "Magic Mail trims it back down."
                 },
 
                 // ---- Post Vans & Trucks ----
@@ -134,68 +130,70 @@ namespace MagicMail
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Post truck fleet size" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
-                    "Controls how many post trucks each sorting facility (and any facility with Post-trucks)\n " +
-                    "can own and dispatch.\n " +
+                    "Controls how many post trucks each facility with post trucks can own and dispatch.\n" +
                     "<100% = vanilla fleet size.>"
                 },
 
-                // ---- Sorting Facility ----
+                // ---- Dedicated Sorting Facility ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)), "Sorting speed" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
-                    "Multiplier for **Sorting** facilities. Applies to the facility's base sorting rate.\n " +
+                    "Multiplier for dedicated sorting facilities.\n" +
+                    "Does not change a post office's sorting upgrade.\n" +
                     "<100% = vanilla>."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Sorting storage capacity" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
-                    "Controls **mail storage**.\n " +
+                    "Controls mail storage for dedicated sorting facilities.\n" +
+                    "Does not change a post office's sorting upgrade.\n" +
                     "<100% = vanilla>."
                 },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Fix low unsorted mail" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Rescue low unsorted mail" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
-                    "When enabled, some unsorted mail magically appears if storage supplies get too low.\n " +
-                    "This keeps sorting buildings active.\n" +
-                    "It is a temp fix for a current bug where sorting facilities don't get enough mail if a cargo harbor is present."
+                    "Lets the game supply unsorted mail normally first.\n" +
+                    "If a dedicated sorting facility stays very low for several scans,\n" +
+                    "Magic Mail adds a small rescue top-up."
                 },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Unsorted mail threshold" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Unsorted mail rescue threshold" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
-                    "If unsorted mail goes below this low percentage of total storage capacity,\n" +
-                    "then some extra unsorted mail is fetched.\n"
+                    "Marks unsorted mail as low when it reaches this percentage of max storage.\n" +
+                    "The rescue only runs if it stays low across several scans."
                 },
 
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Unsorted mail fetch amount" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Unsorted mail rescue amount" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
-                    "The additional mail to add when fetching unsorted mail (magic top-up).\n" +
-                    "Amount is a percentage of max storage capacity.\n" +
-                    "If vanilla <max = 250,000> and this is set to <10%>, then <25,000> is added."
+                    "How much unsorted mail to add when the rescue finally runs.\n" +
+                    "Amount is a percentage of max storage."
                 },
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Game defaults" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)),
-                    "Restore all settings to the game’s original default behaviour (vanilla)."
+                    "Restore all settings to the game's original default behavior (vanilla)."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Recommended" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Quick Start** – apply all recommended postal settings.\n" +
-                    "Easy mode: 1 click and done!"
+                    "**Vanilla Assist** - Quick Start.\n" +
+                    "Lets vanilla mail logistics work first, then rescues persistent shortages or overflow.\n" +
+                    "Also applies the recommended capacity tuning."
                 },
 
                 // ---- Status tab ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), string.Empty },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
-                    "Summary of post offices, post vans, sorting facilities, and post trucks processed in the last background scan."
+                    "Summary of regular post offices, sorting-upgraded post offices, vans,\n" +
+                    "dedicated sorting facilities, and post trucks from the last scan."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "Monthly mail" },
@@ -204,7 +202,7 @@ namespace MagicMail
                     "Shows recent city-wide mail flow.\n\n" +
                     "**Accumulated** = how much mail citizens generated.\n" +
                     "**Processed**   = how much mail the network actually handled.\n\n" +
-                    "- If Processed is often higher than Accumulated, then your postal network has enough capacity.\n " +
+                    "- If Processed is often higher than Accumulated, then your postal network has enough capacity.\n" +
                     "- If Accumulated stays above Processed for long periods,\n" +
                     "then the city is generating more mail than it can handle.\n" +
                     "Add more facilities, vans, or tweak your settings."
@@ -213,7 +211,13 @@ namespace MagicMail
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "Activity" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)),
-                    "Counts of mail pulls and overflow cleanups performed in the last update."
+                    "Rescues and overflow cleanups performed in the last Magic Mail scan."
+                },
+
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenLog)), "Open Log" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenLog)),
+                    "Open <Logs/MagicMail.log>, or the Logs folder if the file does not exist yet."
                 },
 
                 // ---- Status text templates (for MagicMailSystem) ----
@@ -221,16 +225,16 @@ namespace MagicMail
                   "No postal facilities processed yet. Open a city and let the simulation run." },
 
                 { "MM_STATUS_NO_ACTIVITY",
-                  "No activity recorded yet." },
+                  "No rescue activity recorded in the last scan." },
 
                 {
                     "MM_STATUS_SUMMARY",
-                    "{0} post offices | {1} post-vans | {2} sorting buildings | {3} post trucks"
+                    "{0} post offices | {1} sorting post offices | {2} post-vans | {3} sorting facilities | {4} post trucks"
                 },
 
                 {
                     "MM_STATUS_ACTIVITY",
-                    "{0} local-mail pulls | {1} unsorted-mail pulls | {2} overflow cleanups"
+                    "{0} local rescues | {1} unsorted rescues | {2} overflow cleanups"
                 },
 
                 { "MM_STATUS_CITY_MAIL_NOT_READY",
