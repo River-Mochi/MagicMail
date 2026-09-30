@@ -77,6 +77,7 @@ namespace MagicMail
         private const string StatusNoFacilitiesKey = "MM_STATUS_NO_FACILITIES";
         private const string StatusNoActivityKey = "MM_STATUS_NO_ACTIVITY";
         private const string StatusSummaryKey = "MM_STATUS_SUMMARY";
+        private const string StatusVehiclesKey = "MM_STATUS_VEHICLES";
         private const string StatusActivityKey = "MM_STATUS_ACTIVITY";
         private const string StatusCityMailNotReadyKey = "MM_STATUS_CITY_MAIL_NOT_READY";
         private const string StatusCityMailKey = "MM_STATUS_CITY_MAIL";
@@ -403,13 +404,29 @@ namespace MagicMail
                 return string.Format(
                     L(
                         StatusSummaryKey,
-                        "{0} post offices | {1} sorting post offices | {2} post-vans | {3} sorting facilities | {4} post trucks"),
+                        "Post offices: {0} | Sorting PO: {1} | Sorting facilities: {2}"),
                     MagicMailSystem.s_LastPostOfficeCount,
                     MagicMailSystem.s_LastSortingPostOfficeCount,
-                    MagicMailSystem.s_LastPostVanCapacityTotal,
-                    MagicMailSystem.s_LastSortingFacilityCount,
-                    MagicMailSystem.s_LastPostTruckCapacityTotal);
+                    MagicMailSystem.s_LastSortingFacilityCount);
+            }
+        }
 
+        [SettingsUISection(kStatusTab, StatusSummaryGroup)]
+        public string StatusVehicleSummary
+        {
+            get
+            {
+                if (MagicMailSystem.s_LastFacilityCount == 0)
+                {
+                    return string.Empty;
+                }
+
+                return string.Format(
+                    L(
+                        StatusVehiclesKey,
+                        "Post-vans: {0} | Post trucks: {1}"),
+                    MagicMailSystem.s_LastPostVanCapacityTotal,
+                    MagicMailSystem.s_LastPostTruckCapacityTotal);
             }
         }
 
