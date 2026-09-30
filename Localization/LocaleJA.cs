@@ -40,14 +40,14 @@ namespace MagicMail
                 { m_Setting.GetSettingsLocaleID(), "Magic Mail + Postal Dispatch" },
 
                 // Tabs
-                { m_Setting.GetOptionTabLocaleID(Setting.kActionsTab), "操作" },
-                { m_Setting.GetOptionTabLocaleID(Setting.kStatusTab), "状態" },
-                { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "概要" },
+                { m_Setting.GetOptionTabLocaleID(Setting.kActionsTab), "アクション" },
+                { m_Setting.GetOptionTabLocaleID(Setting.kStatusTab), "ステータス" },
+                { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "情報" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "郵便配送サポート" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "バニラ補助" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "郵便バン＆トラック" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "仕分け施設" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "専用仕分け施設" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "リセット" },
 
                 // Groups (Status tab)
@@ -58,184 +58,184 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "情報" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "リンク" },
 
-                // ---- Post Office ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "ローカル郵便の不足を修正" },
+                // ---- Post Office / Vanilla Assist ----
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "ローカル郵便不足を救済" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
-                    "有効にすると、ローカル郵便が少なくなりすぎたときに少量の郵便を追加します。\n" +
-                    "追加のバンは出ません。ちょっとした魔法…でも本物です :)"
+                    "まずゲーム本来の郵便輸送に任せます。\n" +
+                    "ローカル郵便が数回の確認でずっと少ない場合だけ、Magic Mail が少量を補充します。\n" +
+                    "仕分けアップグレード付き郵便局にも適用されます。"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "ローカル郵便のしきい値" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "ローカル郵便の救済しきい値" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
-                    "ローカル郵便が選んだ割合より少なくなると、\n" +
-                    "郵便局がローカル郵便を追加で取り寄せます。\n" +
-                    "建物の最大保管量に対する割合です。\n" +
-                    "例：<最大保管 = 100,000>、<しきい値 = 5%> の場合、\n" +
-                    "ローカル郵便が <5,000> 未満になると追加で取り寄せます。"
+                    "建物の最大保管量に対して、この割合以下を不足と判定します。\n" +
+                    "数回の確認で不足が続いた場合だけ救済します。"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "ローカル郵便の補充量" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "ローカル郵便の救済量" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingPercentage)),
-                    "ローカル郵便を取り寄せるときに追加する割合です（魔法の補充）。\n" +
-                    "バニラの最大値が <100,000> で <10%> に設定した場合、\n" +
-                    "必要なときに <10,000> が追加されます。"
+                    "救済時に追加するローカル郵便の量です。\n" +
+                    "建物の最大保管量に対する割合です。"
                 },
 
-                // Global overflow toggle (PO + PSF)
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "郵便のあふれを修正" },
+                // Global overflow toggle (PO + sorting)
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "郵便のあふれを救済" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
-                    "郵便が多すぎると、施設がちょっとした魔法の掃除をします。\n" +
-                    "余分な郵便は配達済みとして扱われ、削除されます。\n" +
-                    "施設が満杯のまま動かなくなるのを防ぎます。\n" +
-                    "完全なバニラ挙動にしたい場合はオフにしてください。"
+                    "郵便施設がいっぱいになりすぎた場合、Magic Mail が保存量を指定レベルまで減らします。\n" +
+                    "ローカル＋未仕分け＋発送郵便を合計し、ゲームが見落とすことのある過剰保管も検出します。\n" +
+                    "完全なバニラ動作にする場合はオフにしてください。"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "郵便局のあふれしきい値" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_OverflowPercentage)),
-                    "郵便局の総郵便量がこの割合に達すると、\n" +
-                    "この水準まで戻るように余分な郵便を削除します。"
+                    "保存郵便の合計がこの割合を超えると、Magic Mail が減らします。\n" +
+                    "通常の郵便局と仕分けアップグレード付き郵便局に適用されます。"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "仕分け施設のあふれしきい値" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_OverflowPercentage)),
-                    "仕分け施設の総郵便量がこの割合に達すると、\n" +
-                    "この水準まで戻るように余分な郵便を削除します。"
+                    "専用仕分け施設の保存郵便合計がこの割合を超えると、\n" +
+                    "Magic Mail が減らします。"
                 },
 
                 // ---- Post Vans & Trucks ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ChangeCapacity)), "容量を変更" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
-                    "バンとトラックの容量を変更します。オフの場合、\n" +
-                    "下の容量スライダーはすべて非表示になり、\n" +
-                    "スライダーの値に関係なくゲームのバニラ値が使われます。"
+                    "郵便バンとトラックの容量を変更する場合にオンにします。オフでは、\n" +
+                    "下のスライダーが非表示になり、\n" +
+                    "別の値が残っていてもゲーム本来の値を使います。"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "郵便バンの積載量" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "各郵便バンが運べる郵便量を調整します。\n" +
-                    "<100% = バニラの積載量>"
+                    "<100% = バニラの積載量。>"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "郵便バンの台数" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
-                    "各郵便施設が保有・出動できる郵便バンの台数を調整します。\n" +
-                    "<100% = バニラの台数>"
+                    "各郵便施設が所有・出動できる郵便バン数を調整します。\n" +
+                    "<100% = バニラの台数。>"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "郵便トラックの台数" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
-                    "各仕分け施設（および郵便トラックを持つ施設）が\n" +
-                    "保有・出動できる郵便トラックの台数を調整します。\n" +
-                    "<100% = バニラの台数>"
+                    "郵便トラックを持つ施設が所有・出動できる台数を調整します。\n" +
+                    "<100% = バニラの台数。>"
                 },
 
-                // ---- Sorting Facility ----
+                // ---- Dedicated Sorting Facility ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)), "仕分け速度" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
-                    "**仕分け**施設の基本仕分け速度に掛ける倍率です。\n" +
+                    "専用仕分け施設の倍率です。\n" +
+                    "郵便局の仕分けアップグレードは変更しません。\n" +
                     "<100% = バニラ>。"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "仕分け保管容量" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "仕分け施設の保管容量" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
-                    "**郵便の保管容量**を調整します。\n" +
+                    "専用仕分け施設の郵便保管量を調整します。\n" +
+                    "郵便局の仕分けアップグレードは変更しません。\n" +
                     "<100% = バニラ>。"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "未仕分け郵便の不足を修正" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "未仕分け郵便不足を救済" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
-                    "有効にすると、未仕分け郵便が少なすぎるときに少量を自動で追加します。\n" +
-                    "これで仕分け施設が動き続けやすくなります。\n" +
-                    "カーゴ港があると仕分け施設に十分な郵便が届かない現在の不具合への一時的な対策です。"
+                    "まずゲーム本来の方法で未仕分け郵便を供給させます。\n" +
+                    "専用仕分け施設の在庫が数回の確認でずっと少ない場合だけ、\n" +
+                    "Magic Mail が少量を補充します。"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "未仕分け郵便のしきい値" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "未仕分け郵便の救済しきい値" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
-                    "未仕分け郵便が総保管容量のこの低い割合を下回ると、\n" +
-                    "追加の未仕分け郵便を取り寄せます。"
+                    "最大保管量に対して、この割合以下を不足と判定します。\n" +
+                    "数回の確認で不足が続いた場合だけ救済します。"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "未仕分け郵便の補充量" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "未仕分け郵便の救済量" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
-                    "未仕分け郵便を取り寄せるときの追加量です（魔法の補充）。\n" +
-                    "最大保管容量に対する割合です。\n" +
-                    "バニラ <最大 = 250,000> で <10%> に設定した場合、<25,000> が追加されます。"
+                    "救済時に追加する未仕分け郵便の量です。\n" +
+                    "最大保管量に対する割合です。"
                 },
 
                 // ---- RESET BUTTONS ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "ゲームのデフォルト" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "すべての設定をゲーム本来のデフォルト動作（バニラ）に戻します。" },
-
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "ゲーム既定値" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "すべての設定をゲーム本来の動作（バニラ）に戻します。" },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "おすすめ" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**かんたんスタート** – おすすめの郵便設定をまとめて適用します。\n" +
-                    "ワンクリックで完了！"
+                    "**バニラ補助** - クイックスタート。\n" +
+                    "まず通常の郵便物流に任せ、長引く不足やあふれだけを救済します。\n" +
+                    "おすすめの容量調整も適用します。"
                 },
 
                 // ---- Status tab ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), string.Empty },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)), "直近のバックグラウンドスキャンで処理された郵便局、郵便バン、仕分け施設、郵便トラックの概要です。" },
-
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
+                    "ステータス画面を開いた時点の郵便施設です。\n" +
+                    "\n" +
+                    "**郵便局** = 通常の郵便局。\n" +
+                    "**仕分け施設** = 専用の郵便仕分け施設。\n" +
+                    "**仕分け付き郵便局** = <仕分けアップグレード付き Westmont Tower>。\n" +
+                    "- **Skyscrapers DLC** が必要です。"
+                },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusVehicleSummary)), string.Empty },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusVehicleSummary)),
+                    "ステータス画面を開いた時点の郵便車両容量です。\n" +
+                    "\n" +
+                    "**郵便バン** = 地域内の集荷・配達車両。\n" +
+                    "**郵便トラック** = 施設間で郵便を運ぶトラック。"
+                },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "月間郵便" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusCityMailSummary)),
-                    "最近の都市全体の郵便フローを表示します。\n" +
+                    "都市全体の最近の郵便フローを表示します。\n" +
                     "\n" +
                     "**累積** = 市民が生成した郵便量。\n" +
                     "**処理済み** = 郵便ネットワークが実際に処理した量。\n" +
                     "\n" +
-                    "- 処理済みが累積より多いことが多ければ、郵便ネットワークの能力は十分です。\n" +
+                    "- 処理済みが累積より多いことが多ければ、郵便網の能力は十分です。\n" +
                     "- 累積が長時間ずっと処理済みを上回る場合、\n" +
-                    "都市がネットワークの処理能力以上の郵便を生成しています。\n" +
+                    "都市が郵便網の処理能力以上の郵便を生成しています。\n" +
                     "施設や郵便バンを増やすか、設定を調整してください。"
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "アクティビティ" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "直近の更新で行った郵便補充と、あふれクリーンアップの回数です。" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "直近の Magic Mail 救済処理で行った補充と、あふれ整理の回数です。" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.WriteReport)), "レポートを書き出す" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.WriteReport)),
+                    "オプションを開いている間に詳細な郵便スキャンを**1回だけ**実行し、\n" +
+                    "<Logs/MagicMail.log> に書き出します。バックグラウンド記録はありません。"
+                },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenLog)), "ログを開く" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenLog)), "<Logs/MagicMail.log> を開きます。まだ無い場合は Logs フォルダーを開きます。" },
 
                 // ---- Status text templates (for MagicMailSystem) ----
-                { "MM_STATUS_NO_FACILITIES", "まだ郵便施設が処理されていません。都市を開き、シミュレーションをしばらく動かしてください。" },
-
-                { "MM_STATUS_NO_ACTIVITY", "まだアクティビティは記録されていません。" },
-
-                { "MM_STATUS_SUMMARY", "{0} 件の郵便局 | {1} 台の郵便バン | {2} 件の仕分け施設 | {3} 台の郵便トラック" },
-
-                { "MM_STATUS_ACTIVITY", "{0} 回のローカル郵便補充 | {1} 回の未仕分け郵便補充 | {2} 回のあふれクリーンアップ" },
-
-                { "MM_STATUS_CITY_MAIL_NOT_READY", "都市の郵便統計はまだ利用できません。都市を開き、シミュレーションをしばらく動かしてください。" },
-
+                { "MM_STATUS_NO_FACILITIES", "郵便施設が見つかりません。都市を開いてから、もう一度ステータスを開いてください。" },
+                { "MM_STATUS_NO_ACTIVITY", "救済アクティビティは記録されていません。" },
+                { "MM_STATUS_SUMMARY", "郵便局: {0} | 仕分け付き郵便局: {1} | 仕分け施設: {2}" },
+                { "MM_STATUS_VEHICLES", "郵便バン: {0} | 郵便トラック: {1}" },
+                { "MM_STATUS_ACTIVITY", "ローカル救済 {0} | 未仕分け救済 {1} | あふれ整理 {2}" },
+                { "MM_STATUS_CITY_MAIL_NOT_READY", "都市の郵便統計はまだ利用できません。都市を開いてシミュレーションをしばらく動かしてください。" },
                 { "MM_STATUS_CITY_MAIL", "{0} 累積 | {1} 処理済み" },
 
                 // ---- About tab: info ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModNameDisplay)), "Mod" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModNameDisplay)), "このModの表示名です。" },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModVersionDisplay)), "バージョン" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "現在のModバージョンです。" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "現在のModバージョンとビルド種別です。" },
 
                 // ---- About tab: links ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mochi's Paradox mods" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "**Magic Mail** やその他のModの **Paradox** ページを開きます。" },
-
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mochi の Paradox Mods" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "**Magic Mail** とその他のModの **Paradox** ページを開きます。" },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)), "ブラウザで **Discord** のフィードバックチャットを開きます。" },
-
             };
         }
 

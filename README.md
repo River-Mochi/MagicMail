@@ -1,251 +1,112 @@
 # Magic Mail [MM]
 
-Magic Mail helps Cities: Skylines II’s postal system work more smoothly and gives more
-control over how post offices and sorting facilities behave.
+Magic Mail helps Cities: Skylines II's postal system recover from common mail problems and gives you simple controls for postal capacity.
 
-It can:
+## Features
 
-- Top up **Local Mail** at struggling post offices.
-- Top up **Unsorted Mail** at sorting facilities.
-- Trim overflowing mail buffers so facilities don’t stall.
-- Increase post van payload and fleet sizes.
-- Increase post truck fleet sizes.
-- Boost sorting speed and storage for sorting facilities.
-- Show simple city-wide mail stats in the options UI.
+- **Vanilla Assist** for persistent low Local Mail at post offices.
+- **Vanilla Assist** for persistent low Unsorted Mail at dedicated sorting facilities.
+- Optional overflow cleanup using **Local + Unsorted + Outgoing Mail**.
+- Adjustable post-van payload and fleet size.
+- Adjustable post-truck fleet size.
+- Adjustable sorting speed and storage for **dedicated sorting facilities**.
+- Read-only postal stats in **Options > Magic Mail > Status**.
+- One-click **Recommended** preset or **Game defaults** reset.
 
-Everything is optional: sliders can be turned off, and settings can always be reset
-back to game defaults or to a recommended preset.
+Everything is optional. You can use only the capacity controls and leave all rescue features off.
 
----
+## Vanilla Assist
 
-## 1. Post offices – keep “mail to deliver” available
+Magic Mail now lets the game's normal mail transfers try first.
 
-**Goal:** Reduce the *“Unreliable mail service”* happiness penalty by keeping post offices
-supplied with Local Mail to deliver.
+A rescue only happens when a shortage stays low across several Magic Mail checks. This avoids immediately replacing normal postal logistics.
 
-**Options (Actions → Post office):**
+### Post offices
 
-- **Fix low Local mail**  
-  When enabled, each post office checks its own Local Mail storage.  
-  If it falls below a threshold, the mod **adds extra Local Mail** directly into the
-  building’s buffer (no van trip required), so it has something to deliver.
+**Rescue low local mail** can add a small amount of Local Mail when a regular post office stays very low.
 
-- **Local mail threshold (%)**  
-  If Local Mail is below this percentage of the building’s capacity, the top-up triggers.
+This also applies to a post office with a sorting upgrade, such as **Westmont Tower** with its sorting upgrade.
 
-- **Local mail fetch amount (%)**  
-  How much Local Mail to add, as a percentage of the building’s capacity, when a top-up
-  happens.
+### Dedicated sorting facilities
 
-This is a configurable version of the original “Postal Helper” behaviour: instead of a
-fixed amount, both the threshold and amount are under user control.
+**Rescue low unsorted mail** can add a small amount of Unsorted Mail when a dedicated sorting facility stays very low.
 
-> This is a “magic” helper: Local Mail is spawned directly in the post office
-> without simulating a transfer.
+### Mail overflow
 
----
+**Rescue mail overflow** checks the total stored:
 
-## 2. Sorting facilities – keep the sorter busy
+- Local Mail
+- Unsorted Mail
+- Outgoing Mail
 
-**Goal:** Prevent sorting facilities from sitting idle because they have no Unsorted Mail to process.
+If total storage goes above your selected threshold, Magic Mail trims it back down proportionally.
 
-**Options (Actions → Sorting facility):**
+## Capacity controls
 
-- **Fix low unsorted mail**  
-  When enabled, a sorting facility checks its Unsorted Mail storage.  
-  If it falls below a threshold, the mod **adds extra Unsorted Mail** into the facility.
+With **Change capacities** enabled you can adjust:
 
-- **Unsorted mail threshold (%)**  
-  If Unsorted Mail is below this percentage of capacity, the facility triggers a top-up.
+- Post van mail load
+- Post van fleet size
+- Post truck fleet size
 
-- **Unsorted mail fetch amount (%)**  
-  How much Unsorted Mail to add, as a percentage of capacity, when a top-up happens.
+Dedicated sorting facilities also have controls for:
 
-This is also “magic”: Unsorted Mail appears in the facility to keep the sorting line busy
-without waiting for additional trucks or outside connections.
+- Sorting speed
+- Sorting storage capacity
 
----
+`100%` is the game's normal value.
 
-## 3. Fix mail overflow (post offices + sorting)
+Sorting speed and storage sliders do **not** change a post office's sorting upgrade.
 
-**Goal:** Stop postal buildings from becoming permanently overfilled with mail and stalling.
+## Status
 
-Both **post offices** and **sorting facilities** use three stored resources:
+The **Status** tab is read-only and is scanned only when you open it in Options. The city is paused while Options is open, so there is no background Status scan during normal gameplay.
 
-- Local Mail  
-- Outgoing Mail  
-- Unsorted Mail  
+It shows:
 
-When enabled, the overflow fixer looks at the **total** of all three.
+- Regular post offices, sorting-upgraded post offices, and dedicated sorting facilities
+- Post-van and post-truck capacity
+- Recent city-wide mail accumulated vs processed
+- Rescue activity from the last Magic Mail rescue pass
 
-**Options (Actions → Post office):**
+**Write Report** performs one deeper diagnostic scan on demand and writes it to:
 
-- **Fix mail overflow**  
-  Global toggle. When on, both post offices and sorting facilities trim their stored mail
-  if they exceed configurable overflow thresholds.
+`Logs/MagicMail.log`
 
-- **Post office overflow threshold (%)**  
-  If total stored mail (Local + Outgoing + Unsorted) at a post office exceeds this
-  percentage of its capacity, a cleanup is performed.
+There is no continuous Release diagnostic logging.
 
-- **Sorting overflow threshold (%)**  
-  Same logic applied to sorting facilities.
+## Performance
 
-**How trimming works (both building types):**
+If all rescue features are off, Magic Mail's recurring rescue system is disabled. Players who use only the capacity controls do not get the recurring rescue scan.
 
-- The current total mail is compared to capacity.  
-- If total mail exceeds the building’s overflow threshold, a **target total** is computed  
-  (for example, capacity 10 000 and threshold 85% ⇒ target total 8 500).
-- All three mail types (Local, Outgoing, Unsorted) are **scaled down proportionally** so:
-  - Their ratios stay roughly the same, and  
-  - The new total is pulled down toward the target.
+When rescue features are enabled, Magic Mail checks postal facilities at a low frequency and intervenes only after a persistent shortage or real overflow.
 
-In practical terms, this treats some stored mail as “delivered/processed” so the building
-can start working again instead of staying clogged forever.
+## Recommended preset
 
----
+**Recommended** enables Vanilla Assist with conservative rescue thresholds, sets dedicated sorting speed to **150%**, and sets post-van mail load to **200%**.
 
-## 4. Vans, trucks, and sorting power
+You can switch back to **Game defaults** at any time.
 
-**Goal:** Adjust the strength of the postal network without editing game files.
+## Languages
 
-### 4.1 Post vans & trucks
+16 languages are supported:
 
-**Options (Actions → Post vans & trucks):**
+English, Français, Deutsch, Español, Italiano, Polski, Português (Brasil), Português (Portugal), 日本語, 한국어, 简体中文, 繁體中文, ไทย, Tiếng Việt, Türkçe, Українська.
 
-- **Change capacities**  
-  Master toggle. When off, the game uses pure vanilla values and hides the sliders below.
-  When on, the sliders override the vanilla capacities.
+## Compatibility and safety
 
-- **Post van mail load (%)**  
-  Multiplier for how much mail a single post van can carry  
-  (`PostVanData.m_MailCapacity`).  
-  - 100% = vanilla payload.  
-  - Higher values allow each van to carry more mail.
+- No Harmony patches.
+- Does not patch game DLLs.
+- Does not add a custom save-file structure.
+- Capacity changes return to game defaults when the mod is not loaded.
+- Safe to disable or unsubscribe.
 
-- **Post van fleet size (%)**  
-  Multiplier for how many post vans each postal building can own  
-  (`PostFacilityData.m_PostVanCapacity`).  
-  - Applies to post offices and other post facilities using vans.
+## Credits
 
-- **Post truck fleet size (%)**  
-  Multiplier for how many post trucks each sorting facility can own  
-  (`PostFacilityData.m_PostTruckCapacity`).  
-  - Mainly affects sorting facilities and other prefabs with post trucks.
-
-### 4.2 Sorting facilities
-
-**Options (Actions → Sorting facility):**
-
-- **Sorting speed (%)**  
-  Multiplier for the facility’s sorting throughput  
-  (the game’s `m_SortingRate` value).  
-  - 100% = vanilla sorting speed.  
-  - Higher values let a sorting facility process more mail per tick.
-
-- **Sorting storage capacity (%)**  
-  Multiplier for how much mail a sorting facility can store  
-  (`PostFacilityData.m_MailCapacity`, but only for facilities that actually sort).
-
-These capacity changes are non-magical: they simply increase or decrease how strong the
-network is. No mail is created or destroyed by these sliders alone.
-
----
-
-## 5. Status tab – quick city overview
-
-The **Status** tab is read-only and reflects the current state of the city.
-
-**Groups:**
-
-- **City scan**  
-  Shows a one-line summary, for example:  
-  `6 post offices | 55 post-vans | 1 sort building | 5 post trucks`  
-  These counts reflect the effective capacities after sliders are applied.
-
-- **City mail**  
-  Uses the vanilla `MailAccumulationSystem` to summarize recent city-wide mail flow, for example:  
-  `Monthly   168,192 accumulated | 277,759 processed`
-
-  - **Accumulated** = how much mail citizens generated in the recent window.  
-  - **Processed**   = how much mail the network actually handled.
-
-  If **Processed** stays above **Accumulated** over time, the postal network has
-  enough capacity and the postal budget could potentially be reduced.  
-  If **Accumulated** consistently exceeds **Processed**, the city is generating more
-  mail than the network can handle and more capacity or different settings are needed.
-
-- **Activity**  
-  Shows counts for:
-  - Local-mail top-ups at post offices.  
-  - Unsorted-mail top-ups at sorting facilities.  
-  - Overflow cleanups at both building types.
-
-This is useful for checking whether the “magic” helpers are doing anything or if the city
-is already running fine without them.
-
----
-
-## 6. “Magic” vs “non-magic” features
-
-**Magic / instant automatic**
-
-- **Fix low Local mail** (post offices)  
-  Spawns Local Mail directly into the building when storage is too low.
-
-- **Fix low unsorted mail** (sorting facilities)  
-  Spawns Unsorted Mail directly into the facility when storage is too low.
-
-- **Fix mail overflow**  
-  Deletes excess stored mail above chosen thresholds to keep buildings from blocking.
-
-**More realistic tuning:**
-
-- Post van mail load slider.  
-- Post van fleet size slider.  
-- Post truck fleet size slider.  
-- Sorting speed slider.  
-- Sorting storage capacity slider.  
-- Status / City mail information
-
----
-
-### 16 Languages
-
-- Français French, Deutsch German, Español Spanish,  Italiano Italian
-- English, 简体中文 (Simplified Chinese), 한국어 Korean, Português Brazilian
-
----
-
-## 7. Safety
-
-- Does **not** patch game DLLs directly.  
-- Only changes prefab capacities and building resource buffers at runtime.  
-- Does **not** permanently modify the save file structure.
-
-It is safe to:
-
-- Disable the mod in the launcher, or  
-- Unsubscribe from the mod.
-
-On the next load without the mod:
-
-- Facilities return to the game’s default capacities.  
-- Any “magic” mail that was added or removed only existed in the simulation at the
-  time and does not corrupt the save.
+- **River-Mochi** - author
+- **BugsyG** - testing
+- Inspired by **Infixo's Postal Helper**
 
 ## Links
-- [Paradox Mods]("https://mods.paradoxplaza.com/authors/River-mochi/cities_skylines_2?games=cities_skylines_2&orderBy=desc&sortBy=best&time=alltime";)
 
-
-## Scan Frequency Reference
-
-| UpdatesPerDay | In-Game Time Between Scans | Real-Life Rough Estimate| Notes |
-|---------------|----------------------------|----------------------------------------|-------|
-| **32**  | ~45 min                        | ~6–12 seconds                           | Very light load (MM current default) |
-| **64**  | ~22.5 min                      | ~3–6 seconds                           | Still very light, more responsive |
-| **128** | ~11.25 min                     | ~1.5–3 seconds                         | Medium frequency, similar to vanilla feel |
-| **256** | ~5.6 min                       | ~1–2 second                          | Vanilla PostFacilityAISystem speed |
-| **512** | ~2.8 min                       | ~0.5–1 seconds                       | Very high frequency; heavier load |
-
-> **Note:** Real-life times vary by hardware and city size; rough ballpark estimates meant only for tuning. these are my times not other people's PC.
+- [Paradox Mods](https://mods.paradoxplaza.com/authors/River-mochi/cities_skylines_2?games=cities_skylines_2&orderBy=desc&sortBy=best&time=alltime)

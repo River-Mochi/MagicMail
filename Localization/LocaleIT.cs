@@ -42,13 +42,13 @@ namespace MagicMail
                 // Tabs
                 { m_Setting.GetOptionTabLocaleID(Setting.kActionsTab), "Azioni" },
                 { m_Setting.GetOptionTabLocaleID(Setting.kStatusTab), "Stato" },
-                { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Informazioni" },
+                { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab), "Info" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Aiuto alla distribuzione postale" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Furgoni e camion" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Centro di smistamento" },
-                { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Reimposta" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup), "Aiuto vanilla" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup), "Furgoni e camion postali" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Centro di smistamento dedicato" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup), "Ripristina" },
 
                 // Groups (Status tab)
                 { m_Setting.GetOptionGroupLocaleID(Setting.StatusSummaryGroup), "Scansione città" },
@@ -58,184 +58,184 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Info" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Link" },
 
-                // ---- Post Office ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Correggi poca posta locale" },
+                // ---- Post Office / Vanilla Assist ----
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Soccorri posta locale bassa" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
-                    "Se attivo, compare un po' di posta quando le scorte diventano troppo basse.\n" +
-                    "Non crea furgoni extra: è un po' come magia... ma vera :)"
+                    "Lascia prima al gioco il tentativo con i normali trasferimenti di posta.\n" +
+                    "Se la posta locale resta molto bassa per diverse scansioni, Magic Mail aggiunge un piccolo rifornimento di soccorso.\n" +
+                    "Vale anche per gli uffici postali con miglioramento di smistamento."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Soglia posta locale" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingThresholdPercentage)), "Soglia soccorso posta locale" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingThresholdPercentage)),
-                    "Se la posta locale scende sotto questa percentuale scelta da te,\n" +
-                    "l'ufficio postale recupera altra posta locale.\n" +
-                    "È una percentuale della capacità massima dell'edificio.\n" +
-                    "Es.: <stoccaggio max = 100.000> e <soglia = 5%>,\n" +
-                    "quando la posta locale < <5.000>, viene recuperata altra posta."
+                    "La posta locale è considerata bassa a questa percentuale dello spazio massimo dell'edificio.\n" +
+                    "Il soccorso parte solo se resta bassa per diverse scansioni."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Quantità posta locale" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GettingPercentage)), "Quantità soccorso posta locale" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GettingPercentage)),
-                    "Percentuale aggiunta quando viene recuperata posta locale (ricarica magica).\n" +
-                    "Se il massimo vanilla = <100.000> e imposti <10%>,\n" +
-                    "vengono aggiunti <10.000> quando serve."
+                    "Quanta posta locale aggiungere quando scatta il soccorso.\n" +
+                    "È una percentuale dello spazio massimo dell'edificio."
                 },
 
-                // Global overflow toggle (PO + PSF)
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Correggi sovraccarico di posta" },
+                // Global overflow toggle (PO + sorting)
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.FixMailOverflow)), "Correggi posta in eccesso" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.FixMailOverflow)),
-                    "Quando c'è troppa posta, le strutture fanno una piccola pulizia magica.\n" +
-                    "La posta in eccesso viene considerata consegnata e rimossa.\n" +
-                    "Così le strutture non restano bloccate piene per sempre.\n" +
-                    "Disattiva per mantenere il comportamento vanilla puro."
+                    "Se una struttura postale si riempie troppo, Magic Mail riduce la posta accumulata al livello scelto.\n" +
+                    "Conta posta locale + non smistata + in uscita, così può rilevare eccessi che il gioco può calcolare male.\n" +
+                    "Disattiva per il comportamento vanilla puro."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Soglia sovraccarico ufficio postale" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_OverflowPercentage)), "Soglia eccesso ufficio postale" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_OverflowPercentage)),
-                    "Quando la posta totale di un ufficio raggiunge questa percentuale, la mod\n" +
-                    "rimuove abbastanza posta da riportarla a questo livello."
+                    "Quando la posta totale supera questo livello, Magic Mail la riduce.\n" +
+                    "Vale per uffici normali e uffici con miglioramento di smistamento."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Soglia sovraccarico centro di smistamento" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_OverflowPercentage)), "Soglia eccesso centro di smistamento" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_OverflowPercentage)),
-                    "Quando la posta totale di un centro di smistamento raggiunge questa percentuale, la mod\n" +
-                    "rimuove abbastanza posta da riportarla a questo livello."
+                    "Quando la posta totale in un centro di smistamento dedicato supera questo livello,\n" +
+                    "Magic Mail la riduce."
                 },
 
                 // ---- Post Vans & Trucks ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ChangeCapacity)), "Modifica capacità" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
-                    "Attiva per modificare le capacità di furgoni e camion. Se disattivato,\n" +
-                    "tutti i cursori di capacità qui sotto vengono nascosti e\n" +
-                    "si usano i valori vanilla del gioco anche se hai lasciato i cursori su altri valori."
+                    "Attiva per modificare le capacità di furgoni e camion. Se è disattivato,\n" +
+                    "i cursori sotto vengono nascosti e\n" +
+                    "si usano i valori vanilla anche se erano rimasti impostati valori diversi."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Carico del furgone postale" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Carico furgone postale" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "Controlla quanta posta può trasportare ogni furgone postale.\n" +
                     "<100% = carico vanilla.>"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Flotta di furgoni postali" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Dimensione flotta furgoni" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "Controlla quanti furgoni ogni edificio postale può possedere e inviare.\n" +
                     "<100% = flotta vanilla.>"
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Flotta di camion postali" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Dimensione flotta camion" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
-                    "Controlla quanti camion postali ogni centro di smistamento (e ogni struttura con camion postali)\n" +
-                    "può possedere e inviare.\n" +
+                    "Controlla quanti camion postali ogni struttura che li usa può possedere e inviare.\n" +
                     "<100% = flotta vanilla.>"
                 },
 
-                // ---- Sorting Facility ----
+                // ---- Dedicated Sorting Facility ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)), "Velocità di smistamento" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
-                    "Moltiplicatore per i centri di **smistamento**. Si applica alla velocità base della struttura.\n" +
+                    "Moltiplicatore per i centri di smistamento dedicati.\n" +
+                    "Non cambia il miglioramento di smistamento di un ufficio postale.\n" +
                     "<100% = vanilla>."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Capacità di stoccaggio" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Capacità deposito smistamento" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
-                    "Controlla lo **stoccaggio della posta**.\n" +
+                    "Controlla lo spazio posta dei centri di smistamento dedicati.\n" +
+                    "Non cambia il miglioramento di smistamento di un ufficio postale.\n" +
                     "<100% = vanilla>."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Correggi poca posta non smistata" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Soccorri posta non smistata bassa" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GetUnsortedMail)),
-                    "Se attivo, compare un po' di posta non smistata quando le scorte diventano troppo basse.\n" +
-                    "Così i centri di smistamento restano attivi.\n" +
-                    "È una soluzione temporanea a un bug attuale per cui i centri non ricevono abbastanza posta se è presente un porto merci."
+                    "Lascia prima al gioco la normale fornitura di posta non smistata.\n" +
+                    "Se un centro dedicato resta molto basso per diverse scansioni,\n" +
+                    "Magic Mail aggiunge un piccolo rifornimento di soccorso."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Soglia posta non smistata" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)), "Soglia soccorso posta non smistata" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingThresholdPercentage)),
-                    "Se la posta non smistata scende sotto questa bassa percentuale della capacità totale,\n" +
-                    "viene recuperata un po' di posta non smistata in più."
+                    "La posta non smistata è considerata bassa a questa percentuale dello spazio massimo.\n" +
+                    "Il soccorso parte solo se resta bassa per diverse scansioni."
                 },
-
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Quantità posta non smistata" },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GettingPercentage)), "Quantità soccorso posta non smistata" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_GettingPercentage)),
-                    "Posta extra aggiunta quando si recupera posta non smistata (ricarica magica).\n" +
-                    "La quantità è una percentuale della capacità massima.\n" +
-                    "Se vanilla <max = 250.000> e imposti <10%>, vengono aggiunti <25.000>."
+                    "Quanta posta non smistata aggiungere quando scatta il soccorso.\n" +
+                    "È una percentuale dello spazio massimo."
                 },
 
                 // ---- RESET BUTTONS ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Valori del gioco" },
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)), "Ripristina tutte le impostazioni al comportamento originale del gioco (vanilla)." },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Consigliato" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Avvio rapido** – applica tutte le impostazioni postali consigliate.\n" +
-                    "Modalità facile: un clic e fatto!"
+                    "**Aiuto vanilla** - Avvio rapido.\n" +
+                    "Lascia lavorare prima la logistica normale, poi interviene su carenze persistenti o eccessi.\n" +
+                    "Applica anche le regolazioni di capacità consigliate."
                 },
 
                 // ---- Status tab ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), string.Empty },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)), "Riepilogo di uffici postali, furgoni, centri di smistamento e camion postali elaborati nell'ultima scansione in background." },
-
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
+                    "Edifici postali trovati quando si apre la pagina Stato.\n" +
+                    "\n" +
+                    "**Uffici postali** = uffici normali.\n" +
+                    "**Centri di smistamento** = centri postali dedicati.\n" +
+                    "**Uffici con smistamento** = <Westmont Tower con miglioramento di smistamento>.\n" +
+                    "- Richiede il **DLC Skyscrapers**."
+                },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusVehicleSummary)), string.Empty },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusVehicleSummary)),
+                    "Capacità dei veicoli postali quando si apre la pagina Stato.\n" +
+                    "\n" +
+                    "**Furgoni postali** = ritiro e consegna locale.\n" +
+                    "**Camion postali** = spostano la posta tra le strutture."
+                },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusCityMailSummary)), "Posta mensile" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusCityMailSummary)),
                     "Mostra il flusso recente della posta in tutta la città.\n" +
                     "\n" +
-                    "**Accumulata** = quanta posta hanno generato i cittadini.\n" +
-                    "**Gestita** = quanta posta la rete ha effettivamente elaborato.\n" +
+                    "**Accumulated** = quanta posta hanno generato i cittadini.\n" +
+                    "**Processed** = quanta posta la rete ha davvero gestito.\n" +
                     "\n" +
-                    "- Se Gestita è spesso maggiore di Accumulata, la rete postale ha abbastanza capacità.\n" +
-                    "- Se Accumulata resta sopra Gestita per molto tempo,\n" +
-                    "la città genera più posta di quanta la rete possa gestire.\n" +
-                    "Aggiungi strutture o furgoni, oppure modifica le impostazioni."
+                    "- Se Processed è spesso superiore ad Accumulated, la rete postale ha abbastanza capacità.\n" +
+                    "- Se Accumulated resta sopra Processed a lungo,\n" +
+                    "la città genera più posta di quanta la rete riesca a gestire.\n" +
+                    "Aggiungi strutture, furgoni o modifica le impostazioni."
                 },
-
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "Attività" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "Conta le ricariche di posta e le pulizie di sovraccarico eseguite nell'ultimo aggiornamento." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)), "Interventi di soccorso e pulizie per eccesso dell'ultimo passaggio di Magic Mail." },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.WriteReport)), "Scrivi rapporto" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.WriteReport)),
+                    "Esegue **una sola volta** una scansione postale dettagliata mentre le Opzioni sono aperte,\n" +
+                    "poi scrive il rapporto in <Logs/MagicMail.log>. Nessun log in background."
+                },
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenLog)), "Apri log" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenLog)), "Apre <Logs/MagicMail.log> oppure la cartella Logs se il file non esiste ancora." },
 
                 // ---- Status text templates (for MagicMailSystem) ----
-                { "MM_STATUS_NO_FACILITIES", "Nessuna struttura postale ancora elaborata. Apri una città e lascia girare la simulazione." },
-
-                { "MM_STATUS_NO_ACTIVITY", "Nessuna attività registrata finora." },
-
-                { "MM_STATUS_SUMMARY", "{0} uffici postali | {1} furgoni postali | {2} centri di smistamento | {3} camion postali" },
-
-                { "MM_STATUS_ACTIVITY", "{0} ricariche posta locale | {1} ricariche posta non smistata | {2} pulizie sovraccarico" },
-
-                { "MM_STATUS_CITY_MAIL_NOT_READY", "Le statistiche della posta cittadina non sono ancora disponibili. Apri una città e lascia girare la simulazione." },
-
-                { "MM_STATUS_CITY_MAIL", "{0} accumulata | {1} gestita" },
+                { "MM_STATUS_NO_FACILITIES", "Nessuna struttura postale trovata. Apri una città, poi riapri Stato." },
+                { "MM_STATUS_NO_ACTIVITY", "Nessuna attività di soccorso registrata." },
+                { "MM_STATUS_SUMMARY", "Uffici postali: {0} | Uffici con smistamento: {1} | Centri di smistamento: {2}" },
+                { "MM_STATUS_VEHICLES", "Furgoni postali: {0} | Camion postali: {1}" },
+                { "MM_STATUS_ACTIVITY", "{0} soccorsi locali | {1} soccorsi non smistati | {2} pulizie eccesso" },
+                { "MM_STATUS_CITY_MAIL_NOT_READY", "Statistiche postali della città non ancora disponibili. Apri una città e lascia andare la simulazione." },
+                { "MM_STATUS_CITY_MAIL", "{0} accumulata | {1} elaborata" },
 
                 // ---- About tab: info ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModNameDisplay)), "Mod" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModNameDisplay)), "Nome visualizzato di questa mod." },
-
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModNameDisplay)), "Nome visualizzato di questo mod." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ModVersionDisplay)), "Versione" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "Versione attuale della mod." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.ModVersionDisplay)), "Versione attuale del mod e tipo di build." },
 
                 // ---- About tab: links ----
-                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mochi's Paradox mods" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "Apre la pagina **Paradox** di **Magic Mail** e delle altre mod." },
-
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadox)), "Mod Paradox di Mochi" },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadox)), "Apre la pagina **Paradox** di **Magic Mail** e degli altri mod." },
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)), "Apre la chat di feedback **Discord** nel browser." },
-
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)), "Apre nel browser la chat **Discord** per feedback." },
             };
         }
 

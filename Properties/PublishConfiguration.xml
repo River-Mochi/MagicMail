@@ -79,7 +79,11 @@ tags: postal helper, unreliable mail service, broken mail bug fixes, post van li
 <Dependency Id="" />
 <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 <ChangeLog>
-- Updated for game patch 1.6.2
+- Updated for game 1.6.2.
+- Added proper support for post offices with sorting upgrades (e.g., SK Westmont Tower).
+- Recommended sorting speed is now 150%; post-van mail load remains 200%.
+- new Write Report button
+- Mail rescues lets normal game transfers try first before stepping helping.
 </ChangeLog>
 <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 <ExternalLink Type="github" Url="https://github.com/River-Mochi/MagicMail" />
