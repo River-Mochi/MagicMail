@@ -192,17 +192,17 @@ namespace MagicMail
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusFacilitySummary)), string.Empty },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusFacilitySummary)),
-                    "Postal buildings found in the last scan.\n\n" +
+                    "Postal buildings found when the Status page is opened.\n\n" +
                     "**Post offices** = regular post offices (PO).\n" +
                     "**Sorting facilities** = dedicated Post Sorting Facilities.\n" +
-                    "**Sorting PO** = <Westmont Tower with Sorting Upgrade>.\n" +
+                    "**Sorting post offices** = <Westmont Tower with Sorting Upgrade>.\n" +
                     "- Requires **Skyscrapers DLC**."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusVehicleSummary)), string.Empty },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusVehicleSummary)),
-                    "Postal vehicle capacity from the last scan.\n\n" +
+                    "Postal vehicle capacity when the Status page is opened.\n\n" +
                     "**Post-vans** = local pickup and delivery vehicles.\n" +
                     "**Post trucks** = trucks that move mail between facilities."
                 },
@@ -222,7 +222,14 @@ namespace MagicMail
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.StatusLastActivity)), "Activity" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.StatusLastActivity)),
-                    "Rescues and overflow cleanups performed in the last Magic Mail scan."
+                    "Rescues and overflow cleanups from the last Magic Mail rescue pass."
+                },
+
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.WriteReport)), "Write Report" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.WriteReport)),
+                    "Runs a **one-time** detailed postal scan while Options is open,\n" +
+                    "then writes the report to <Logs/MagicMail.log>. No background logging."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenLog)), "Open Log" },
@@ -233,10 +240,10 @@ namespace MagicMail
 
                 // ---- Status text templates (for MagicMailSystem) ----
                 { "MM_STATUS_NO_FACILITIES",
-                  "No postal facilities processed yet. Open a city and let the simulation run." },
+                  "No postal facilities found. Open a city, then open Status again." },
 
                 { "MM_STATUS_NO_ACTIVITY",
-                  "No rescue activity recorded in the last scan." },
+                  "No rescue activity recorded." },
 
                 {
                     "MM_STATUS_SUMMARY", 

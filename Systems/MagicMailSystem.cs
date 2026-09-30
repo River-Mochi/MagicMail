@@ -142,9 +142,17 @@ namespace MagicMail
         /// Per-update simulation logic for all post facilities.</summary>
         protected override void OnUpdate()
         {
-            Setting? settings = Mod.Settings;
+           Setting? settings = Mod.Settings;
             if (settings == null)
             {
+                return;
+            }
+
+            // Capacity-only users do not need the recurring rescue scan.
+            // Disable this system before creating/querying the facility array.
+            if (!NeedsRescue(settings))
+            {
+                SetRescueEnabled(false);
                 return;
             }
 
@@ -695,6 +703,38 @@ namespace MagicMail
         // --------------------------------------------------------------------
         // Internal helpers
         // --------------------------------------------------------------------
+         internal static bool NeedsRescue(Setting settings)
+        {
+            return settings.PO_GetLocalMail ||
+                   settings.FixMailOverflow ||
+                   settings.PSF_GetUnsortedMail;
+        }
+
+        internal void SetRescueEnabled(bool enabled)
+        {
+            if (!enabled)
+            {
+                m_PostOfficeLowLocalScans.Clear();
+                m_SortingLowUnsortedScans.Clear();
+                ResetStatus();
+            }
+
+            Enabled = enabled;
+        }
+
+        internal int GetPostOfficeLowLocalScanCount(Entity entity)
+        {
+            return m_PostOfficeLowLocalScans.TryGetValue(entity, out int count)
+                ? count
+                : 0;
+        }
+
+        internal int GetSortingLowUnsortedScanCount(Entity entity)
+        {
+            return m_SortingLowUnsortedScans.TryGetValue(entity, out int count)
+                ? count
+                : 0;
+        }
 
         private static void ResetStatus()
         {
