@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "정보" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "링크" },
 
-                // ---- Post Office / Vanilla Assist ----
+                // ---- Post Office / Postal Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "로컬 우편 부족 구조" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),

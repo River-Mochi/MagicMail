@@ -27,9 +27,9 @@
 
 ### Mail fixes - all optional; the mod can also be used only to adjust mail capacity.
 
-1. **Vanilla Assist** lets normal transfers try first, then tops up Local Mail if it stays too low for several checks.
+1. **Postal Dispatch Assist** lets normal transfers try first, then tops up Local Mail if it stays too low for several checks.
 2. **auto Fix** mail overflow by trimming overfilled mail buffers so they do not remain blocked forever (for PO and Sorters).
-3. **Vanilla Assist** does the same for Unsorted Mail at dedicated sorting facilities.
+3. **Postal Dispatch Assist** does the same for Unsorted Mail at dedicated sorting facilities.
 
 
 Currently, cargo shipyards could be shipping out most of the unsorted mail leaving very little for local sorting (reference below).

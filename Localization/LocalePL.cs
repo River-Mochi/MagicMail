@@ -58,7 +58,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup), "Informacje" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Linki" },
 
-                // ---- Post Office / Vanilla Assist ----
+                // ---- Post Office / Postal Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Ratowanie niskiej lokalnej poczty" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
