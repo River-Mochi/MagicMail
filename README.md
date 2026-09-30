@@ -4,8 +4,8 @@ Magic Mail helps Cities: Skylines II's postal system recover from common mail pr
 
 ## Features
 
-- **Vanilla Assist** for persistent low Local Mail at post offices.
-- **Vanilla Assist** for persistent low Unsorted Mail at dedicated sorting facilities.
+- **Postal Dispatch Assist** for repeated low Local Mail at post offices.
+- **Postal Dispatch Assist** for repeated low Unsorted Mail at dedicated sorting facilities.
 - Optional overflow cleanup using **Local + Unsorted + Outgoing Mail**.
 - Adjustable post-van payload and fleet size.
 - Adjustable post-truck fleet size.
@@ -15,9 +15,9 @@ Magic Mail helps Cities: Skylines II's postal system recover from common mail pr
 
 Everything is optional. You can use only the capacity controls and leave all rescue features off.
 
-## Vanilla Assist
+## Postal Dispatch Assist
 
-Magic Mail now lets the game's normal mail transfers try first.
+Magic Mail lets the game's normal mail transfers try first.
 
 A rescue only happens when a shortage stays low across several Magic Mail checks. This avoids immediately replacing normal postal logistics.
 
@@ -83,7 +83,7 @@ When rescue features are enabled, Magic Mail checks postal facilities at a low f
 
 ## Recommended preset
 
-**Recommended** enables Vanilla Assist with conservative rescue thresholds, sets dedicated sorting speed to **150%**, and sets post-van mail load to **200%**.
+**Recommended** enables Postal Dispatch Assist with conservative rescue thresholds, sets dedicated sorting speed to **150%**, and sets post-van mail load to **200%**.
 
 You can switch back to **Game defaults** at any time.
 

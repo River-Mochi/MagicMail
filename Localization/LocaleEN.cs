@@ -13,6 +13,9 @@ namespace MagicMail
 {
     using System.Collections.Generic;
     using Colossal;
+    using Game.Citizens;
+    using Game.Simulation;
+    using Microsoft.SqlServer.Server;
 
     /// <summary>
     /// English localization source for Magic Mail [MM].</summary>
@@ -45,7 +48,7 @@ namespace MagicMail
                 { m_Setting.GetOptionTabLocaleID(Setting.kAboutTab),   "About" },
 
                 // Groups (Actions tab)
-                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Vanilla Assist" },
+                { m_Setting.GetOptionGroupLocaleID(Setting.PostOfficeGroup),          "Postal Dispatch Assist" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostVanGroup),             "Post vans & trucks" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.PostSortingFacilityGroup), "Dedicated sorting facility" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.ResetGroup),               "Reset" },
@@ -58,7 +61,7 @@ namespace MagicMail
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutInfoGroup),  "Info" },
                 { m_Setting.GetOptionGroupLocaleID(Setting.kAboutLinksGroup), "Links" },
 
-                // ---- Post Office / Vanilla Assist ----
+                // ---- Post Office / Dispatch Assist ----
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PO_GetLocalMail)), "Rescue low local mail" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PO_GetLocalMail)),
@@ -110,28 +113,28 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ChangeCapacity)),
                     "Enable this to modify van and truck capacities. When off,\n" +
                     "all capacity sliders below are hidden and\n" +
-                    "vanilla (game) values are used even if you left the sliders at different amounts."
+                    "vanilla game values are used even if you left the sliders at different amounts."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanMailLoadPercentage)), "Post van mail load" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanMailLoadPercentage)),
                     "Controls how much mail each post van can carry.\n" +
-                    "<100% = vanilla payload.>"
+                    "<100% = normal vanilla payload.>"
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PostVanFleetSizePercentage)), "Post van fleet size" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PostVanFleetSizePercentage)),
                     "Controls how many post vans each postal building can own and dispatch.\n" +
-                    "<100% = vanilla fleet size.>"
+                    "<100% = normal vanilla fleet size.>"
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.TruckCapacityPercentage)), "Post truck fleet size" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.TruckCapacityPercentage)),
                     "Controls how many post trucks each facility with post trucks can own and dispatch.\n" +
-                    "<100% = vanilla fleet size.>"
+                    "<100% = normal vanilla fleet size.>"
                 },
 
                 // ---- Dedicated Sorting Facility ----
@@ -140,7 +143,7 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_SortingSpeedPercentage)),
                     "Multiplier for dedicated sorting facilities.\n" +
                     "Does not change a post office's sorting upgrade.\n" +
-                    "<100% = vanilla>."
+                    "<100% = normal vanilla>."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)), "Sorting storage capacity" },
@@ -148,7 +151,7 @@ namespace MagicMail
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.PSF_StorageCapacityPercentage)),
                     "Controls mail storage for dedicated sorting facilities.\n" +
                     "Does not change a post office's sorting upgrade.\n" +
-                    "<100% = vanilla>."
+                    "<100% = normal vanilla>."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.PSF_GetUnsortedMail)), "Rescue low unsorted mail" },
@@ -177,14 +180,14 @@ namespace MagicMail
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToVanilla)), "Game defaults" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToVanilla)),
-                    "Restore all settings to the game's original default behavior (vanilla)."
+                    "Restore all settings to the game's original default behavior."
                 },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetToRecommend)), "Recommended" },
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetToRecommend)),
-                    "**Vanilla Assist** - Quick Start.\n" +
-                    "Lets vanilla mail logistics work first, then rescues persistent shortages or overflow.\n" +
+                    "**Postal Dispatch Assist** - Quick Start.\n" +
+                    "Lets normal mail logistics work first, then rescues repeat shortages or overflow.\n" +
                     "Also applies the recommended capacity tuning."
                 },
 
